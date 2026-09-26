@@ -1,1743 +1,1625 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Rail Fare Finder</title>
+<title>TARSUS Finder</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef4f9;
+    color: #10243a;
+    min-height: 100vh;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 55px 20px 125px;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(60,150,220,.18), transparent 35%),
+        radial-gradient(circle at 80% 30%, rgba(80,180,255,.12), transparent 35%),
+        linear-gradient(135deg, #071a2e, #0b2945 55%, #071a2e);
+    color: white;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(64, 177, 255, .08);
+    filter: blur(15px);
+    top: -100px;
+    left: -80px;
+    animation: floatGlow 6s ease-in-out infinite;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(40, 130, 220, .07);
+    filter: blur(20px);
+    bottom: -170px;
+    right: -100px;
+    animation: floatGlow 8s ease-in-out infinite reverse;
+}
+
+@keyframes floatGlow {
+    0%,100% {
+        transform: translate(0,0);
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f3f6fa;
-      color: #172033;
-      min-height: 100vh;
-      overflow-x: hidden;
+    50% {
+        transform: translate(20px,15px);
+    }
+}
+
+.identity {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.brand-kai,
+.brand-121 {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.brand-kai {
+    color: #ffffff;
+}
+
+.brand-121 {
+    color: #8ecbff;
+}
+
+.brand-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #58bdf2;
+    box-shadow: 0 0 10px rgba(88,189,242,.8);
+}
+
+.eyebrow {
+    position: relative;
+    z-index: 2;
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 800;
+    color: #8ecbff;
+    margin-bottom: 8px;
+}
+
+.hero h1 {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(38px, 9vw, 62px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: #ffffff;
+}
+
+.hero h1 span {
+    color: #8ecbff;
+}
+
+.hero p {
+    position: relative;
+    z-index: 2;
+    max-width: 430px;
+    margin: 14px auto 0;
+    color: #a9bdd2;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.creator {
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #7189a3;
+    text-transform: uppercase;
+}
+
+.creator strong {
+    color: #b9d9f5;
+    font-weight: 800;
+}
+
+/* RAIL DECORATION */
+
+.rail {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    height: 28px;
+    opacity: .35;
+}
+
+.rail::before,
+.rail::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #9fc7e5;
+}
+
+.rail::before {
+    top: 5px;
+}
+
+.rail::after {
+    bottom: 5px;
+}
+
+.sleepers {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sleeper {
+    width: 9px;
+    height: 30px;
+    background: #7895ad;
+    transform: rotate(0deg);
+}
+
+/* SEARCH CARD */
+
+.search-card {
+    position: relative;
+    z-index: 10;
+    width: min(92%, 850px);
+    margin: -80px auto 0;
+    background: rgba(255,255,255,.97);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow:
+        0 20px 50px rgba(8,35,60,.15),
+        0 5px 15px rgba(8,35,60,.08);
+    animation: cardIn .7s ease;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
 
-    /* HERO */
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-row {
+    display: grid;
+    grid-template-columns: 1fr 55px 1fr;
+    gap: 12px;
+    align-items: center;
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box label {
+    display: block;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #71869b;
+    margin: 0 0 7px 5px;
+    text-transform: uppercase;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #d7e2ec;
+    border-radius: 13px;
+    padding: 0 15px;
+    font-size: 14px;
+    outline: none;
+    color: #17314b;
+    background: #f8fbfd;
+    transition: .25s;
+}
+
+.input-box input:focus {
+    border-color: #4da9e8;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(77,169,232,.1);
+}
+
+.swap-btn {
+    width: 46px;
+    height: 46px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 50%;
+    background: #0b2945;
+    color: white;
+    font-size: 21px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.swap-btn:hover {
+    transform: rotate(180deg);
+    background: #12456e;
+}
+
+.suggestion-box {
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #dce7ef;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(10,40,65,.15);
+    overflow: hidden;
+    display: none;
+    z-index: 100;
+}
+
+.suggestion-item {
+    padding: 12px 15px;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.suggestion-item:hover {
+    background: #edf7ff;
+    color: #0c6aa5;
+}
+
+.search-btn {
+    width: 100%;
+    height: 52px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#0b2945,#125d8d);
+    color: white;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(12,83,130,.25);
+}
+
+.search-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+    transform: skewX(-20deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    35%,100% {
+        left: 140%;
+    }
+}
+
+/* RESULT */
+
+.result-section {
+    width: min(92%, 850px);
+    margin: 35px auto 60px;
+}
+
+.result-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.result-title h2 {
+    font-size: 18px;
+    color: #17314b;
+}
+
+.result-count {
+    font-size: 11px;
+    color: #7a8fa3;
+}
+
+#result {
+    display: grid;
+    gap: 15px;
+}
+
+.empty {
+    background: white;
+    border-radius: 17px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #8295a6;
+    box-shadow: 0 8px 25px rgba(10,40,65,.07);
+}
+
+.result-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(10,40,65,.09);
+    animation: resultIn .5s ease both;
+}
+
+@keyframes resultIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.train-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.train-name {
+    font-size: 18px;
+    font-weight: 900;
+    color: #102f4b;
+}
+
+.available {
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #14814b;
+    background: #e9f8f0;
+    border-radius: 20px;
+    padding: 6px 9px;
+}
+
+.route {
+    margin: 12px 0 18px;
+    font-size: 13px;
+    color: #71879b;
+}
+
+.route span {
+    color: #aac0d0;
+    padding: 0 7px;
+}
+
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 9px;
+}
+
+.price-box {
+    background: #f5f9fc;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.price-class {
+    font-size: 9px;
+    font-weight: 800;
+    color: #7c91a4;
+    letter-spacing: .7px;
+}
+
+.price {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #103b5e;
+}
+
+.departure {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #edf1f4;
+    font-size: 11px;
+    color: #71879b;
+}
+
+.loading {
+    text-align: center;
+    padding: 25px;
+    color: #6d8295;
+}
+
+@media(max-width:600px) {
 
     .hero {
-      position: relative;
-      height: 330px;
-      background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(66, 153, 225, 0.22),
-          transparent 32%
-        ),
-        radial-gradient(
-          circle at 10% 80%,
-          rgba(0, 198, 255, 0.12),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          #071426,
-          #0b1f3a 55%,
-          #102b4d
-        );
-      color: white;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: rgba(45, 156, 219, 0.12);
-      filter: blur(10px);
-      top: -130px;
-      right: -80px;
-      animation: floatingGlow 6s ease-in-out infinite;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: rgba(0, 200, 255, 0.07);
-      filter: blur(20px);
-      bottom: -130px;
-      left: -80px;
-      animation: floatingGlow 7s ease-in-out infinite reverse;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      margin: auto;
-      padding: 55px 20px 0;
-      text-align: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #8ecbff;
-      margin-bottom: 14px;
-      font-weight: bold;
+        padding: 45px 18px 115px;
     }
 
     .hero h1 {
-      font-size: 36px;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
+        font-size: 42px;
     }
 
     .hero p {
-      color: #b8c8dc;
-      font-size: 14px;
-      line-height: 1.6;
-      max-width: 500px;
-      margin: auto;
-    }
-
-    /* RAIL */
-
-    .rail {
-      position: absolute;
-      left: -5%;
-      right: -5%;
-      bottom: 20px;
-      height: 45px;
-      opacity: 0.18;
-      transform: rotate(-2deg);
-    }
-
-    .rail::before,
-    .rail::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: #9edcff;
-    }
-
-    .rail::before {
-      top: 10px;
-    }
-
-    .rail::after {
-      bottom: 10px;
-    }
-
-    .sleepers {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent 0,
-        transparent 30px,
-        rgba(158, 220, 255, 0.7) 31px,
-        rgba(158, 220, 255, 0.7) 36px,
-        transparent 37px,
-        transparent 65px
-      );
-    }
-
-    /* SEARCH CARD */
-
-    .search-wrapper {
-      position: relative;
-      z-index: 10;
-      max-width: 900px;
-      margin: -75px auto 0;
-      padding: 0 16px;
+        font-size: 13px;
     }
 
     .search-card {
-      background: rgba(255, 255, 255, 0.97);
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow:
-        0 18px 50px rgba(8, 25, 50, 0.15),
-        0 4px 12px rgba(8, 25, 50, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      animation: searchCardIn 0.7s ease-out;
-    }
-
-    .search-label {
-      font-size: 12px;
-      font-weight: bold;
-      color: #6b778c;
-      margin-bottom: 9px;
-      display: block;
+        padding: 18px;
+        border-radius: 18px;
     }
 
     .search-row {
-      display: grid;
-      grid-template-columns: 1fr 54px 1fr;
-      gap: 10px;
-      align-items: end;
-    }
-
-    .input-group {
-      position: relative;
-    }
-
-    .input-box {
-      width: 100%;
-      height: 52px;
-      border: 1px solid #dce3eb;
-      border-radius: 13px;
-      padding: 0 15px;
-      outline: none;
-      font-size: 14px;
-      color: #182235;
-      background: #f9fbfd;
-      transition: 0.25s ease;
-    }
-
-    .input-box:focus {
-      border-color: #298bdc;
-      background: white;
-      box-shadow: 0 0 0 4px rgba(41, 139, 220, 0.09);
-    }
-
-    .input-box::placeholder {
-      color: #9aa5b5;
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 
     .swap-btn {
-      width: 54px;
-      height: 52px;
-      border: none;
-      border-radius: 13px;
-      background: #edf5fc;
-      color: #176aa8;
-      font-size: 22px;
-      cursor: pointer;
-      transition: 0.25s ease;
+        margin: 3px auto;
+        transform: rotate(90deg);
     }
 
     .swap-btn:hover {
-      background: #dceefb;
-      transform: rotate(180deg);
-    }
-
-    .swap-btn:active {
-      transform: scale(0.92) rotate(180deg);
-    }
-
-    .search-button {
-      width: 100%;
-      height: 52px;
-      margin-top: 14px;
-      border: none;
-      border-radius: 13px;
-      background: linear-gradient(
-        135deg,
-        #1268a8,
-        #1594d1
-      );
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(21, 148, 209, 0.22);
-      transition: 0.25s ease;
-    }
-
-    .search-button::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 70%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.25),
-        transparent
-      );
-      transform: skewX(-20deg);
-      animation: buttonShine 3.5s infinite;
-    }
-
-    .search-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 11px 25px rgba(21, 148, 209, 0.28);
-    }
-
-    .search-button:active {
-      transform: translateY(0) scale(0.99);
-    }
-
-    /* AUTOCOMPLETE */
-
-    .suggestions {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: calc(100% + 7px);
-      background: white;
-      border: 1px solid #e2e7ee;
-      border-radius: 13px;
-      overflow: hidden;
-      box-shadow: 0 12px 30px rgba(15, 30, 50, 0.13);
-      z-index: 100;
-      display: none;
-      max-height: 220px;
-      overflow-y: auto;
-    }
-
-    .suggestion-item {
-      padding: 12px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      color: #273449;
-      border-bottom: 1px solid #f0f2f5;
-      transition: 0.15s ease;
-    }
-
-    .suggestion-item:last-child {
-      border-bottom: none;
-    }
-
-    .suggestion-item:hover {
-      background: #f1f8fd;
-      color: #106ca8;
-    }
-        /* CONTENT */
-
-    .content {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 38px 16px 60px;
-    }
-
-    .section-heading {
-      margin-bottom: 17px;
-    }
-
-    .section-heading small {
-      display: block;
-      color: #8290a3;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
-
-    .section-heading h2 {
-      font-size: 21px;
-      color: #152137;
-    }
-
-    #status {
-      font-size: 13px;
-      color: #7b8798;
-      margin-bottom: 15px;
-      min-height: 18px;
-    }
-
-    /* RESULT CARD */
-
-    .results {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .result-card {
-      background: white;
-      border-radius: 18px;
-      border: 1px solid #e6ebf0;
-      box-shadow: 0 7px 22px rgba(22, 38, 60, 0.07);
-      padding: 19px;
-      animation: cardIn 0.5s ease both;
-      transition: 0.25s ease;
-    }
-
-    .result-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 11px 28px rgba(22, 38, 60, 0.10);
-    }
-
-    .result-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 13px;
-    }
-
-    .train-name {
-      font-size: 17px;
-      font-weight: bold;
-      color: #13233a;
-    }
-
-    .available-badge {
-      flex-shrink: 0;
-      padding: 6px 9px;
-      border-radius: 30px;
-      background: #eaf8f0;
-      color: #16804a;
-      font-size: 10px;
-      font-weight: bold;
-      letter-spacing: 0.4px;
-    }
-
-    .route {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: #58677b;
-      margin-bottom: 17px;
-      flex-wrap: wrap;
-    }
-
-    .route-arrow {
-      color: #1994d0;
-      font-weight: bold;
+        transform: rotate(270deg);
     }
 
     .price-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid #edf0f4;
-      border-bottom: 1px solid #edf0f4;
-      margin-bottom: 14px;
-    }
-
-    .price-item {
-      padding: 13px 7px;
-      text-align: center;
-      border-right: 1px solid #edf0f4;
-    }
-
-    .price-item:last-child {
-      border-right: none;
-    }
-
-    .price-label {
-      font-size: 9px;
-      color: #8b97a8;
-      letter-spacing: 0.7px;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .price {
-      font-size: 14px;
-      color: #17263c;
-      font-weight: bold;
-    }
-
-    .departure {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: #8995a6;
-    }
-
-    .departure strong {
-      font-size: 15px;
-      color: #18283f;
-    }
-
-    /* EMPTY STATE */
-
-    .empty-state {
-      text-align: center;
-      padding: 45px 20px;
-      background: white;
-      border-radius: 18px;
-      border: 1px solid #e6ebf0;
-      color: #7c8999;
-    }
-
-    .empty-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-      opacity: 0.65;
-    }
-
-    .empty-state h3 {
-      color: #334158;
-      font-size: 16px;
-      margin-bottom: 7px;
-    }
-
-    .empty-state p {
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    /* LOADING */
-
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 7px;
-      padding: 25px;
-      color: #7d8a9d;
-      font-size: 13px;
-    }
-
-    .loading-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #2196d2;
-      animation: loadingDot 1s infinite ease-in-out;
-    }
-
-    .loading-dot:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-
-    .loading-dot:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    /* ANIMATIONS */
-
-    @keyframes floatingGlow {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-
-      50% {
-        transform: translateY(15px) scale(1.05);
-      }
-    }
-
-    @keyframes searchCardIn {
-      from {
-        opacity: 0;
-        transform: translateY(25px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes cardIn {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes buttonShine {
-      0% {
-        left: -100%;
-      }
-
-      45%, 100% {
-        left: 150%;
-      }
-    }
-
-    @keyframes loadingDot {
-      0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.45;
-      }
-
-      30% {
-        transform: translateY(-5px);
-        opacity: 1;
-      }
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 650px) {
-
-      .hero {
-        height: 300px;
-      }
-
-      .hero-content {
-        padding-top: 45px;
-      }
-
-      .hero h1 {
-        font-size: 29px;
-      }
-
-      .hero p {
-        font-size: 13px;
-      }
-
-      .search-wrapper {
-        margin-top: -65px;
-      }
-
-      .search-card {
-        padding: 17px;
-        border-radius: 18px;
-      }
-
-      .search-row {
         grid-template-columns: 1fr;
-        gap: 9px;
-      }
-
-      .swap-btn {
-        width: 100%;
-        height: 38px;
-        font-size: 19px;
-      }
-
-      .swap-btn:hover {
-        transform: none;
-      }
-
-      .swap-btn:active {
-        transform: scale(0.98);
-      }
-
-      .input-box {
-        height: 50px;
-      }
-
-      .search-button {
-        height: 50px;
-      }
-
-      .content {
-        padding-top: 32px;
-      }
-
-      .result-card {
-        padding: 16px;
-      }
-
-      .train-name {
-        font-size: 15px;
-      }
-
-      .route {
-        font-size: 12px;
-      }
-
-      .price {
-        font-size: 13px;
-      }
-
-      .price-label {
-        font-size: 8px;
-      }
     }
 
-    @media (max-width: 380px) {
-
-      .hero h1 {
-        font-size: 26px;
-      }
-
-      .result-top {
+    .train-top {
         align-items: flex-start;
-      }
-
-      .available-badge {
-        font-size: 9px;
-        padding: 5px 7px;
-      }
-
-      .price-item {
-        padding-left: 3px;
-        padding-right: 3px;
-      }
     }
 
-  </style>
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- HERO -->
+<section class="hero">
 
-  <section class="hero">
+    <div class="identity">
+        <span class="brand-kai">KAI</span>
+        <span class="brand-dot"></span>
+        <span class="brand-121">121</span>
+    </div>
 
-    <div class="hero-content">
+    <div class="eyebrow">
+        SPECIAL FARE SERVICE
+    </div>
 
-      <span class="eyebrow">
-        Railway Fare Search
-      </span>
+    <h1>
+        TARSUS <span>Finder</span>
+    </h1>
 
-      <h1>
-        Rail Fare Finder
-      </h1>
+    <p>
+        Pencarian informasi tarif khusus kereta
+        dengan cepat, sederhana, dan nyaman.
+    </p>
 
-      <p>
-        Cari informasi tarif khusus kereta dengan cepat,
-        sederhana, dan nyaman.
-      </p>
-
+    <div class="creator">
+        Created by <strong>Prima CC121</strong>
     </div>
 
     <div class="rail">
-      <div class="sleepers"></div>
+        <div class="sleepers">
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+            <div class="sleeper"></div>
+        </div>
     </div>
 
-  </section>
+</section>
 
+<div class="search-card">
 
-  <!-- SEARCH -->
+    <div class="search-row">
 
-  <div class="search-wrapper">
+        <div class="input-box">
 
-    <div class="search-card">
+            <label>Stasiun Asal</label>
 
-      <label class="search-label">
-        CARI RELASI PERJALANAN
-      </label>
+            <input
+                type="text"
+                id="asal"
+                placeholder="Contoh: Bandung"
+                autocomplete="off"
+            >
 
-      <div class="search-row">
-
-        <div class="input-group">
-
-          <input
-            type="text"
-            id="asal"
-            class="input-box"
-            placeholder="Stasiun asal"
-            autocomplete="off"
-          >
-
-          <div
-            id="suggestionsAsal"
-            class="suggestions">
-          </div>
+            <div
+                class="suggestion-box"
+                id="asalSuggestions">
+            </div>
 
         </div>
-
 
         <button
-          type="button"
-          class="swap-btn"
-          id="swapBtn"
-          title="Tukar stasiun"
-        >
-          ⇅
+            class="swap-btn"
+            id="swapBtn"
+            title="Tukar stasiun">
+            ⇅
         </button>
 
+        <div class="input-box">
 
-        <div class="input-group">
+            <label>Stasiun Tujuan</label>
 
-          <input
-            type="text"
-            id="tujuan"
-            class="input-box"
-            placeholder="Stasiun tujuan"
-            autocomplete="off"
-          >
+            <input
+                type="text"
+                id="tujuan"
+                placeholder="Contoh: Banjar"
+                autocomplete="off"
+            >
 
-          <div
-            id="suggestionsTujuan"
-            class="suggestions">
-          </div>
+            <div
+                class="suggestion-box"
+                id="tujuanSuggestions">
+            </div>
 
         </div>
 
-      </div>
+    </div>
 
-
-      <button
-        type="button"
-        id="searchBtn"
-        class="search-button"
-      >
+    <button
+        class="search-btn"
+        id="searchBtn">
         CARI TARIF KHUSUS
-      </button>
+    </button>
+
+</div>
+
+<section class="result-section">
+
+    <div class="result-title">
+
+        <h2>Hasil Pencarian</h2>
+
+        <span
+            class="result-count"
+            id="resultCount">
+        </span>
 
     </div>
 
-  </div>
+    <div id="result">
 
-
-  <!-- CONTENT -->
-
-  <main class="content">
-
-    <div class="section-heading">
-
-      <small>
-        HASIL PENCARIAN
-      </small>
-
-      <h2>
-        Tarif Khusus
-      </h2>
-
-    </div>
-
-    <div id="status"></div>
-
-    <div
-      id="results"
-      class="results"
-    >
-
-      <div class="empty-state">
-
-        <div class="empty-icon">
-          🚆
+        <div class="empty">
+            Masukkan stasiun asal dan tujuan
+            untuk mencari tarif khusus.
         </div>
 
-        <h3>
-          Cari tarif perjalanan
-        </h3>
-
-        <p>
-          Pilih stasiun asal dan tujuan,
-          kemudian tekan tombol cari.
-        </p>
-
-      </div>
-
     </div>
 
-  </main>
+</section>
+<!-- =========================
+     BAGIAN 2/3
+     JAVASCRIPT DATA & SEARCH
+========================= -->
+
+<script>
+
+const CSV_URL =
+"https://docs.google.com/spreadsheets/d/1a4Ln_wASazV35F2M3MKZcJHEmiAV8G-0WmkMmU4Csls/gviz/tq?tqx=out:csv&sheet=Tarif%20Khusus";
 
 
-  <script>
-        const CSV_URL =
-      "https://docs.google.com/spreadsheets/d/1a4Ln_wASazV35F2M3MKZcJHEmiAV8G-0WmkMmU4Csls/gviz/tq?tqx=out:csv&sheet=Tarif%20Khusus";
+let database = [];
+let stations = [];
 
 
-    const asalInput = document.getElementById("asal");
-    const tujuanInput = document.getElementById("tujuan");
+/* =========================
+   CSV PARSER
+========================= */
 
-    const suggestionsAsal =
-      document.getElementById("suggestionsAsal");
+function parseCSV(text) {
 
-    const suggestionsTujuan =
-      document.getElementById("suggestionsTujuan");
+    const rows = [];
+    let row = [];
+    let cell = "";
+    let insideQuotes = false;
 
-    const swapBtn =
-      document.getElementById("swapBtn");
+    for (let i = 0; i < text.length; i++) {
 
-    const searchBtn =
-      document.getElementById("searchBtn");
+        const char = text[i];
+        const next = text[i + 1];
 
-    const results =
-      document.getElementById("results");
+        if (char === '"' && insideQuotes && next === '"') {
 
-    const status =
-      document.getElementById("status");
+            cell += '"';
+            i++;
+            continue;
+        }
+
+        if (char === '"') {
+
+            insideQuotes = !insideQuotes;
+            continue;
+        }
+
+        if (char === "," && !insideQuotes) {
+
+            row.push(cell);
+            cell = "";
+            continue;
+        }
+
+        if (
+            (char === "\n" || char === "\r") &&
+            !insideQuotes
+        ) {
+
+            if (char === "\r" && next === "\n") {
+                i++;
+            }
+
+            row.push(cell);
+
+            if (row.some(value => value.trim() !== "")) {
+                rows.push(row);
+            }
+
+            row = [];
+            cell = "";
+
+            continue;
+        }
+
+        cell += char;
+    }
+
+    if (cell !== "" || row.length > 0) {
+
+        row.push(cell);
+
+        if (row.some(value => value.trim() !== "")) {
+            rows.push(row);
+        }
+    }
+
+    return rows;
+}
 
 
-    let database = [];
-    let stations = [];
+/* =========================
+   LOAD DATABASE
+========================= */
+
+async function loadDatabase() {
+
+    try {
+
+        const response = await fetch(
+            CSV_URL + "&t=" + Date.now()
+        );
+
+        const text = await response.text();
+
+        const rows = parseCSV(text);
+
+        database = rows
+            .slice(1)
+            .map(row => {
+
+                return {
+
+                    kereta:
+                        row[0]?.trim() || "",
+
+                    stasiunAsal:
+                        row[1]?.trim() || "",
+
+                    stasiunTujuan:
+                        row[2]?.trim() || "",
+
+                    kelas:
+                        row[3]?.trim() || "",
+
+                    tarif:
+                        Number(
+                            String(row[4] || "")
+                            .replace(/[^\d]/g, "")
+                        ),
+
+                    jam:
+                        row[5]?.trim() || "",
+
+                    keberangkatan:
+                        row[5]?.trim() || ""
+
+                };
+
+            })
+            .filter(item =>
+                item.kereta &&
+                item.stasiunAsal &&
+                item.stasiunTujuan
+            );
 
 
-    /* =========================
-       ESCAPE HTML
-    ========================= */
+        createStationList();
 
-    function escapeHTML(text) {
+        console.log(
+            "Database berhasil dimuat:",
+            database.length,
+            "data"
+        );
 
-      return String(text ?? "")
+    }
+
+    catch (error) {
+
+        console.error(
+            "Gagal mengambil database:",
+            error
+        );
+
+        document.getElementById("result").innerHTML = `
+
+            <div class="empty">
+
+                Gagal mengambil data tarif.
+                <br><br>
+
+                Pastikan Google Sheet
+                dapat diakses secara publik.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   STATION LIST
+========================= */
+
+function createStationList() {
+
+    const set = new Set();
+
+    database.forEach(item => {
+
+        if (item.stasiunAsal) {
+            set.add(item.stasiunAsal);
+        }
+
+        if (item.stasiunTujuan) {
+            set.add(item.stasiunTujuan);
+        }
+
+    });
+
+    stations = Array.from(set)
+        .sort((a, b) =>
+            a.localeCompare(b, "id")
+        );
+
+}
+
+
+/* =========================
+   AUTOCOMPLETE
+========================= */
+
+function setupAutocomplete(
+    inputId,
+    suggestionId
+) {
+
+    const input =
+        document.getElementById(inputId);
+
+    const box =
+        document.getElementById(suggestionId);
+
+
+    input.addEventListener(
+        "input",
+        function () {
+
+            const keyword =
+                input.value
+                    .trim()
+                    .toLowerCase();
+
+
+            box.innerHTML = "";
+
+
+            if (!keyword) {
+
+                box.style.display = "none";
+
+                return;
+            }
+
+
+            const matches =
+                stations
+                    .filter(station =>
+                        station
+                            .toLowerCase()
+                            .includes(keyword)
+                    )
+                    .slice(0, 8);
+
+
+            if (!matches.length) {
+
+                box.style.display = "none";
+
+                return;
+            }
+
+
+            matches.forEach(station => {
+
+                const item =
+                    document.createElement("div");
+
+                item.className =
+                    "suggestion-item";
+
+                item.textContent =
+                    station;
+
+
+                item.addEventListener(
+                    "click",
+                    function () {
+
+                        input.value =
+                            station;
+
+                        box.style.display =
+                            "none";
+
+                    }
+                );
+
+
+                box.appendChild(item);
+
+            });
+
+
+            box.style.display = "block";
+
+        }
+    );
+
+
+    input.addEventListener(
+        "focus",
+        function () {
+
+            if (!input.value.trim()) {
+                box.style.display = "none";
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                !input.contains(event.target) &&
+                !box.contains(event.target)
+            ) {
+
+                box.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   INITIALIZE AUTOCOMPLETE
+========================= */
+
+setupAutocomplete(
+    "asal",
+    "asalSuggestions"
+);
+
+setupAutocomplete(
+    "tujuan",
+    "tujuanSuggestions"
+);
+
+
+/* =========================
+   SWAP STATION
+========================= */
+
+document
+    .getElementById("swapBtn")
+    .addEventListener(
+        "click",
+        function () {
+
+            const asal =
+                document.getElementById("asal");
+
+            const tujuan =
+                document.getElementById("tujuan");
+
+
+            const temp =
+                asal.value;
+
+            asal.value =
+                tujuan.value;
+
+            tujuan.value =
+                temp;
+
+        }
+    );
+
+
+/* =========================
+   FORMAT RUPIAH
+========================= */
+
+function formatRupiah(number) {
+
+    if (!number) {
+        return "-";
+    }
+
+    return new Intl.NumberFormat(
+        "id-ID"
+    ).format(number);
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value) {
+
+    return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 
+}
+
+
+/* =========================
+   SEARCH BUTTON
+========================= */
+
+document
+    .getElementById("searchBtn")
+    .addEventListener(
+        "click",
+        searchTarif
+    );
+
+
+/* =========================
+   ENTER KEY SEARCH
+========================= */
+
+document
+    .getElementById("asal")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+                searchTarif();
+            }
+
+        }
+    );
+
+
+document
+    .getElementById("tujuan")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+                searchTarif();
+            }
+
+        }
+    );
+
+
+/* =========================
+   LOAD DATABASE
+========================= */
+
+loadDatabase();
+
+              </script>
+              <script>
+
+/* =========================
+   SEARCH TARIF
+========================= */
+
+function searchTarif() {
+
+    const asal =
+        document
+        .getElementById("asal")
+        .value
+        .trim();
+
+    const tujuan =
+        document
+        .getElementById("tujuan")
+        .value
+        .trim();
+
+    const result =
+        document.getElementById("result");
+
+    const resultCount =
+        document.getElementById("resultCount");
+
+
+    /* VALIDASI */
+
+    if (!asal || !tujuan) {
+
+        result.innerHTML = `
+
+            <div class="empty">
+
+                Silakan pilih
+                <strong>stasiun asal</strong>
+                dan
+                <strong>stasiun tujuan</strong>.
+
+            </div>
+
+        `;
+
+        resultCount.textContent = "";
+
+        return;
     }
 
 
-    /* =========================
-       FORMAT RUPIAH
-    ========================= */
+    /* LOADING */
 
-    function formatRupiah(value) {
+    result.innerHTML = `
 
-      if (
-        value === null ||
-        value === undefined ||
-        value === "" ||
-        Number(value) === 0
-      ) {
-        return "-";
-      }
+        <div class="loading">
 
-      return "Rp " +
-        Number(value).toLocaleString("id-ID");
+            Mencari tarif khusus
+            <span class="loading-dots">
+                • • •
+            </span>
 
-    }
+        </div>
 
+    `;
 
-    /* =========================
-       PARSE CSV
-    ========================= */
 
-    function parseCSV(text) {
+    setTimeout(() => {
 
-      const rows = [];
+        const asalLower =
+            asal.toLowerCase();
 
-      let row = [];
+        const tujuanLower =
+            tujuan.toLowerCase();
 
-      let cell = "";
 
-      let insideQuotes = false;
+        /* =========================
+           FILTER DATA
+        ========================= */
 
+        const data =
+            database.filter(item => {
 
-      for (let i = 0; i < text.length; i++) {
+                const itemAsal =
+                    item.stasiunAsal
+                    .toLowerCase();
 
-        const char = text[i];
+                const itemTujuan =
+                    item.stasiunTujuan
+                    .toLowerCase();
 
-        const next = text[i + 1];
 
-
-        if (char === '"' && insideQuotes && next === '"') {
-
-          cell += '"';
-
-          i++;
-
-        }
-
-        else if (char === '"') {
-
-          insideQuotes = !insideQuotes;
-
-        }
-
-        else if (char === "," && !insideQuotes) {
-
-          row.push(cell);
-
-          cell = "";
-
-        }
-
-        else if (
-          (char === "\n" || char === "\r") &&
-          !insideQuotes
-        ) {
-
-          if (char === "\r" && next === "\n") {
-            i++;
-          }
-
-          row.push(cell);
-
-          rows.push(row);
-
-          row = [];
-
-          cell = "";
-
-        }
-
-        else {
-
-          cell += char;
-
-        }
-
-      }
-
-
-      if (cell !== "" || row.length > 0) {
-
-        row.push(cell);
-
-        rows.push(row);
-
-      }
-
-
-      return rows;
-
-    }
-
-
-    /* =========================
-       LOAD DATA
-    ========================= */
-
-    async function loadData() {
-
-      try {
-
-        status.textContent =
-          "Memuat data tarif khusus...";
-
-
-        const response =
-          await fetch(CSV_URL);
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Gagal mengambil data."
-          );
-
-        }
-
-
-        const csv =
-          await response.text();
-
-
-        const rows =
-          parseCSV(csv);
-
-
-        database =
-          rows
-            .slice(1)
-            .filter(row =>
-              row.some(cell =>
-                String(cell).trim() !== ""
-              )
-            )
-            .map(row => {
-
-              return {
-
-                kereta:
-                  row[0]?.trim() || "",
-
-                stasiunAsal:
-                  row[1]?.trim() || "",
-
-                stasiunTujuan:
-                  row[2]?.trim() || "",
-
-                kelas:
-                  row[3]?.trim() || "",
-
-                tarif:
-                  Number(
-                    String(row[4] || "")
-                      .replace(/[^\d]/g, "")
-                  ),
-
-                jam:
-                  row[5]?.trim() || "",
-
-                keberangkatan:
-                  row[5]?.trim() || ""
-
-              };
+                return (
+                    itemAsal === asalLower &&
+                    itemTujuan === tujuanLower
+                );
 
             });
 
 
-        buildStationList();
+        /* =========================
+           TIDAK DITEMUKAN
+        ========================= */
 
+        if (!data.length) {
 
-        status.textContent =
-          `${database.length} data tarif berhasil dimuat.`;
+            result.innerHTML = `
 
+                <div class="empty">
 
-      }
+                    <div style="
+                        font-size:32px;
+                        margin-bottom:10px;
+                    ">
+                        🚆
+                    </div>
 
-      catch (error) {
+                    <strong>
+                        Tarif khusus tidak ditemukan
+                    </strong>
 
-        console.error(error);
+                    <br><br>
 
+                    <span style="
+                        font-size:12px;
+                    ">
 
-        status.textContent =
-          "Gagal memuat data tarif.";
+                        ${escapeHTML(asal)}
+                        →
+                        ${escapeHTML(tujuan)}
 
+                    </span>
 
-        results.innerHTML = `
+                    <br><br>
 
-          <div class="empty-state">
+                    <span style="
+                        font-size:11px;
+                        color:#8da0b0;
+                    ">
 
-            <div class="empty-icon">
-              ⚠️
-            </div>
+                        Coba periksa kembali
+                        nama stasiun atau
+                        pilih dari daftar saran.
 
-            <h3>
-              Data tidak dapat dimuat
-            </h3>
-
-            <p>
-              Pastikan Google Sheet dapat diakses
-              dan URL CSV sudah benar.
-            </p>
-
-          </div>
-
-        `;
-
-      }
-
-    }
-
-
-    /* =========================
-       STATION LIST
-    ========================= */
-
-    function buildStationList() {
-
-      const set =
-        new Set();
-
-
-      database.forEach(item => {
-
-        if (item.stasiunAsal) {
-
-          set.add(item.stasiunAsal);
-
-        }
-
-        if (item.stasiunTujuan) {
-
-          set.add(item.stasiunTujuan);
-
-        }
-
-      });
-
-
-      stations =
-        [...set].sort((a, b) =>
-          a.localeCompare(b, "id")
-        );
-
-    }
-
-
-    /* =========================
-       AUTOCOMPLETE
-    ========================= */
-
-    function showSuggestions(
-      input,
-      container
-    ) {
-
-      const keyword =
-        input.value
-          .trim()
-          .toLowerCase();
-
-
-      if (!keyword) {
-
-        container.style.display =
-          "none";
-
-        container.innerHTML =
-          "";
-
-        return;
-
-      }
-
-
-      const matches =
-        stations
-          .filter(station =>
-            station
-              .toLowerCase()
-              .includes(keyword)
-          )
-          .slice(0, 8);
-
-
-      if (!matches.length) {
-
-        container.style.display =
-          "none";
-
-        container.innerHTML =
-          "";
-
-        return;
-
-      }
-
-
-      container.innerHTML =
-        matches
-          .map(station => `
-
-            <div
-              class="suggestion-item"
-              data-value="${escapeHTML(station)}"
-            >
-              ${escapeHTML(station)}
-            </div>
-
-          `)
-          .join("");
-
-
-      container.style.display =
-        "block";
-
-
-      container
-        .querySelectorAll(".suggestion-item")
-        .forEach(item => {
-
-          item.addEventListener(
-            "click",
-            () => {
-
-              input.value =
-                item.dataset.value;
-
-              container.style.display =
-                "none";
-
-            }
-          );
-
-        });
-
-    }
-
-
-    asalInput.addEventListener(
-      "input",
-      () => {
-
-        showSuggestions(
-          asalInput,
-          suggestionsAsal
-        );
-
-      }
-    );
-
-
-    tujuanInput.addEventListener(
-      "input",
-      () => {
-
-        showSuggestions(
-          tujuanInput,
-          suggestionsTujuan
-        );
-
-      }
-    );
-
-
-    /* =========================
-       CLOSE SUGGESTIONS
-    ========================= */
-
-    document.addEventListener(
-      "click",
-      event => {
-
-        if (
-          !event.target.closest(
-            ".input-group"
-          )
-        ) {
-
-          suggestionsAsal.style.display =
-            "none";
-
-          suggestionsTujuan.style.display =
-            "none";
-
-        }
-
-      }
-    );
-
-
-    /* =========================
-       SWAP
-    ========================= */
-
-    swapBtn.addEventListener(
-      "click",
-      () => {
-
-        const temp =
-          asalInput.value;
-
-        asalInput.value =
-          tujuanInput.value;
-
-        tujuanInput.value =
-          temp;
-
-      }
-    );
-
-
-    /* =========================
-       SEARCH
-    ========================= */
-
-    searchBtn.addEventListener(
-      "click",
-      searchFare
-    );
-
-
-    asalInput.addEventListener(
-      "keydown",
-      event => {
-
-        if (event.key === "Enter") {
-
-          searchFare();
-
-        }
-
-      }
-    );
-
-
-    tujuanInput.addEventListener(
-      "keydown",
-      event => {
-
-        if (event.key === "Enter") {
-
-          searchFare();
-
-        }
-
-      }
-    );
-
-
-    function searchFare() {
-
-      const asal =
-        asalInput.value.trim();
-
-      const tujuan =
-        tujuanInput.value.trim();
-
-
-      if (!asal || !tujuan) {
-
-        status.textContent =
-          "Silakan isi stasiun asal dan tujuan.";
-
-
-        results.innerHTML = `
-
-          <div class="empty-state">
-
-            <div class="empty-icon">
-              🚉
-            </div>
-
-            <h3>
-              Data belum lengkap
-            </h3>
-
-            <p>
-              Masukkan stasiun asal dan tujuan
-              terlebih dahulu.
-            </p>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      if (
-        asal.toLowerCase() ===
-        tujuan.toLowerCase()
-      ) {
-
-        status.textContent =
-          "Stasiun asal dan tujuan tidak boleh sama.";
-
-
-        results.innerHTML = `
-
-          <div class="empty-state">
-
-            <div class="empty-icon">
-              🔄
-            </div>
-
-            <h3>
-              Relasi tidak valid
-            </h3>
-
-            <p>
-              Pilih dua stasiun yang berbeda.
-            </p>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      results.innerHTML = `
-
-        <div class="loading">
-
-          <span class="loading-dot"></span>
-          <span class="loading-dot"></span>
-          <span class="loading-dot"></span>
-
-          <span>
-            Mencari tarif...
-          </span>
-
-        </div>
-
-      `;
-
-
-      setTimeout(() => {
-
-        const matched =
-          database.filter(item => {
-
-            const origin =
-              item.stasiunAsal
-                .toLowerCase();
-
-            const destination =
-              item.stasiunTujuan
-                .toLowerCase();
-
-            const searchOrigin =
-              asal.toLowerCase();
-
-            const searchDestination =
-              tujuan.toLowerCase();
-
-
-            return (
-              origin === searchOrigin &&
-              destination === searchDestination
-            );
-
-          });
-
-
-        renderResults(
-          matched,
-          asal,
-          tujuan
-        );
-
-      }, 350);
-
-    }
-
-
-    /* =========================
-       RENDER RESULTS
-    ========================= */
-
-    function renderResults(
-      data,
-      asal,
-      tujuan
-    ) {
-
-      if (!data.length) {
-
-        status.textContent =
-          "Tidak ditemukan tarif khusus untuk relasi tersebut.";
-
-
-        results.innerHTML = `
-
-          <div class="empty-state">
-
-            <div class="empty-icon">
-              🔎
-            </div>
-
-            <h3>
-              Tarif tidak ditemukan
-            </h3>
-
-            <p>
-              Belum ada data tarif khusus
-              untuk relasi
-              <strong>
-                ${escapeHTML(asal)}
-              </strong>
-              →
-              <strong>
-                ${escapeHTML(tujuan)}
-              </strong>.
-            </p>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      status.textContent =
-        `${data.length} data ditemukan.`;
-
-
-      const grouped = {};
-
-
-      data.forEach(item => {
-
-        const key =
-          item.kereta || "Kereta";
-
-
-        if (!grouped[key]) {
-
-          grouped[key] = {
-
-            kereta: item.kereta,
-
-            asal:
-              item.stasiunAsal,
-
-            tujuan:
-              item.stasiunTujuan,
-
-            eksekutif: null,
-
-            bisnis: null,
-
-            ekonomi: null,
-
-            jam:
-              item.jam ||
-              item.keberangkatan ||
-              ""
-
-          };
-
-        }
-
-
-        const kelas =
-          item.kelas
-            .toLowerCase();
-
-
-        if (
-          kelas.includes("eksekutif")
-        ) {
-
-          grouped[key].eksekutif =
-            item.tarif;
-
-        }
-
-        else if (
-          kelas.includes("bisnis")
-        ) {
-
-          grouped[key].bisnis =
-            item.tarif;
-
-        }
-
-        else if (
-          kelas.includes("ekonomi")
-        ) {
-
-          grouped[key].ekonomi =
-            item.tarif;
-
-        }
-
-
-        if (
-          !grouped[key].jam &&
-          (
-            item.jam ||
-            item.keberangkatan
-          )
-        ) {
-
-          grouped[key].jam =
-            item.jam ||
-            item.keberangkatan;
-
-        }
-
-      });
-
-
-      const trains =
-        Object.values(grouped);
-
-
-      results.innerHTML =
-        trains
-          .map((train, index) => {
-
-            return `
-
-              <div
-                class="result-card"
-                style="animation-delay:${index * 0.08}s"
-              >
-
-                <div class="result-top">
-
-                  <div class="train-name">
-                    🚆
-                    ${escapeHTML(
-                      train.kereta || "Kereta"
-                    )}
-                  </div>
-
-                  <div class="available-badge">
-                    ● TERSEDIA
-                  </div>
+                    </span>
 
                 </div>
-
-
-                <div class="route">
-
-                  <span>
-                    ${escapeHTML(train.asal)}
-                  </span>
-
-                  <span class="route-arrow">
-                    →
-                  </span>
-
-                  <span>
-                    ${escapeHTML(train.tujuan)}
-                  </span>
-
-                </div>
-
-
-                <div class="price-grid">
-
-                  <div class="price-item">
-
-                    <div class="price-label">
-                      EKSEKUTIF
-                    </div>
-
-                    <div class="price">
-                      ${formatRupiah(
-                        train.eksekutif
-                      )}
-                    </div>
-
-                  </div>
-
-
-                  <div class="price-item">
-
-                    <div class="price-label">
-                      BISNIS
-                    </div>
-
-                    <div class="price">
-                      ${formatRupiah(
-                        train.bisnis
-                      )}
-                    </div>
-
-                  </div>
-
-
-                  <div class="price-item">
-
-                    <div class="price-label">
-                      EKONOMI
-                    </div>
-
-                    <div class="price">
-                      ${formatRupiah(
-                        train.ekonomi
-                      )}
-                    </div>
-
-                  </div>
-
-                </div>
-
-
-                <div class="departure">
-
-                  <span>
-                    Keberangkatan
-                  </span>
-
-                  <strong>
-                    ${escapeHTML(
-                      train.jam || "-"
-                    )}
-                  </strong>
-
-                </div>
-
-              </div>
 
             `;
 
-          })
-          .join("");
+            resultCount.textContent =
+                "0 data";
 
+            return;
+        }
+
+
+        /* =========================
+           GROUP BERDASARKAN KERETA
+        ========================= */
+
+        const grouped = {};
+
+
+        data.forEach(item => {
+
+            if (!grouped[item.kereta]) {
+
+                grouped[item.kereta] = {
+
+                    kereta:
+                        item.kereta,
+
+                    asal:
+                        item.stasiunAsal,
+
+                    tujuan:
+                        item.stasiunTujuan,
+
+                    eksekutif:
+                        null,
+
+                    bisnis:
+                        null,
+
+                    ekonomi:
+                        null,
+
+                    jam:
+                        item.jam ||
+                        item.keberangkatan ||
+                        "-"
+
+                };
+
+            }
+
+
+            const kelas =
+                item.kelas
+                .toLowerCase();
+
+
+            if (
+                kelas.includes("eksekutif")
+            ) {
+
+                grouped[item.kereta]
+                    .eksekutif =
+                    item.tarif;
+
+            }
+
+
+            else if (
+                kelas.includes("bisnis")
+            ) {
+
+                grouped[item.kereta]
+                    .bisnis =
+                    item.tarif;
+
+            }
+
+
+            else if (
+                kelas.includes("ekonomi")
+            ) {
+
+                grouped[item.kereta]
+                    .ekonomi =
+                    item.tarif;
+
+            }
+
+
+            if (
+                item.jam ||
+                item.keberangkatan
+            ) {
+
+                grouped[item.kereta].jam =
+                    item.jam ||
+                    item.keberangkatan;
+
+            }
+
+        });
+
+
+        const trains =
+            Object.values(grouped);
+
+
+        /* =========================
+           RESULT COUNT
+        ========================= */
+
+        resultCount.textContent =
+            trains.length +
+            (
+                trains.length === 1
+                    ? " kereta"
+                    : " kereta"
+            );
+
+
+        /* =========================
+           DISPLAY RESULT
+        ========================= */
+
+        result.innerHTML =
+            trains
+            .map((train, index) => {
+
+                return `
+
+                    <div
+                        class="result-card"
+                        style="
+                            animation-delay:
+                            ${index * 80}ms;
+                        "
+                    >
+
+                        <div class="train-top">
+
+                            <div class="train-name">
+
+                                ${escapeHTML(
+                                    train.kereta
+                                )}
+
+                            </div>
+
+                            <div class="available">
+
+                                ● TERSEDIA
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="route">
+
+                            ${escapeHTML(
+                                train.asal
+                            )}
+
+                            <span>→</span>
+
+                            ${escapeHTML(
+                                train.tujuan
+                            )}
+
+                        </div>
+
+
+                        <div class="price-grid">
+
+
+                            <div class="price-box">
+
+                                <div class="price-class">
+
+                                    EKSEKUTIF
+
+                                </div>
+
+                                <div class="price">
+
+                                    ${
+                                        train.eksekutif
+                                            ? "Rp " +
+                                              formatRupiah(
+                                                  train.eksekutif
+                                              )
+                                            : "-"
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="price-box">
+
+                                <div class="price-class">
+
+                                    BISNIS
+
+                                </div>
+
+                                <div class="price">
+
+                                    ${
+                                        train.bisnis
+                                            ? "Rp " +
+                                              formatRupiah(
+                                                  train.bisnis
+                                              )
+                                            : "-"
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="price-box">
+
+                                <div class="price-class">
+
+                                    EKONOMI
+
+                                </div>
+
+                                <div class="price">
+
+                                    ${
+                                        train.ekonomi
+                                            ? "Rp " +
+                                              formatRupiah(
+                                                  train.ekonomi
+                                              )
+                                            : "-"
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="departure">
+
+                            🕐 Keberangkatan:
+
+                            <strong>
+
+                                ${escapeHTML(
+                                    train.jam || "-"
+                                )}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
+
+
+    }, 350);
+
+}
+
+
+/* =========================
+   LOADING DOT ANIMATION
+========================= */
+
+const loadingStyle =
+document.createElement("style");
+
+loadingStyle.innerHTML = `
+
+.loading-dots {
+    display: inline-block;
+    margin-left: 4px;
+    animation: loadingDots 1.2s infinite;
+}
+
+@keyframes loadingDots {
+
+    0%,100% {
+        opacity: .25;
     }
 
+    50% {
+        opacity: 1;
+    }
 
-    /* =========================
-       INITIAL LOAD
-    ========================= */
+}
 
-    loadData();
+`;
 
-  </script>
+document.head.appendChild(
+    loadingStyle
+);
+
+
+/* =========================
+   FOOTER
+========================= */
+
+const footer =
+document.createElement("footer");
+
+footer.innerHTML = `
+
+    <div style="
+        text-align:center;
+        padding:0 20px 35px;
+        color:#8a9bab;
+        font-size:10px;
+        letter-spacing:1px;
+    ">
+
+        TARSUS Finder
+
+        <span style="
+            margin:0 7px;
+            color:#b7c6d2;
+        ">
+            •
+        </span>
+
+        Created by
+        <strong style="
+            color:#60788e;
+        ">
+            Prima CC121
+        </strong>
+
+    </div>
+
+`;
+
+document.body.appendChild(
+    footer
+);
+
+</script>
 
 </body>
 </html>
