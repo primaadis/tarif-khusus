@@ -8,1508 +8,1968 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>TARSUS Finder</title>
+<title>TARSUS FINDER</title>
+
+<meta name="description"
+      content="Pencarian tarif khusus kereta api">
+
+
+<!-- FONT -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet">
+
 
 <style>
 
-/* =========================
+
+/* =========================================
    RESET
-========================= */
+========================================= */
 
 * {
+
     box-sizing: border-box;
+
     margin: 0;
+
     padding: 0;
+
 }
+
 
 html {
+
     scroll-behavior: smooth;
+
 }
 
+
 body {
+
+    min-height: 100vh;
+
     font-family:
-        Inter,
+        "Inter",
+        system-ui,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
 
-    background:
-        linear-gradient(
-            180deg,
-            #eef8ff 0%,
-            #f7fbff 45%,
-            #ffffff 100%
-        );
-
-    color: #10243e;
-    min-height: 100vh;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    position: relative;
-    overflow: hidden;
-
-    padding:
-        28px 20px
-        75px;
+    color: #eef3f8;
 
     background:
+
         radial-gradient(
-            circle at 15% 15%,
-            rgba(0, 217, 255, .18),
-            transparent 32%
+            circle at 50% -10%,
+            rgba(255, 107, 26, .13),
+            transparent 34%
         ),
+
         radial-gradient(
-            circle at 85% 10%,
-            rgba(0, 119, 255, .20),
+            circle at 100% 80%,
+            rgba(21, 67, 112, .18),
             transparent 30%
         ),
-        linear-gradient(
-            135deg,
-            #06172c,
-            #092b4d 55%,
-            #06182d
-        );
 
-    color: white;
+        #07111f;
+
+    overflow-x: hidden;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
 }
 
-.hero::before {
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+body::before {
+
     content: "";
 
-    position: absolute;
+    position: fixed;
 
-    width: 350px;
-    height: 350px;
+    width: 520px;
+    height: 520px;
 
-    right: -160px;
-    bottom: -180px;
+    top: -280px;
+    right: -190px;
 
     border-radius: 50%;
 
     background:
-        rgba(0, 211, 255, .08);
 
-    filter: blur(20px);
+        radial-gradient(
+            circle,
+            rgba(255, 107, 26, .10),
+            transparent 68%
+        );
+
+    pointer-events: none;
+
+    z-index: -1;
 
     animation:
-        floatingGlow 7s ease-in-out infinite;
-}
+        ambientGlow 9s ease-in-out infinite alternate;
 
-@keyframes floatingGlow {
-
-    0%,
-    100% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-25px) scale(1.08);
-    }
 }
 
 
-/* =========================
-   MINI BRAND
-========================= */
+body::after {
 
-.brand-mini {
-    position: relative;
+    content: "";
 
-    display: inline-flex;
+    position: fixed;
 
-    align-items: center;
+    width: 450px;
+    height: 450px;
 
-    padding:
-        7px 12px;
+    bottom: -270px;
+    left: -190px;
 
-    margin-bottom: 28px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.16);
-
-    border-radius: 999px;
+    border-radius: 50%;
 
     background:
-        rgba(255,255,255,.06);
 
-    backdrop-filter:
-        blur(10px);
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-
-    color:
-        rgba(255,255,255,.82);
-}
-
-
-/* =========================
-   HERO TEXT
-========================= */
-
-.eyebrow {
-    position: relative;
-
-    margin-bottom: 10px;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: 3px;
-
-    color:
-        #54dcff;
-}
-
-.hero h1 {
-    position: relative;
-
-    font-size:
-        clamp(
-            38px,
-            10vw,
-            68px
+        radial-gradient(
+            circle,
+            rgba(18, 61, 103, .25),
+            transparent 70%
         );
 
-    line-height: .95;
+    pointer-events: none;
 
-    font-weight: 900;
+    z-index: -1;
 
-    letter-spacing: -2px;
-
-    margin-bottom: 17px;
-}
-
-.hero h1 span {
-    color: #55dcff;
-
-    text-shadow:
-        0 0 22px
-        rgba(65,218,255,.35);
-}
-
-.hero-subtitle {
-    position: relative;
-
-    max-width: 620px;
-
-    color:
-        rgba(255,255,255,.68);
-
-    font-size: 14px;
-
-    line-height: 1.7;
 }
 
 
-/* =========================
-   DIGITAL RAIL
-========================= */
-
-.digital-rail {
-    position: relative;
-
-    height: 36px;
-
-    margin-top: 40px;
-
-    opacity: .8;
-
-    overflow: hidden;
-}
-
-.rail-sleepers {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    bottom: 4px;
-
-    height: 7px;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 20px,
-            rgba(255,255,255,.14) 21px,
-            rgba(255,255,255,.14) 25px
-        );
-}
-
-.rail-light {
-    position: absolute;
-
-    left: -20%;
-
-    bottom: 12px;
-
-    width: 25%;
-
-    height: 2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #55dcff,
-            transparent
-        );
-
-    filter:
-        drop-shadow(
-            0 0 8px
-            #55dcff
-        );
-
-    animation:
-        railMove 4s linear infinite;
-}
-
-@keyframes railMove {
+@keyframes ambientGlow {
 
     from {
+
         transform:
-            translateX(0);
+            translate3d(0, 0, 0);
+
+        opacity: .55;
+
     }
 
     to {
+
         transform:
-            translateX(500%);
+            translate3d(-28px, 22px, 0);
+
+        opacity: 1;
+
     }
+
 }
 
 
-/* =========================
-   SEARCH AREA
-========================= */
+/* =========================================
+   APP
+========================================= */
 
-.search-wrap {
-    position: relative;
+.app {
 
-    margin-top: -42px;
-
-    padding:
-        0 16px;
-
-    z-index: 10;
-}
-
-.search-card {
-    max-width: 980px;
-
-    margin:
-        0 auto;
-
-    padding:
-        20px;
-
-    border:
-        1px solid
-        rgba(12, 73, 116, .10);
-
-    border-radius: 22px;
-
-    background:
-        rgba(255,255,255,.96);
-
-    box-shadow:
-        0 20px 50px
-        rgba(13, 55, 91, .12);
-
-    backdrop-filter:
-        blur(18px);
-}
-
-
-/* =========================
-   SEARCH GRID
-========================= */
-
-.search-grid {
-    display: grid;
-
-    grid-template-columns:
-        1fr
-        48px
-        1fr
-        auto;
-
-    gap: 12px;
-
-    align-items: end;
-}
-
-.field {
-    position: relative;
-}
-
-.field-label {
-    display: block;
-
-    margin-bottom: 7px;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.3px;
-
-    text-transform: uppercase;
-
-    color:
-        #7890a8;
-}
-
-.field-box {
-    position: relative;
-
-    height: 52px;
-
-    display: flex;
-
-    align-items: center;
-
-    border:
-        1px solid
-        #d9e7f2;
-
-    border-radius: 14px;
-
-    background:
-        #f9fcff;
-
-    transition:
-        .2s ease;
-}
-
-.field-box:focus-within {
-    border-color:
-        #48cbed;
-
-    background:
-        white;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(72,203,237,.10);
-}
-
-.field input {
     width: 100%;
 
-    height: 100%;
+    max-width: 820px;
+
+    margin: auto;
 
     padding:
-        0 15px;
+        28px
+        18px
+        60px;
 
-    border: none;
-
-    outline: none;
-
-    background:
-        transparent;
-
-    color:
-        #173552;
-
-    font-size: 14px;
-
-    font-weight: 600;
-}
-
-.field input::placeholder {
-    color:
-        #a5b5c4;
-
-    font-weight: 500;
 }
 
 
-/* =========================
-   SWAP BUTTON
-========================= */
+/* =========================================
+   HEADER
+========================================= */
 
-.swap-btn {
-    width: 48px;
-    height: 48px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    background:
-        #e9f8fd;
-
-    color:
-        #159cc5;
-
-    cursor: pointer;
-
-    font-size: 20px;
-
-    transition:
-        .2s ease;
-}
-
-.swap-btn:hover {
-    transform:
-        rotate(180deg);
-
-    background:
-        #d9f4fc;
-}
-
-.swap-btn:active {
-    transform:
-        scale(.94)
-        rotate(180deg);
-}
-
-
-/* =========================
-   SUGGESTIONS
-========================= */
-
-.suggestions {
-    position: absolute;
-
-    top: calc(100% + 7px);
-
-    left: 0;
-    right: 0;
-
-    z-index: 100;
-
-    max-height: 220px;
-
-    overflow-y: auto;
-
-    border-radius: 14px;
-
-    background:
-        white;
-
-    box-shadow:
-        0 15px 35px
-        rgba(17, 52, 78, .15);
-
-    border:
-        1px solid
-        #e2edf4;
-
-    display: none;
-}
-
-.suggestion-item {
-    padding:
-        12px 14px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    color:
-        #294762;
-
-    transition:
-        .15s ease;
-}
-
-.suggestion-item:hover {
-    background:
-        #effaff;
-
-    color:
-        #0b99c5;
-}
-
-
-/* =========================
-   SEARCH BUTTON
-========================= */
-
-.search-btn {
-    height: 52px;
-
-    padding:
-        0 22px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    cursor: pointer;
-
-    background:
-        linear-gradient(
-            135deg,
-            #09afd9,
-            #0878c9
-        );
-
-    color:
-        white;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    letter-spacing: .4px;
-
-    box-shadow:
-        0 8px 22px
-        rgba(8,143,205,.22);
+.header {
 
     position: relative;
 
-    overflow: hidden;
+    padding:
+        24px
+        4px
+        34px;
 
-    transition:
-        .2s ease;
+    text-align: center;
+
 }
 
-.search-btn::after {
+
+.header::after {
+
     content: "";
 
     position: absolute;
 
-    top: 0;
-    bottom: 0;
+    left: 50%;
 
-    width: 70px;
+    bottom: 8px;
 
-    left: -100px;
+    width: 90px;
+    height: 2px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50px;
 
     background:
+
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.35),
+            #ff6b1a 25%,
+            #ff8b4a 50%,
+            #ff6b1a 75%,
             transparent
         );
 
-    transform:
-        skewX(-20deg);
+    box-shadow:
+
+        0 0 14px
+        rgba(255, 107, 26, .35);
 
     animation:
-        buttonShine 3.5s infinite;
+        headerLine 3s ease-in-out infinite;
+
 }
 
-@keyframes buttonShine {
 
-    0% {
-        left: -100px;
-    }
+@keyframes headerLine {
 
-    45%,
+    0%,
     100% {
-        left: 130%;
+
+        width: 65px;
+
+        opacity: .55;
+
     }
-}
 
-.search-btn:hover {
-    transform:
-        translateY(-2px);
+    50% {
 
-    box-shadow:
-        0 12px 28px
-        rgba(8,143,205,.30);
-}
+        width: 105px;
 
-.search-btn:active {
-    transform:
-        translateY(0)
-        scale(.98);
-}
-          
-/* =========================
-   MAIN CONTENT
-========================= */
+        opacity: 1;
 
-.content {
-    max-width: 980px;
+    }
 
-    margin:
-        0 auto;
-
-    padding:
-        38px 16px
-        70px;
 }
 
 
-/* =========================
-   SECTION HEADER
-========================= */
+/* =========================================
+   BRAND
+========================================= */
 
-.section-head {
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: 21px;
-
-    font-weight: 850;
-
-    letter-spacing:
-        -.5px;
-
-    color:
-        #123250;
-}
-
-.section-desc {
-    margin-top: 5px;
-
-    font-size: 12px;
-
-    color:
-        #7890a8;
-
-    line-height: 1.5;
-}
-
-.status {
-    flex-shrink: 0;
+.brand {
 
     display: inline-flex;
 
     align-items: center;
 
-    gap: 7px;
+    justify-content: center;
 
-    padding:
-        7px 11px;
+    gap: 12px;
 
-    border-radius:
-        999px;
+    margin-bottom: 10px;
 
-    background:
-        #eef9fc;
-
-    color:
-        #1596ba;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing:
-        .7px;
-}
-
-.status::before {
-    content: "";
-
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background:
-        #20c997;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(32,201,151,.10);
 }
 
 
-/* =========================
-   LOADING
-========================= */
+.brand-mark {
 
-.loading {
-    display: none;
+    position: relative;
 
-    padding:
-        45px 20px;
-
-    text-align: center;
-
-    color:
-        #7890a8;
-}
-
-.loading-text {
-    font-size: 13px;
-
-    font-weight: 600;
-}
-
-.loading-dots {
-    display: inline-flex;
-
-    gap: 5px;
-
-    margin-left: 6px;
-}
-
-.loading-dots span {
-    width: 5px;
-    height: 5px;
-
-    border-radius: 50%;
-
-    background:
-        #20acd2;
-
-    animation:
-        loadingDot 1.2s
-        infinite ease-in-out;
-}
-
-.loading-dots span:nth-child(2) {
-    animation-delay:
-        .15s;
-}
-
-.loading-dots span:nth-child(3) {
-    animation-delay:
-        .3s;
-}
-
-@keyframes loadingDot {
-
-    0%,
-    80%,
-    100% {
-        transform:
-            scale(.65);
-
-        opacity:
-            .4;
-    }
-
-    40% {
-        transform:
-            scale(1);
-
-        opacity:
-            1;
-    }
-}
-
-
-/* =========================
-   EMPTY STATE
-========================= */
-
-.empty {
-    display: none;
-
-    padding:
-        55px 20px;
-
-    text-align: center;
-
-    border:
-        1px dashed
-        #d5e5ef;
-
-    border-radius:
-        18px;
-
-    background:
-        rgba(255,255,255,.65);
-}
-
-.empty-icon {
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    width: 54px;
-    height: 54px;
+    width: 46px;
+    height: 46px;
 
-    margin:
-        0 auto 14px;
-
-    border-radius:
-        17px;
+    border-radius: 14px;
 
     background:
-        #eef9fc;
 
-    color:
-        #12a1c9;
-
-    font-size:
-        23px;
-}
-
-.empty-title {
-    margin-bottom: 6px;
-
-    color:
-        #28455f;
-
-    font-size:
-        15px;
-
-    font-weight:
-        800;
-}
-
-.empty-text {
-    max-width:
-        430px;
-
-    margin:
-        0 auto;
-
-    color:
-        #8497a9;
-
-    font-size:
-        12px;
-
-    line-height:
-        1.6;
-}
-
-
-/* =========================
-   RESULTS
-========================= */
-
-.results {
-    display:
-        grid;
-
-    gap:
-        14px;
-}
-
-
-/* =========================
-   RESULT COUNT
-========================= */
-
-.result-count {
-    display: none;
-
-    margin-bottom:
-        14px;
-
-    font-size:
-        12px;
-
-    color:
-        #7890a8;
-
-    font-weight:
-        600;
-}
-
-.result-count strong {
-    color:
-        #159cc5;
-
-    font-weight:
-        800;
-}
-
-
-/* =========================
-   TRAIN CARD
-========================= */
-
-.train-card {
-    position: relative;
-
-    overflow: hidden;
-
-    padding:
-        18px;
+        linear-gradient(
+            145deg,
+            #ff8a45,
+            #ed5008
+        );
 
     border:
         1px solid
-        #deebf3;
-
-    border-radius:
-        18px;
-
-    background:
-        rgba(255,255,255,.96);
+        rgba(255, 170, 120, .25);
 
     box-shadow:
+
         0 8px 25px
-        rgba(18,55,85,.06);
+        rgba(255, 88, 10, .18),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, .16);
+
+    font-size: 21px;
+
+    transform:
+        rotate(-3deg);
 
     transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
+        transform .3s ease,
+        box-shadow .3s ease;
 
-    animation:
-        cardAppear .45s ease both;
 }
 
-.train-card::before {
+
+.brand-mark::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 5px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .10);
+
+    border-radius: 10px;
+
+}
+
+
+.brand:hover .brand-mark {
+
+    transform:
+        rotate(3deg)
+        translateY(-2px);
+
+    box-shadow:
+
+        0 12px 30px
+        rgba(255, 88, 10, .25),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, .18);
+
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.brand-name {
+
+    position: relative;
+
+    font-family:
+        "Manrope",
+        "Inter",
+        sans-serif;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    letter-spacing: .08em;
+
+    line-height: 1;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 4px 20px
+        rgba(0, 0, 0, .35);
+
+}
+
+
+.brand-name::after {
+
     content: "";
 
     position: absolute;
 
     left: 0;
+
+    bottom: -7px;
+
+    width: 30px;
+    height: 2px;
+
+    border-radius: 10px;
+
+    background:
+        #ff6b1a;
+
+    box-shadow:
+        0 0 10px
+        rgba(255, 107, 26, .45);
+
+}
+
+
+/* =========================================
+   SUBTITLE
+========================================= */
+
+.subtitle {
+
+    margin-top: 6px;
+
+    color: #8795a5;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================
+   SEARCH PANEL
+========================================= */
+
+.search-panel {
+
+    position: relative;
+
+    padding: 19px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .07);
+
+    border-radius: 20px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(18, 35, 55, .94),
+            rgba(9, 23, 39, .94)
+        );
+
+    box-shadow:
+
+        0 18px 50px
+        rgba(0, 0, 0, .25);
+
+    backdrop-filter:
+        blur(12px);
+
+    animation:
+        panelEnter .6s ease both;
+
+}
+
+
+@keyframes panelEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+      /* =========================================
+   ROUTE INPUT
+========================================= */
+
+.route-wrapper {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 48px 1fr;
+
+    gap: 10px;
+
+    align-items: end;
+
+}
+
+
+.field {
+
+    position: relative;
+
+}
+
+
+.field-label {
+
+    display: block;
+
+    margin:
+        0
+        0
+        8px
+        3px;
+
+    color: #94a3b3;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+}
+
+
+.input-wrap {
+
+    position: relative;
+
+}
+
+
+.station-input {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding:
+        0
+        15px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .09);
+
+    border-radius: 13px;
+
+    outline: none;
+
+    color: #ffffff;
+
+    background:
+        rgba(5, 16, 29, .72);
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    transition:
+
+        border-color .25s ease,
+
+        box-shadow .25s ease,
+
+        background .25s ease;
+
+}
+
+
+.station-input::placeholder {
+
+    color: #667587;
+
+}
+
+
+.station-input:hover {
+
+    border-color:
+        rgba(255, 255, 255, .14);
+
+}
+
+
+.station-input:focus {
+
+    border-color:
+        rgba(255, 107, 26, .65);
+
+    background:
+        rgba(5, 16, 29, .92);
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(255, 107, 26, .08);
+
+}
+
+
+/* =========================================
+   AUTOCOMPLETE
+========================================= */
+
+.suggestions {
+
+    position: absolute;
+
+    top: calc(100% + 7px);
+
+    left: 0;
+
+    right: 0;
+
+    z-index: 100;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .08);
+
+    border-radius: 13px;
+
+    background:
+        #0c1b2c;
+
+    box-shadow:
+
+        0 18px 40px
+        rgba(0, 0, 0, .38);
+
+}
+
+
+.suggestion-item {
+
+    padding:
+        13px
+        14px;
+
+    color: #d3dce5;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+
+        background .2s ease,
+
+        color .2s ease,
+
+        padding-left .2s ease;
+
+}
+
+
+.suggestion-item:hover {
+
+    padding-left: 18px;
+
+    color: #ffffff;
+
+    background:
+        rgba(255, 107, 26, .09);
+
+}
+
+
+/* =========================================
+   SWAP
+========================================= */
+
+.swap-button {
+
+    width: 48px;
+
+    height: 48px;
+
+    border:
+        1px solid
+        rgba(255, 107, 26, .25);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    color: #ff7b32;
+
+    background:
+        rgba(255, 107, 26, .07);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    transition:
+
+        transform .4s
+        cubic-bezier(.2,.8,.2,1),
+
+        background .25s ease,
+
+        border-color .25s ease,
+
+        color .25s ease;
+
+}
+
+
+.swap-button:hover {
+
+    background:
+        rgba(255, 107, 26, .15);
+
+    border-color:
+        rgba(255, 107, 26, .55);
+
+    color: #ff914f;
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+.swap-button:active {
+
+    transform:
+        rotate(180deg)
+        scale(.92);
+
+}
+
+
+.swap-button:focus,
+.swap-button:focus-visible {
+
+    outline: none;
+
+    box-shadow: none;
+
+}
+
+
+/* =========================================
+   SEARCH BUTTON
+========================================= */
+
+.search-button {
+
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    outline: none;
+
+    color: #ffffff;
+
+    background:
+
+        linear-gradient(
+            100deg,
+            #e9570a,
+            #ff762d
+        );
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: .02em;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    box-shadow:
+
+        0 10px 28px
+        rgba(255, 107, 26, .16);
+
+    transition:
+
+        transform .2s ease,
+
+        box-shadow .25s ease,
+
+        filter .25s ease;
+
+}
+
+
+.search-button:hover {
+
+    filter:
+        brightness(1.08);
+
+    box-shadow:
+
+        0 13px 32px
+        rgba(255, 107, 26, .23);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.search-button:active {
+
+    transform:
+        translateY(1px)
+        scale(.99);
+
+}
+
+
+.search-button:focus,
+.search-button:focus-visible {
+
+    outline: none;
+
+    box-shadow:
+
+        0 10px 28px
+        rgba(255, 107, 26, .16);
+
+}
+
+
+/* =========================================
+   DATABASE STATUS
+========================================= */
+
+.database-status {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 13px;
+
+    color: #718196;
+
+    font-size: 11px;
+
+}
+
+
+.status-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        #ff762d;
+
+    box-shadow:
+        0 0 10px
+        rgba(255, 118, 45, .65);
+
+    animation:
+        statusPulse 2s ease-in-out infinite;
+
+}
+
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+
+        opacity: .55;
+
+        transform:
+            scale(.9);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.15);
+
+    }
+
+}
+      /* =========================================
+   RESULT HEADER
+========================================= */
+
+.result-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin:
+        32px
+        3px
+        13px;
+
+}
+
+
+.result-title {
+
+    color: #ffffff;
+
+    font-family:
+        "Manrope",
+        "Inter",
+        sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+}
+
+
+.result-count {
+
+    color: #7d8da0;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================
+   RESULTS
+========================================= */
+
+#results {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.result-card {
+
+    position: relative;
+
+    padding: 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .065);
+
+    border-radius: 17px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(17, 34, 53, .94),
+            rgba(9, 22, 37, .94)
+        );
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(0, 0, 0, .17);
+
+    animation:
+        resultEnter .45s ease both;
+
+    transition:
+
+        border-color .25s ease,
+
+        transform .25s ease,
+
+        box-shadow .25s ease;
+
+}
+
+
+.result-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
     top: 0;
+
     bottom: 0;
 
     width: 3px;
 
     background:
+
         linear-gradient(
             180deg,
-            #13b8df,
-            #087dc5
+            #ff6b1a,
+            rgba(255, 107, 26, .12)
         );
 
-    opacity:
-        .85;
+    opacity: .85;
+
 }
 
-.train-card:hover {
+
+.result-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 140px;
+
+    height: 140px;
+
+    top: -90px;
+
+    right: -70px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255, 107, 26, .08),
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+}
+
+
+.result-card:hover {
+
     transform:
-        translateY(-3px);
+        translateY(-2px);
 
     border-color:
-        #c9e7f2;
+        rgba(255, 107, 26, .18);
 
     box-shadow:
-        0 14px 32px
-        rgba(18,55,85,.10);
+
+        0 15px 35px
+        rgba(0, 0, 0, .24);
+
 }
 
-@keyframes cardAppear {
+
+@keyframes resultEnter {
 
     from {
+
         opacity: 0;
 
         transform:
-            translateY(10px);
+            translateY(8px);
+
     }
 
     to {
+
         opacity: 1;
 
         transform:
             translateY(0);
+
     }
+
 }
 
 
-/* =========================
-   TRAIN HEADER
-========================= */
+/* =========================================
+   TRAIN
+========================================= */
 
-.train-header {
-    display:
-        flex;
+.result-train {
 
-    align-items:
-        flex-start;
+    display: flex;
 
-    justify-content:
-        space-between;
+    align-items: center;
 
-    gap:
-        15px;
+    gap: 7px;
 
-    margin-bottom:
-        15px;
+    color: #ffffff;
+
+    font-family:
+        "Manrope",
+        "Inter",
+        sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+
 }
 
-.train-name {
-    color:
-        #102f4b;
 
-    font-size:
-        16px;
+/* =========================================
+   USER ROUTE
+========================================= */
 
-    font-weight:
-        850;
+.result-route {
 
-    letter-spacing:
-        -.2px;
+    color: #a9b5c1;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    margin-bottom: 14px;
+
 }
 
-.route {
-    margin-top:
-        5px;
 
-    color:
-        #688198;
+/* =========================================
+   SPECIAL ROUTE
+========================================= */
 
-    font-size:
-        12px;
-
-    font-weight:
-        600;
-
-    line-height:
-        1.5;
-}
-
-.availability {
-    flex-shrink:
-        0;
+.special-route {
 
     padding:
-        6px 9px;
+        11px
+        12px;
 
-    border-radius:
-        999px;
+    border:
+        1px solid
+        rgba(255, 255, 255, .04);
+
+    border-radius: 10px;
+
+    color: #909eae;
 
     background:
-        #effaf7;
+        rgba(255, 255, 255, .035);
 
-    color:
-        #159b78;
+    font-size: 12px;
 
-    font-size:
-        9px;
+    line-height: 1.65;
 
-    font-weight:
-        800;
-
-    letter-spacing:
-        .6px;
 }
 
 
-/* =========================
-   FARE GRID
-========================= */
+.special-route strong {
 
-.fare-grid {
-    display:
-        grid;
+    color: #ff8745;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================
+   FARE LIST
+========================================= */
+
+.fare-list {
+
+    display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap:
-        9px;
+    gap: 8px;
+
+    margin-top: 12px;
+
 }
+
 
 .fare-item {
-    min-width:
-        0;
 
     padding:
-        12px;
-
-    border:
-        1px solid
-        #e2edf3;
-
-    border-radius:
-        13px;
-
-    background:
-        #f8fbfd;
-}
-
-.fare-class {
-    margin-bottom:
-        6px;
-
-    color:
-        #8a9bac;
-
-    font-size:
+        11px
         9px;
 
-    font-weight:
-        800;
+    border:
+        1px solid
+        rgba(255, 255, 255, .05);
 
-    letter-spacing:
-        .8px;
+    border-radius: 10px;
 
-    text-transform:
-        uppercase;
-}
-
-.fare-price {
-    color:
-        #173b5a;
-
-    font-size:
-        14px;
-
-    font-weight:
-        850;
-
-    white-space:
-        nowrap;
-}
-
-.fare-item.unavailable {
     background:
-        #fafcfd;
+        rgba(4, 13, 24, .42);
+
+    text-align: center;
+
+    transition:
+
+        background .2s ease,
+
+        border-color .2s ease;
+
+}
+
+
+.fare-item:hover {
 
     border-color:
-        #edf2f5;
-}
+        rgba(255, 107, 26, .15);
 
-.fare-item.unavailable .fare-price {
-    color:
-        #b7c2ca;
+    background:
+        rgba(255, 107, 26, .035);
 
-    font-weight:
-        650;
 }
 
 
-/* =========================
-   ERROR
-========================= */
+.fare-label {
 
+    color: #7c8b9c;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    margin-bottom: 6px;
+
+}
+
+
+.fare-price {
+
+    color: #f1f5f8;
+
+    font-family:
+        "Manrope",
+        "Inter",
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading {
+
+    display: none;
+
+    padding: 28px;
+
+    text-align: center;
+
+    color: #8291a3;
+
+    font-size: 12px;
+
+}
+
+
+.loading-spinner {
+
+    width: 25px;
+
+    height: 25px;
+
+    margin:
+        0
+        auto
+        11px;
+
+    border:
+        2px solid
+        rgba(255, 255, 255, .08);
+
+    border-top-color:
+        #ff6b1a;
+
+    border-radius: 50%;
+
+    animation:
+        spin .8s linear infinite;
+
+}
+
+
+@keyframes spin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================================
+   EMPTY / ERROR
+========================================= */
+
+.empty,
 .error-box {
-    display:
-        none;
 
-    margin-bottom:
-        18px;
+    display: none;
+
+    margin-top: 13px;
 
     padding:
-        13px 15px;
+        27px
+        19px;
 
     border:
         1px solid
-        #ffd9d9;
+        rgba(255, 255, 255, .06);
 
-    border-radius:
-        13px;
+    border-radius: 15px;
+
+    text-align: center;
+
+    color: #7d8da0;
 
     background:
-        #fff6f6;
+        rgba(11, 25, 41, .65);
 
-    color:
-        #b34b4b;
+    font-size: 12px;
 
-    font-size:
-        12px;
+    line-height: 1.65;
 
-    line-height:
-        1.6;
 }
 
 
-/* =========================
+.error-box {
+
+    color: #ff9b75;
+
+    border-color:
+        rgba(255, 107, 26, .15);
+
+      }
+      /* =========================================
    FOOTER
-========================= */
+========================================= */
 
-footer {
-    padding:
-        24px 20px
-        35px;
+.footer {
 
-    text-align:
-        center;
+    margin-top: 40px;
 
-    color:
-        #9aacba;
+    padding-top: 5px;
 
-    font-size:
-        10px;
+    text-align: center;
 
-    letter-spacing:
-        .5px;
-}
+    color: #4d5d6f;
 
-footer strong {
-    color:
-        #668096;
+    font-size: 10px;
 
-    font-weight:
-        750;
+    font-weight: 500;
+
+    letter-spacing: .05em;
+
 }
 
 
-/* =========================
-   SCROLLBAR
-========================= */
-
-::-webkit-scrollbar {
-    width:
-        7px;
-
-    height:
-        7px;
-}
-
-::-webkit-scrollbar-track {
-    background:
-        #edf5f9;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius:
-        99px;
-
-    background:
-        #b8d4e2;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background:
-        #8fb9cd;
-}
-
-
-/* =========================
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
-@media (max-width: 760px) {
+@media (max-width: 560px) {
 
-    .hero {
+
+    .app {
+
         padding:
-            23px 18px
-            68px;
+            20px
+            13px
+            45px;
+
     }
 
-    .hero h1 {
-        font-size:
-            47px;
 
-        letter-spacing:
-            -2.5px;
-    }
+    /* HEADER */
 
-    .hero-subtitle {
-        font-size:
-            13px;
-    }
+    .header {
 
-    .search-wrap {
         padding:
-            0 12px;
+            18px
+            4px
+            29px;
+
     }
 
-    .search-card {
+
+    .brand {
+
+        gap: 10px;
+
+    }
+
+
+    .brand-mark {
+
+        width: 40px;
+
+        height: 40px;
+
+        border-radius: 12px;
+
+        font-size: 18px;
+
+    }
+
+
+    .brand-name {
+
+        font-size: 23px;
+
+        letter-spacing: .07em;
+
+    }
+
+
+    .brand-name::after {
+
+        bottom: -6px;
+
+        width: 24px;
+
+    }
+
+
+    .subtitle {
+
+        font-size: 10px;
+
+        letter-spacing: .07em;
+
+    }
+
+
+    /* SEARCH PANEL */
+
+    .search-panel {
+
+        padding: 15px;
+
+        border-radius: 17px;
+
+    }
+
+
+    /* ROUTE */
+
+    .route-wrapper {
+
+        grid-template-columns:
+            1fr 42px 1fr;
+
+        gap: 7px;
+
+    }
+
+
+    .field-label {
+
+        font-size: 10px;
+
+    }
+
+
+    /* INPUT */
+
+    .station-input {
+
+        height: 49px;
+
         padding:
-            16px;
+            0
+            11px;
 
-        border-radius:
-            19px;
+        border-radius: 12px;
+
+        font-size: 13px;
+
     }
 
-    .search-grid {
+
+    /* SWAP */
+
+    .swap-button {
+
+        width: 42px;
+
+        height: 42px;
+
+        border-radius: 12px;
+
+        font-size: 18px;
+
+    }
+
+
+    /* SEARCH */
+
+    .search-button {
+
+        height: 49px;
+
+        margin-top: 13px;
+
+        border-radius: 12px;
+
+        font-size: 13px;
+
+    }
+
+
+    /* STATUS */
+
+    .database-status {
+
+        font-size: 10px;
+
+    }
+
+
+    /* RESULT HEADER */
+
+    .result-header {
+
+        margin:
+            28px
+            2px
+            12px;
+
+    }
+
+
+    .result-title {
+
+        font-size: 14px;
+
+    }
+
+
+    .result-count {
+
+        font-size: 10px;
+
+    }
+
+
+    /* CARD */
+
+    .result-card {
+
+        padding: 16px;
+
+        border-radius: 15px;
+
+    }
+
+
+    .result-train {
+
+        font-size: 16px;
+
+    }
+
+
+    .result-route {
+
+        font-size: 12px;
+
+    }
+
+
+    .special-route {
+
+        font-size: 11px;
+
+        line-height: 1.6;
+
+    }
+
+
+    /* FARE */
+
+    .fare-list {
+
         grid-template-columns:
             1fr;
+
+        gap: 6px;
+
     }
 
-    .swap-btn {
-        width:
-            100%;
-
-        height:
-            40px;
-    }
-
-    .search-btn {
-        width:
-            100%;
-    }
-
-    .section-head {
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-
-        gap:
-            10px;
-    }
-
-    .content {
-        padding:
-            30px 12px
-            55px;
-    }
-
-    .train-card {
-        padding:
-            16px;
-    }
-
-    .train-header {
-        flex-direction:
-            column;
-
-        gap:
-            9px;
-    }
-
-    .availability {
-        align-self:
-            flex-start;
-    }
-
-    .fare-grid {
-        grid-template-columns:
-            1fr;
-    }
 
     .fare-item {
-        display:
-            flex;
 
-        align-items:
-            center;
+        display: flex;
 
         justify-content:
             space-between;
 
-        gap:
-            10px;
+        align-items: center;
+
+        padding:
+            10px
+            12px;
+
+        text-align: left;
+
     }
 
-    .fare-class {
-        margin-bottom:
-            0;
+
+    .fare-label {
+
+        margin-bottom: 0;
+
+        font-size: 10px;
+
     }
+
 
     .fare-price {
-        font-size:
-            13px;
+
+        font-size: 13px;
+
     }
+
+
+    /* AUTOCOMPLETE */
+
+    .suggestion-item {
+
+        padding:
+            12px
+            13px;
+
+        font-size: 12px;
+
+    }
+
+
+    /* FOOTER */
+
+    .footer {
+
+        margin-top: 32px;
+
+        font-size: 9px;
+
+    }
+
 }
 
 
-/* =========================
-   SMALL PHONE
-========================= */
+/* =========================================
+   VERY SMALL PHONE
+========================================= */
 
-@media (max-width: 390px) {
+@media (max-width: 360px) {
 
-    .hero h1 {
-        font-size:
-            41px;
+
+    .app {
+
+        padding-left: 10px;
+
+        padding-right: 10px;
+
     }
 
-    .hero {
-        padding-bottom:
-            62px;
+
+    .brand-name {
+
+        font-size: 20px;
+
     }
 
-    .section-title {
-        font-size:
-            19px;
+
+    .brand-mark {
+
+        width: 36px;
+
+        height: 36px;
+
+        font-size: 16px;
+
     }
 
-    .train-name {
-        font-size:
-            15px;
+
+    .station-input {
+
+        font-size: 12px;
+
     }
 
-    .fare-item {
-        padding:
-            11px;
+
+    .result-train {
+
+        font-size: 15px;
+
     }
+
+
+    .result-route {
+
+        font-size: 11px;
+
+    }
+
+
+    .special-route {
+
+        font-size: 10px;
+
+    }
+
+
+}
+
+
+/* =========================================
+   ANDROID TOUCH
+========================================= */
+
+button,
+input {
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+
+button {
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+}
+
+
+button:focus,
+button:focus-visible {
+
+    outline: none;
+
+}
+
+
+/* =========================================
+   REMOVE BUTTON GLOW
+========================================= */
+
+.search-button:focus,
+.search-button:focus-visible {
+
+    outline: none;
+
+    box-shadow:
+        0 10px 28px
+        rgba(255, 107, 26, .16);
+
+}
+
+
+.swap-button:focus,
+.swap-button:focus-visible {
+
+    outline: none;
+
+    box-shadow: none;
+
+}
+
+
+/* =========================================
+   REDUCE MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            .01ms !important;
+
+    }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
-     HERO
-========================= -->
 
-<section class="hero">
-
-    <div class="brand-mini">
-        KAI • 121
-    </div>
-
-    <div class="eyebrow">
-        SPECIAL FARE
-    </div>
-
-    <h1>
-        TARSUS <span>Finder</span>
-    </h1>
-
-    <p class="hero-subtitle">
-        Cari tarif khusus perjalanan kereta berdasarkan
-        stasiun asal, tujuan, dan kelas layanan.
-    </p>
-
-    <div class="digital-rail">
-        <div class="rail-sleepers"></div>
-        <div class="rail-light"></div>
-    </div>
-
-</section>
+<main class="app">
 
 
-<!-- =========================
-     SEARCH
-========================= -->
+    <!-- =====================================
+         HEADER
+    ====================================== -->
 
-<div class="search-wrap">
+    <header class="header">
 
-    <div class="search-card">
 
-        <div class="search-grid">
+        <div class="brand">
+
+
+            <div class="brand-mark">
+                🚆
+            </div>
+
+
+            <div class="brand-name">
+                TARSUS FINDER
+            </div>
+
+
+        </div>
+
+
+        <p class="subtitle">
+            Pencarian Tarif Khusus Kereta Api
+        </p>
+
+
+    </header>
+
+
+
+    <!-- =====================================
+         SEARCH PANEL
+    ====================================== -->
+
+    <section class="search-panel">
+
+
+        <div class="route-wrapper">
+
 
             <!-- ASAL -->
 
             <div class="field">
 
+
                 <label
                     class="field-label"
-                    for="asal">
+                    for="asal"
+                >
                     Stasiun Asal
                 </label>
 
-                <div class="field-box">
+
+                <div class="input-wrap">
+
 
                     <input
                         type="text"
                         id="asal"
+                        class="station-input"
+                        placeholder="Contoh: Kroya"
                         autocomplete="off"
-                        placeholder="Contoh: Bandung">
+                    >
+
+
+                    <div
+                        id="suggestionsAsal"
+                        class="suggestions"
+                    ></div>
+
 
                 </div>
 
-                <div
-                    id="suggestionsAsal"
-                    class="suggestions">
-                </div>
 
             </div>
+
 
 
             <!-- SWAP -->
@@ -1517,1307 +1977,186 @@ footer strong {
             <button
                 type="button"
                 id="swapBtn"
-                class="swap-btn"
-                aria-label="Tukar stasiun">
-
+                class="swap-button"
+                aria-label="Tukar stasiun"
+                title="Tukar stasiun"
+            >
                 ⇄
-
             </button>
+
 
 
             <!-- TUJUAN -->
 
             <div class="field">
 
+
                 <label
                     class="field-label"
-                    for="tujuan">
+                    for="tujuan"
+                >
                     Stasiun Tujuan
                 </label>
 
-                <div class="field-box">
+
+                <div class="input-wrap">
+
 
                     <input
                         type="text"
                         id="tujuan"
+                        class="station-input"
+                        placeholder="Contoh: Yogyakarta"
                         autocomplete="off"
-                        placeholder="Contoh: Tasikmalaya">
+                    >
+
+
+                    <div
+                        id="suggestionsTujuan"
+                        class="suggestions"
+                    ></div>
+
 
                 </div>
 
-                <div
-                    id="suggestionsTujuan"
-                    class="suggestions">
-                </div>
 
             </div>
 
-
-            <!-- SEARCH BUTTON -->
-
-            <button
-                type="button"
-                id="searchBtn"
-                class="search-btn">
-
-                Cari Tarif
-
-            </button>
 
         </div>
 
-    </div>
-
-</div>
 
 
-<!-- =========================
-     CONTENT
-========================= -->
+        <!-- SEARCH BUTTON -->
 
-<main class="content">
+        <button
+            type="button"
+            id="searchBtn"
+            class="search-button"
+        >
+            Cari Tarif Khusus
+        </button>
 
-    <div class="section-head">
 
-        <div>
 
-            <div class="section-title">
-                Hasil Pencarian
-            </div>
+        <!-- DATABASE STATUS -->
 
-            <div class="section-desc">
-                Menampilkan seluruh kereta yang memiliki
-                tarif khusus pada relasi yang dicari.
-            </div>
+        <div class="database-status">
+
+            <span class="status-dot"></span>
+
+            <span id="status">
+                Menghubungkan database...
+            </span>
 
         </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         RESULT HEADER
+    ====================================== -->
+
+    <div class="result-header">
+
+
+        <div class="result-title">
+            Hasil Pencarian
+        </div>
+
 
         <div
-            id="status"
-            class="status">
-
-            Memuat data
-
+            id="resultCount"
+            class="result-count"
+        >
+            Belum ada pencarian
         </div>
 
+
     </div>
 
 
-    <!-- ERROR -->
 
-    <div
-        id="errorBox"
-        class="error-box">
-    </div>
-
-
-    <!-- RESULT COUNT -->
-
-    <div
-        id="resultCount"
-        class="result-count">
-    </div>
-
-
-    <!-- LOADING -->
+    <!-- =====================================
+         LOADING
+    ====================================== -->
 
     <div
         id="loading"
-        class="loading">
+        class="loading"
+    >
 
-        <span class="loading-text">
-            Memuat database
-        </span>
+        <div class="loading-spinner"></div>
 
-        <span class="loading-dots">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </span>
+        Memuat database...
 
     </div>
 
 
-    <!-- EMPTY -->
+
+    <!-- =====================================
+         ERROR
+    ====================================== -->
+
+    <div
+        id="errorBox"
+        class="error-box"
+    ></div>
+
+
+
+    <!-- =====================================
+         EMPTY
+    ====================================== -->
 
     <div
         id="empty"
-        class="empty">
+        class="empty"
+    >
 
-        <div class="empty-icon">
-            ⌕
-        </div>
-
-        <div class="empty-title">
-            Belum ada hasil
-        </div>
-
-        <div class="empty-text">
-            Masukkan stasiun asal dan tujuan,
-            lalu tekan tombol Cari Tarif.
-        </div>
+        Tarif khusus tidak ditemukan
+        untuk rute tersebut.
 
     </div>
 
 
-    <!-- RESULTS -->
 
-    <div
-        id="results"
-        class="results">
-    </div>
+    <!-- =====================================
+         RESULTS
+    ====================================== -->
+
+    <div id="results"></div>
+
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer">
+
+        TARSUS FINDER
+        •
+        Tarif Khusus Kereta Api
+
+    </footer>
+
 
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
 
-<footer>
+<!-- =========================================
+     DATA JAVASCRIPT
+========================================= -->
 
-    Created by
-    <strong>Prima CC121</strong>
+<script src="data.js"></script>
 
-</footer>
-
-
-<script>
-      
-// ========================================
-// TARSUS FINDER
-// DATABASE & CORE SYSTEM
-// ========================================
-
-
-// ========================================
-// GOOGLE SHEET DATABASE
-// ========================================
-
-const CSV_URL =
-    "https://docs.google.com/spreadsheets/d/1a4Ln_wASazV35F2M3MKZcJHEmiAV8G-0WmkMmU4Csls/gviz/tq?tqx=out:csv&sheet=Tarif%20Khusus";
-
-
-// ========================================
-// ELEMENT
-// ========================================
-
-const asalInput =
-    document.getElementById("asal");
-
-const tujuanInput =
-    document.getElementById("tujuan");
-
-const suggestionsAsal =
-    document.getElementById("suggestionsAsal");
-
-const suggestionsTujuan =
-    document.getElementById("suggestionsTujuan");
-
-const swapBtn =
-    document.getElementById("swapBtn");
-
-const searchBtn =
-    document.getElementById("searchBtn");
-
-const results =
-    document.getElementById("results");
-
-const resultCount =
-    document.getElementById("resultCount");
-
-const loading =
-    document.getElementById("loading");
-
-const empty =
-    document.getElementById("empty");
-
-const errorBox =
-    document.getElementById("errorBox");
-
-const status =
-    document.getElementById("status");
-
-
-// ========================================
-// DATABASE
-// ========================================
-
-let database = [];
-
-let stations = [];
-
-
-// ========================================
-// NORMALIZE TEXT
-// ========================================
-
-function normalizeText(text) {
-
-    return String(text || "")
-        .trim()
-        .replace(/\s+/g, " ")
-        .toLowerCase();
-
-}
-
-
-// ========================================
-// ESCAPE HTML
-// ========================================
-
-function escapeHTML(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-
-// ========================================
-// FORMAT RUPIAH
-// ========================================
-
-function formatRupiah(value) {
-
-    if (
-        value === null ||
-        value === undefined ||
-        String(value).trim() === "" ||
-        String(value).trim() === "-"
-    ) {
-        return "-";
-    }
-
-    const number =
-        Number(
-            String(value)
-                .replace(/[^\d]/g, "")
-        );
-
-    if (!Number.isFinite(number)) {
-        return "-";
-    }
-
-    return "Rp" +
-        number.toLocaleString("id-ID");
-
-}
-
-
-// ========================================
-// PARSE CSV
-// ========================================
-
-function parseCSV(csv) {
-
-    const rows = [];
-
-    let row = [];
-
-    let value = "";
-
-    let insideQuotes = false;
-
-
-    for (
-        let i = 0;
-        i < csv.length;
-        i++
-    ) {
-
-        const char =
-            csv[i];
-
-        const next =
-            csv[i + 1];
-
-
-        // Quote
-
-        if (
-            char === '"' &&
-            insideQuotes &&
-            next === '"'
-        ) {
-
-            value += '"';
-
-            i++;
-
-            continue;
-        }
-
-
-        if (char === '"') {
-
-            insideQuotes =
-                !insideQuotes;
-
-            continue;
-        }
-
-
-        // Comma
-
-        if (
-            char === "," &&
-            !insideQuotes
-        ) {
-
-            row.push(value);
-
-            value = "";
-
-            continue;
-        }
-
-
-        // New line
-
-        if (
-            (char === "\n" ||
-             char === "\r") &&
-            !insideQuotes
-        ) {
-
-            if (
-                char === "\r" &&
-                next === "\n"
-            ) {
-                i++;
-            }
-
-            row.push(value);
-
-            value = "";
-
-            if (
-                row.some(
-                    cell =>
-                        String(cell).trim() !== ""
-                )
-            ) {
-                rows.push(row);
-            }
-
-            row = [];
-
-            continue;
-        }
-
-
-        value += char;
-    }
-
-
-    // Last row
-
-    if (
-        value !== "" ||
-        row.length > 0
-    ) {
-
-        row.push(value);
-
-        if (
-            row.some(
-                cell =>
-                    String(cell).trim() !== ""
-            )
-        ) {
-            rows.push(row);
-        }
-    }
-
-
-    return rows;
-}
-
-
-// ========================================
-// LOAD DATABASE
-// ========================================
-
-async function loadDatabase() {
-
-    try {
-
-        setLoading(true);
-
-        hideError();
-
-
-        const response =
-            await fetch(
-                CSV_URL + "&_=" + Date.now()
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Database Google Sheet tidak dapat diakses."
-            );
-        }
-
-
-        const csv =
-            await response.text();
-
-
-        const rows =
-            parseCSV(csv);
-
-
-        if (!rows.length) {
-
-            throw new Error(
-                "Database kosong."
-            );
-        }
-
-
-        // --------------------------------
-        // HEADER
-        // --------------------------------
-
-        const header =
-            rows[0].map(
-                item =>
-                    normalizeText(item)
-            );
-
-
-        const expectedHeaders = [
-            "kereta",
-            "stasiunasal",
-            "stasiuntujuan",
-            "eksekutif",
-            "bisnis",
-            "ekonomi"
-        ];
-
-
-        const validHeader =
-            expectedHeaders.every(
-                item =>
-                    header.includes(item)
-            );
-
-
-        if (!validHeader) {
-
-            throw new Error(
-                "Format Google Sheet tidak sesuai. Pastikan kolomnya: kereta, stasiunAsal, stasiunTujuan, eksekutif, bisnis, ekonomi."
-            );
-        }
-
-
-        // --------------------------------
-        // COLUMN INDEX
-        // --------------------------------
-
-        const keretaIndex =
-            header.indexOf("kereta");
-
-        const asalIndex =
-            header.indexOf("stasiunasal");
-
-        const tujuanIndex =
-            header.indexOf("stasiuntujuan");
-
-        const eksekutifIndex =
-            header.indexOf("eksekutif");
-
-        const bisnisIndex =
-            header.indexOf("bisnis");
-
-        const ekonomiIndex =
-            header.indexOf("ekonomi");
-
-
-        // --------------------------------
-        // BUILD DATABASE
-        // --------------------------------
-
-        database =
-            rows
-                .slice(1)
-                .map(row => {
-
-                    return {
-
-                        kereta:
-                            String(
-                                row[keretaIndex] || ""
-                            ).trim(),
-
-                        asal:
-                            String(
-                                row[asalIndex] || ""
-                            ).trim(),
-
-                        tujuan:
-                            String(
-                                row[tujuanIndex] || ""
-                            ).trim(),
-
-                        eksekutif:
-                            String(
-                                row[eksekutifIndex] || ""
-                            ).trim(),
-
-                        bisnis:
-                            String(
-                                row[bisnisIndex] || ""
-                            ).trim(),
-
-                        ekonomi:
-                            String(
-                                row[ekonomiIndex] || ""
-                            ).trim()
-
-                    };
-
-                })
-                .filter(item =>
-
-                    item.kereta &&
-                    item.asal &&
-                    item.tujuan
-
-                );
-
-
-        // --------------------------------
-        // REMOVE DUPLICATES
-        // --------------------------------
-
-        const unique =
-            new Map();
-
-
-        database.forEach(item => {
-
-            const key =
-                [
-                    normalizeText(item.kereta),
-                    normalizeText(item.asal),
-                    normalizeText(item.tujuan)
-                ].join("|");
-
-
-            if (!unique.has(key)) {
-
-                unique.set(
-                    key,
-                    item
-                );
-
-            }
-
-        });
-
-
-        database =
-            Array.from(
-                unique.values()
-            );
-
-
-        // --------------------------------
-        // BUILD STATION LIST
-        // --------------------------------
-
-        const stationMap =
-            new Map();
-
-
-        database.forEach(item => {
-
-            const asalKey =
-                normalizeText(item.asal);
-
-            const tujuanKey =
-                normalizeText(item.tujuan);
-
-
-            if (!stationMap.has(asalKey)) {
-
-                stationMap.set(
-                    asalKey,
-                    item.asal
-                );
-
-            }
-
-
-            if (!stationMap.has(tujuanKey)) {
-
-                stationMap.set(
-                    tujuanKey,
-                    item.tujuan
-                );
-
-            }
-
-        });
-
-
-        stations =
-            Array.from(
-                stationMap.values()
-            ).sort(
-                (a, b) =>
-                    a.localeCompare(
-                        b,
-                        "id"
-                    )
-            );
-
-
-        // --------------------------------
-        // DATABASE READY
-        // --------------------------------
-
-        status.textContent =
-            "Database aktif";
-
-
-        setLoading(false);
-
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        database = [];
-
-        stations = [];
-
-
-        setLoading(false);
-
-
-        status.textContent =
-            "Database error";
-
-
-        showError(
-            error.message ||
-            "Terjadi kesalahan saat membaca database."
-        );
-
-    }
-
-}
-
-
-// ========================================
-// LOADING CONTROL
-// ========================================
-
-function setLoading(active) {
-
-    if (active) {
-
-        loading.style.display =
-            "block";
-
-        empty.style.display =
-            "none";
-
-        results.innerHTML =
-            "";
-
-    } else {
-
-        loading.style.display =
-            "none";
-    }
-
-}
-
-
-// ========================================
-// ERROR
-// ========================================
-
-function showError(message) {
-
-    errorBox.textContent =
-        message;
-
-    errorBox.style.display =
-        "block";
-
-}
-
-
-function hideError() {
-
-    errorBox.textContent =
-        "";
-
-    errorBox.style.display =
-        "none";
-
-}
-
-
-// ========================================
-// AUTOCOMPLETE
-// ========================================
-
-function showSuggestions(
-    input,
-    container
-) {
-
-    const keyword =
-        normalizeText(
-            input.value
-        );
-
-
-    if (!keyword) {
-
-        container.style.display =
-            "none";
-
-        container.innerHTML =
-            "";
-
-        return;
-    }
-
-
-    const filtered =
-        stations
-            .filter(station =>
-                normalizeText(station)
-                    .includes(keyword)
-            )
-            .slice(0, 8);
-
-
-    if (!filtered.length) {
-
-        container.style.display =
-            "none";
-
-        container.innerHTML =
-            "";
-
-        return;
-    }
-
-
-    container.innerHTML =
-        filtered
-            .map(station => `
-                <div
-                    class="suggestion-item"
-                    data-value="${escapeHTML(station)}">
-
-                    ${escapeHTML(station)}
-
-                </div>
-            `)
-            .join("");
-
-
-    container.style.display =
-        "block";
-
-
-    container
-        .querySelectorAll(
-            ".suggestion-item"
-        )
-        .forEach(item => {
-
-            item.addEventListener(
-                "click",
-                () => {
-
-                    input.value =
-                        item.dataset.value;
-
-                    container.style.display =
-                        "none";
-
-                }
-            );
-
-        });
-
-}
-
-
-// ========================================
-// INPUT EVENTS
-// ========================================
-
-asalInput.addEventListener(
-    "input",
-    () => {
-
-        showSuggestions(
-            asalInput,
-            suggestionsAsal
-        );
-
-    }
-);
-
-
-tujuanInput.addEventListener(
-    "input",
-    () => {
-
-        showSuggestions(
-            tujuanInput,
-            suggestionsTujuan
-        );
-
-    }
-);
-
-
-// ========================================
-// CLOSE SUGGESTIONS
-// ========================================
-
-document.addEventListener(
-    "click",
-    event => {
-
-        if (
-            !event.target.closest(".field")
-        ) {
-
-            suggestionsAsal.style.display =
-                "none";
-
-            suggestionsTujuan.style.display =
-                "none";
-
-        }
-
-    }
-);
-
-
-// ========================================
-// SWAP STATION
-// ========================================
-
-swapBtn.addEventListener(
-    "click",
-    () => {
-
-        const temp =
-            asalInput.value;
-
-        asalInput.value =
-            tujuanInput.value;
-
-        tujuanInput.value =
-            temp;
-
-
-        if (
-            asalInput.value &&
-            tujuanInput.value
-        ) {
-
-            searchTarif();
-
-        }
-
-    }
-);
-
-
-// ========================================
-// SEARCH DATABASE
-// ========================================
-
-function findTarif(
-    asal,
-    tujuan
-) {
-
-    const asalKey =
-        normalizeText(asal);
-
-    const tujuanKey =
-        normalizeText(tujuan);
-
-
-    return database.filter(item =>
-
-        normalizeText(item.asal) ===
-            asalKey &&
-
-        normalizeText(item.tujuan) ===
-            tujuanKey
-
-    );
-
-                  }
-      
-// ========================================
-// RENDER FARE ITEM
-// ========================================
-
-function renderFareItem(
-    label,
-    value
-) {
-
-    const unavailable =
-        !value ||
-        String(value).trim() === "" ||
-        String(value).trim() === "-";
-
-
-    return `
-        <div class="fare-item ${unavailable ? "unavailable" : ""}">
-
-            <div class="fare-class">
-                ${label}
-            </div>
-
-            <div class="fare-price">
-                ${
-                    unavailable
-                        ? "-"
-                        : formatRupiah(value)
-                }
-            </div>
-
-        </div>
-    `;
-
-}
-
-
-// ========================================
-// RENDER RESULTS
-// ========================================
-
-function renderResults(data) {
-
-    results.innerHTML =
-        "";
-
-    resultCount.style.display =
-        "none";
-
-
-    // --------------------------------
-    // NO RESULT
-    // --------------------------------
-
-    if (!data.length) {
-
-        empty.style.display =
-            "block";
-
-        return;
-
-    }
-
-
-    empty.style.display =
-        "none";
-
-
-    // --------------------------------
-    // RESULT COUNT
-    // --------------------------------
-
-    resultCount.innerHTML =
-        `Menampilkan <strong>${data.length}</strong> kereta dengan tarif khusus`;
-
-    resultCount.style.display =
-        "block";
-
-
-    // --------------------------------
-    // CREATE CARDS
-    // --------------------------------
-
-    data.forEach(
-        (item, index) => {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "train-card";
-
-
-            card.style.animationDelay =
-                `${index * 0.06}s`;
-
-
-            card.innerHTML = `
-
-                <div class="train-header">
-
-                    <div>
-
-                        <div class="train-name">
-                            ${escapeHTML(
-                                item.kereta
-                            )}
-                        </div>
-
-                        <div class="route">
-                            ${escapeHTML(
-                                item.asal
-                            )}
-
-                            <span
-                                style="
-                                    margin:0 5px;
-                                    color:#18a9d2;
-                                    font-weight:800;
-                                "
-                            >
-                                →
-                            </span>
-
-                            ${escapeHTML(
-                                item.tujuan
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="availability">
-                        TARIF KHUSUS
-                    </div>
-
-                </div>
-
-
-                <div class="fare-grid">
-
-                    ${renderFareItem(
-                        "Eksekutif",
-                        item.eksekutif
-                    )}
-
-                    ${renderFareItem(
-                        "Bisnis",
-                        item.bisnis
-                    )}
-
-                    ${renderFareItem(
-                        "Ekonomi",
-                        item.ekonomi
-                    )}
-
-                </div>
-
-            `;
-
-
-            results.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-// ========================================
-// SEARCH
-// ========================================
-
-function searchTarif() {
-
-    hideError();
-
-
-    const asal =
-        asalInput.value.trim();
-
-    const tujuan =
-        tujuanInput.value.trim();
-
-
-    // --------------------------------
-    // VALIDATION
-    // --------------------------------
-
-    if (!asal || !tujuan) {
-
-        empty.style.display =
-            "block";
-
-        results.innerHTML =
-            "";
-
-        resultCount.style.display =
-            "none";
-
-        empty.querySelector(
-            ".empty-title"
-        ).textContent =
-            "Lengkapi stasiun";
-
-        empty.querySelector(
-            ".empty-text"
-        ).textContent =
-            "Masukkan stasiun asal dan tujuan terlebih dahulu.";
-
-        return;
-
-    }
-
-
-    if (
-        normalizeText(asal) ===
-        normalizeText(tujuan)
-    ) {
-
-        empty.style.display =
-            "block";
-
-        results.innerHTML =
-            "";
-
-        resultCount.style.display =
-            "none";
-
-        empty.querySelector(
-            ".empty-title"
-        ).textContent =
-            "Stasiun sama";
-
-        empty.querySelector(
-            ".empty-text"
-        ).textContent =
-            "Stasiun asal dan tujuan harus berbeda.";
-
-        return;
-
-    }
-
-
-    // --------------------------------
-    // SEARCH
-    // --------------------------------
-
-    const found =
-        findTarif(
-            asal,
-            tujuan
-        );
-
-
-    // --------------------------------
-    // SORT BY TRAIN NAME
-    // --------------------------------
-
-    found.sort(
-        (a, b) =>
-            a.kereta.localeCompare(
-                b.kereta,
-                "id"
-            )
-    );
-
-
-    renderResults(
-        found
-    );
-
-}
-
-
-// ========================================
-// SEARCH BUTTON
-// ========================================
-
-searchBtn.addEventListener(
-    "click",
-    searchTarif
-);
-
-
-// ========================================
-// ENTER KEY
-// ========================================
-
-asalInput.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            event.preventDefault();
-
-            searchTarif();
-
-        }
-
-    }
-);
-
-
-tujuanInput.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            event.preventDefault();
-
-            searchTarif();
-
-        }
-
-    }
-);
-
-
-// ========================================
-// INITIAL LOAD
-// ========================================
-
-loadDatabase();
-
-
-// ========================================
-// END
-// ========================================
-
-</script>
 
 </body>
+
 
 </html>
