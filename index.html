@@ -3,2160 +3,1198 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>TARSUS FINDER</title>
+    <title>TARSUS FINDER</title>
 
-<meta name="description"
-      content="Pencarian tarif khusus kereta api">
+    <meta name="description"
+          content="Pencarian tarif khusus kereta api">
 
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<!-- FONT -->
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap"
+          rel="stylesheet">
 
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
+    <style>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
-      rel="stylesheet">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
 
-<style>
+        body {
+            min-height: 100vh;
 
+            font-family:
+                "Inter",
+                system-ui,
+                sans-serif;
 
-/* =========================================
-   RESET
-========================================= */
+            color: #eef3f8;
 
-* {
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(255, 107, 26, .12),
+                    transparent 34%
+                ),
+                #07111f;
 
-    box-sizing: border-box;
+            overflow-x: hidden;
 
-    margin: 0;
+            -webkit-tap-highlight-color:
+                transparent;
+        }
 
-    padding: 0;
+        body::before {
+            content: "";
 
-}
+            position: fixed;
 
+            width: 450px;
+            height: 450px;
 
-html {
+            top: -250px;
+            right: -180px;
 
-    scroll-behavior: smooth;
+            border-radius: 50%;
 
-}
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 107, 26, .08),
+                    transparent 68%
+                );
 
+            pointer-events: none;
 
-body {
+            z-index: -1;
+        }
 
-    min-height: 100vh;
+        body::after {
+            content: "";
 
-    font-family:
-        "Inter",
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+            position: fixed;
 
-    color: #eef3f8;
+            width: 400px;
+            height: 400px;
 
-    background:
+            bottom: -240px;
+            left: -180px;
 
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(255, 107, 26, .13),
-            transparent 34%
-        ),
+            border-radius: 50%;
 
-        radial-gradient(
-            circle at 100% 80%,
-            rgba(21, 67, 112, .18),
-            transparent 30%
-        ),
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(20, 70, 110, .18),
+                    transparent 70%
+                );
 
-        #07111f;
+            pointer-events: none;
 
-    overflow-x: hidden;
+            z-index: -1;
+        }
 
-    -webkit-tap-highlight-color:
-        transparent;
+        .app {
+            width: 100%;
+            max-width: 820px;
 
-}
+            margin: auto;
 
+            padding:
+                24px 16px 50px;
+        }
 
-/* =========================================
-   BACKGROUND
-========================================= */
+        .header {
+            position: relative;
 
-body::before {
+            padding:
+                18px 4px 28px;
 
-    content: "";
+            text-align: center;
+        }
 
-    position: fixed;
+        .header::after {
+            content: "";
 
-    width: 520px;
-    height: 520px;
+            position: absolute;
 
-    top: -280px;
-    right: -190px;
+            left: 50%;
+            bottom: 7px;
 
-    border-radius: 50%;
+            width: 70px;
+            height: 2px;
 
-    background:
+            transform:
+                translateX(-50%);
 
-        radial-gradient(
-            circle,
-            rgba(255, 107, 26, .10),
-            transparent 68%
-        );
+            border-radius: 20px;
 
-    pointer-events: none;
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #ff6b1a,
+                    transparent
+                );
 
-    z-index: -1;
+            box-shadow:
+                0 0 12px
+                rgba(255, 107, 26, .3);
+        }
 
-    animation:
-        ambientGlow 9s ease-in-out infinite alternate;
+        .brand {
+            display: inline-flex;
 
-}
+            align-items: center;
 
+            gap: 10px;
 
-body::after {
+            margin-bottom: 9px;
+        }
 
-    content: "";
+        .brand-mark {
+            display: flex;
 
-    position: fixed;
+            align-items: center;
+            justify-content: center;
 
-    width: 450px;
-    height: 450px;
+            width: 40px;
+            height: 40px;
 
-    bottom: -270px;
-    left: -190px;
+            border-radius: 12px;
 
-    border-radius: 50%;
+            background:
+                linear-gradient(
+                    145deg,
+                    #ff8540,
+                    #ed5008
+                );
 
-    background:
+            border:
+                1px solid
+                rgba(255, 255, 255, .12);
 
-        radial-gradient(
-            circle,
-            rgba(18, 61, 103, .25),
-            transparent 70%
-        );
+            box-shadow:
+                0 7px 20px
+                rgba(255, 88, 10, .16);
 
-    pointer-events: none;
+            font-size: 18px;
 
-    z-index: -1;
+            transform:
+                rotate(-3deg);
+        }
 
-}
+        .brand-name {
+            font-family:
+                "Manrope",
+                sans-serif;
 
+            font-size: 24px;
 
-@keyframes ambientGlow {
+            font-weight: 800;
 
-    from {
+            letter-spacing: .08em;
 
-        transform:
-            translate3d(0, 0, 0);
+            line-height: 1;
 
-        opacity: .55;
+            color: #ffffff;
+        }
 
-    }
+        .brand-name::after {
+            content: "";
 
-    to {
+            display: block;
 
-        transform:
-            translate3d(-28px, 22px, 0);
+            width: 24px;
+            height: 2px;
 
-        opacity: 1;
+            margin-top: 6px;
 
-    }
+            border-radius: 10px;
 
-}
+            background:
+                #ff6b1a;
+        }
 
+        .subtitle {
+            color: #8795a5;
 
-/* =========================================
-   APP
-========================================= */
+            font-size: 10px;
 
-.app {
+            letter-spacing: .08em;
 
-    width: 100%;
+            text-transform:
+                uppercase;
+        }
+          .search-panel {
+            padding: 17px;
 
-    max-width: 820px;
+            border:
+                1px solid
+                rgba(255, 255, 255, .07);
 
-    margin: auto;
+            border-radius: 18px;
 
-    padding:
-        28px
-        18px
-        60px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(18, 35, 55, .94),
+                    rgba(9, 23, 39, .94)
+                );
 
-}
+            box-shadow:
+                0 16px 42px
+                rgba(0, 0, 0, .23);
 
+            backdrop-filter:
+                blur(10px);
+        }
 
-/* =========================================
-   HEADER
-========================================= */
+        .route-wrapper {
+            display: grid;
 
-.header {
+            grid-template-columns:
+                1fr 42px 1fr;
 
-    position: relative;
+            gap: 10px;
 
-    padding:
-        24px
-        4px
-        34px;
+            align-items: end;
+        }
 
-    text-align: center;
+        .field {
+            position: relative;
+        }
 
-}
+        .field-label {
+            display: block;
 
+            margin:
+                0 0 7px 2px;
 
-.header::after {
+            color: #8290a0;
 
-    content: "";
+            font-size: 10px;
 
-    position: absolute;
+            font-weight: 700;
 
-    left: 50%;
+            letter-spacing: .08em;
 
-    bottom: 8px;
+            text-transform:
+                uppercase;
+        }
 
-    width: 90px;
-    height: 2px;
+        .input-wrap {
+            position: relative;
+        }
 
-    transform:
-        translateX(-50%);
+        .station-input {
+            width: 100%;
 
-    border-radius: 50px;
+            height: 44px;
 
-    background:
+            padding:
+                0 13px;
 
-        linear-gradient(
-            90deg,
-            transparent,
-            #ff6b1a 25%,
-            #ff8b4a 50%,
-            #ff6b1a 75%,
-            transparent
-        );
+            border:
+                1px solid
+                rgba(255, 255, 255, .08);
 
-    box-shadow:
+            border-radius: 12px;
 
-        0 0 14px
-        rgba(255, 107, 26, .35);
+            outline: none;
 
-    animation:
-        headerLine 3s ease-in-out infinite;
+            background:
+                rgba(5, 16, 29, .72);
 
-}
+            color: #f4f7fa;
 
+            font-family:
+                "Inter",
+                sans-serif;
 
-@keyframes headerLine {
+            font-size: 13px;
 
-    0%,
-    100% {
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
 
-        width: 65px;
+        .station-input::placeholder {
+            color: #526173;
+        }
 
-        opacity: .55;
+        .station-input:focus {
+            border-color:
+                rgba(255, 107, 26, .65);
 
-    }
+            background:
+                rgba(5, 16, 29, .9);
 
-    50% {
+            box-shadow:
+                0 0 0 3px
+                rgba(255, 107, 26, .08);
+        }
 
-        width: 105px;
+        .suggestions {
+            position: absolute;
 
-        opacity: 1;
+            top: calc(100% + 6px);
 
-    }
+            left: 0;
+            right: 0;
 
-}
+            z-index: 50;
 
+            overflow: hidden;
 
-/* =========================================
-   BRAND
-========================================= */
+            border:
+                1px solid
+                rgba(255, 255, 255, .08);
 
-.brand {
+            border-radius: 12px;
 
-    display: inline-flex;
+            background:
+                #102238;
 
-    align-items: center;
+            box-shadow:
+                0 14px 30px
+                rgba(0, 0, 0, .35);
+        }
 
-    justify-content: center;
+        .suggestion-item {
+            padding:
+                10px 12px;
 
-    gap: 12px;
+            color: #dbe4ec;
 
-    margin-bottom: 10px;
+            font-size: 12px;
 
-}
+            cursor: pointer;
 
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, .05);
+        }
 
-.brand-mark {
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
 
-    position: relative;
+        .suggestion-item:hover,
+        .suggestion-item:active {
+            background:
+                rgba(255, 107, 26, .1);
 
-    display: flex;
+            color: #ffffff;
+        }
+          .swap-button {
+            width: 42px;
+            height: 42px;
 
-    align-items: center;
+            border:
+                1px solid
+                rgba(255, 255, 255, .08);
 
-    justify-content: center;
+            border-radius: 12px;
 
-    width: 46px;
-    height: 46px;
+            background:
+                rgba(255, 255, 255, .035);
 
-    border-radius: 14px;
+            color: #ff8a4c;
 
-    background:
+            font-size: 18px;
 
-        linear-gradient(
-            145deg,
-            #ff8a45,
-            #ed5008
-        );
+            cursor: pointer;
 
-    border:
-        1px solid
-        rgba(255, 170, 120, .25);
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                border-color .2s ease;
+        }
 
-    box-shadow:
+        .swap-button:hover {
+            background:
+                rgba(255, 107, 26, .09);
 
-        0 8px 25px
-        rgba(255, 88, 10, .18),
+            border-color:
+                rgba(255, 107, 26, .25);
+        }
 
-        inset 0 1px 0
-        rgba(255, 255, 255, .16);
+        .swap-button:active {
+            transform:
+                scale(.94);
+        }
 
-    font-size: 21px;
+        .search-button {
+            width: 100%;
 
-    transform:
-        rotate(-3deg);
+            height: 44px;
 
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+            margin-top: 14px;
 
-}
+            border: none;
 
+            border-radius: 12px;
 
-.brand-mark::after {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7b32,
+                    #f0540b
+                );
 
-    content: "";
+            color: #ffffff;
 
-    position: absolute;
+            font-family:
+                "Inter",
+                sans-serif;
 
-    inset: 5px;
+            font-size: 13px;
 
-    border:
-        1px solid
-        rgba(255, 255, 255, .10);
+            font-weight: 800;
 
-    border-radius: 10px;
+            letter-spacing: .02em;
 
-}
+            cursor: pointer;
 
+            box-shadow:
+                0 8px 24px
+                rgba(255, 107, 26, .14);
 
-.brand:hover .brand-mark {
+            transition:
+                transform .2s ease,
+                filter .2s ease;
+        }
 
-    transform:
-        rotate(3deg)
-        translateY(-2px);
+        .search-button:hover {
+            filter:
+                brightness(1.06);
+        }
 
-    box-shadow:
+        .search-button:active {
+            transform:
+                scale(.985);
+        }
 
-        0 12px 30px
-        rgba(255, 88, 10, .25),
+        button,
+        input {
+            -webkit-tap-highlight-color:
+                transparent;
+        }
 
-        inset 0 1px 0
-        rgba(255, 255, 255, .18);
+        button {
+            -webkit-appearance:
+                none;
 
-}
+            appearance: none;
+        }
 
+        button:focus,
+        button:focus-visible {
+            outline: none;
+        }
 
-/* =========================================
-   TITLE
-========================================= */
+        .search-button:focus,
+        .search-button:focus-visible {
+            outline: none;
 
-.brand-name {
+            box-shadow:
+                0 8px 24px
+                rgba(255, 107, 26, .14);
+        }
 
-    position: relative;
+        .swap-button:focus,
+        .swap-button:focus-visible {
+            outline: none;
 
-    font-family:
-        "Manrope",
-        "Inter",
-        sans-serif;
+            box-shadow: none;
+        }
 
-    font-size: 30px;
+        .database-status {
+            display: flex;
 
-    font-weight: 800;
+            align-items: center;
+            justify-content: center;
 
-    letter-spacing: .08em;
+            gap: 7px;
 
-    line-height: 1;
+            margin-top: 12px;
 
-    color: #ffffff;
+            color: #647386;
 
-    text-shadow:
-        0 4px 20px
-        rgba(0, 0, 0, .35);
+            font-size: 10px;
 
-}
+            text-align: center;
+        }
 
+        .status-dot {
+            width: 6px;
+            height: 6px;
 
-.brand-name::after {
+            flex-shrink: 0;
 
-    content: "";
+            border-radius: 50%;
 
-    position: absolute;
+            background:
+                #39d98a;
 
-    left: 0;
+            box-shadow:
+                0 0 8px
+                rgba(57, 217, 138, .45);
+        }
+          .result-header {
+            display: flex;
 
-    bottom: -7px;
+            align-items: center;
+            justify-content: space-between;
 
-    width: 30px;
-    height: 2px;
+            gap: 10px;
 
-    border-radius: 10px;
+            margin:
+                26px 3px 12px;
+        }
 
-    background:
-        #ff6b1a;
+        .result-title {
+            color: #f3f6f9;
 
-    box-shadow:
-        0 0 10px
-        rgba(255, 107, 26, .45);
+            font-size: 13px;
 
-}
+            font-weight: 700;
+        }
 
+        .result-count {
+            color: #778698;
 
-/* =========================================
-   SUBTITLE
-========================================= */
+            font-size: 10px;
 
-.subtitle {
+            white-space:
+                nowrap;
+        }
 
-    margin-top: 6px;
+        #results {
+            display: grid;
 
-    color: #8795a5;
+            gap: 10px;
+        }
 
-    font-size: 12px;
+        .result-card {
+            padding: 14px;
 
-    font-weight: 500;
+            border:
+                1px solid
+                rgba(255, 255, 255, .065);
 
-    letter-spacing: .08em;
+            border-radius: 15px;
 
-    text-transform: uppercase;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16, 34, 53, .96),
+                    rgba(8, 21, 36, .96)
+                );
 
-}
+            box-shadow:
+                0 10px 28px
+                rgba(0, 0, 0, .18);
 
+            animation:
+                resultIn .35s ease both;
+        }
 
-/* =========================================
-   SEARCH PANEL
-========================================= */
+        @keyframes resultIn {
 
-.search-panel {
+            from {
+                opacity: 0;
 
-    position: relative;
+                transform:
+                    translateY(7px);
+            }
 
-    padding: 19px;
+            to {
+                opacity: 1;
 
-    border:
-        1px solid
-        rgba(255, 255, 255, .07);
+                transform:
+                    translateY(0);
+            }
+        }
 
-    border-radius: 20px;
+        .result-train {
+            color: #ffffff;
 
-    background:
+            font-family:
+                "Manrope",
+                sans-serif;
 
-        linear-gradient(
-            145deg,
-            rgba(18, 35, 55, .94),
-            rgba(9, 23, 39, .94)
-        );
+            font-size: 16px;
 
-    box-shadow:
+            font-weight: 800;
+        }
 
-        0 18px 50px
-        rgba(0, 0, 0, .25);
+        .result-route {
+            margin-top: 5px;
 
-    backdrop-filter:
-        blur(12px);
+            color: #a9b6c4;
 
-    animation:
-        panelEnter .6s ease both;
+            font-size: 11px;
 
-}
+            font-weight: 500;
+        }
 
+        .special-route {
+            margin-top: 10px;
 
-@keyframes panelEnter {
+            padding:
+                8px 10px;
 
-    from {
+            border-left:
+                2px solid
+                #ff6b1a;
 
-        opacity: 0;
+            border-radius:
+                0 8px 8px 0;
 
-        transform:
-            translateY(10px);
+            background:
+                rgba(255, 107, 26, .055);
 
-    }
+            color: #7f8e9f;
 
-    to {
+            font-size: 10px;
 
-        opacity: 1;
+            line-height: 1.5;
+        }
 
-        transform:
-            translateY(0);
+        .special-route strong {
+            color: #d7e0e8;
 
-    }
+            font-weight: 600;
+        }
+          .fare-list {
+            display: grid;
 
-}
-      /* =========================================
-   ROUTE INPUT
-========================================= */
+            grid-template-columns:
+                repeat(3, 1fr);
 
-.route-wrapper {
+            gap: 8px;
 
-    position: relative;
+            margin-top: 11px;
+        }
 
-    display: grid;
+        .fare-item {
+            min-width: 0;
 
-    grid-template-columns:
-        1fr 48px 1fr;
+            padding:
+                9px 8px;
 
-    gap: 10px;
+            border:
+                1px solid
+                rgba(255, 255, 255, .055);
 
-    align-items: end;
+            border-radius: 10px;
 
-}
+            background:
+                rgba(0, 0, 0, .14);
 
+            text-align: center;
+        }
 
-.field {
+        .fare-label {
+            color: #718093;
 
-    position: relative;
+            font-size: 9px;
 
-}
+            font-weight: 700;
 
+            text-transform:
+                uppercase;
 
-.field-label {
+            letter-spacing: .04em;
+        }
 
-    display: block;
+        .fare-price {
+            margin-top: 4px;
 
-    margin:
-        0
-        0
-        8px
-        3px;
+            color: #ff9a68;
 
-    color: #94a3b3;
+            font-size: 12px;
 
-    font-size: 11px;
+            font-weight: 800;
+        }
 
-    font-weight: 700;
+        .loading {
+            display: none;
 
-    letter-spacing: .08em;
+            padding:
+                18px 10px;
 
-    text-transform: uppercase;
+            color: #788798;
 
-}
+            font-size: 11px;
 
+            text-align: center;
+        }
 
-.input-wrap {
+        .loading-spinner {
+            width: 22px;
+            height: 22px;
 
-    position: relative;
+            margin:
+                0 auto 8px;
 
-}
+            border:
+                2px solid
+                rgba(255, 255, 255, .08);
 
+            border-top-color:
+                #ff6b1a;
 
-.station-input {
+            border-radius: 50%;
 
-    width: 100%;
+            animation:
+                spin .8s linear infinite;
+        }
 
-    height: 52px;
+        @keyframes spin {
 
-    padding:
-        0
-        15px;
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
 
-    border:
-        1px solid
-        rgba(255, 255, 255, .09);
+        .empty {
+            display: none;
 
-    border-radius: 13px;
+            padding:
+                28px 15px;
 
-    outline: none;
+            border:
+                1px solid
+                rgba(255, 255, 255, .05);
 
-    color: #ffffff;
+            border-radius: 14px;
 
-    background:
-        rgba(5, 16, 29, .72);
+            background:
+                rgba(255, 255, 255, .02);
 
-    font-family: inherit;
+            color: #68788b;
 
-    font-size: 14px;
+            font-size: 11px;
 
-    -webkit-tap-highlight-color:
-        transparent;
+            line-height: 1.6;
 
-    transition:
+            text-align: center;
+        }
 
-        border-color .25s ease,
+        .error-box {
+            display: none;
 
-        box-shadow .25s ease,
+            margin-top: 12px;
 
-        background .25s ease;
+            padding:
+                10px 12px;
 
-}
+            border:
+                1px solid
+                rgba(255, 75, 75, .16);
 
+            border-radius: 10px;
 
-.station-input::placeholder {
+            background:
+                rgba(255, 75, 75, .06);
 
-    color: #667587;
+            color: #ff9696;
 
-}
+            font-size: 10px;
 
+            line-height: 1.5;
+        }
 
-.station-input:hover {
+        .footer {
+            margin-top: 30px;
 
-    border-color:
-        rgba(255, 255, 255, .14);
+            color: #4e5d6d;
 
-}
+            font-size: 9px;
 
+            line-height: 1.6;
 
-.station-input:focus {
+            text-align: center;
+        }
+          @media (max-width: 560px) {
 
-    border-color:
-        rgba(255, 107, 26, .65);
+            .app {
+                padding:
+                    18px 12px 40px;
+            }
 
-    background:
-        rgba(5, 16, 29, .92);
+            .header {
+                padding:
+                    14px 4px 26px;
+            }
 
-    box-shadow:
+            .brand-mark {
+                width: 36px;
+                height: 36px;
 
-        0 0 0 3px
-        rgba(255, 107, 26, .08);
+                border-radius: 11px;
 
-}
+                font-size: 16px;
+            }
 
+            .brand-name {
+                font-size: 22px;
+            }
 
-/* =========================================
-   AUTOCOMPLETE
-========================================= */
+            .subtitle {
+                font-size: 9px;
+            }
 
-.suggestions {
+            .search-panel {
+                padding: 14px;
 
-    position: absolute;
+                border-radius: 16px;
+            }
 
-    top: calc(100% + 7px);
+            .route-wrapper {
+                grid-template-columns:
+                    1fr 38px 1fr;
 
-    left: 0;
+                gap: 7px;
+            }
 
-    right: 0;
+            .field-label {
+                font-size: 9px;
+            }
 
-    z-index: 100;
+            .station-input {
+                height: 42px;
 
-    overflow: hidden;
+                padding:
+                    0 11px;
 
-    border:
-        1px solid
-        rgba(255, 255, 255, .08);
+                font-size: 12px;
+            }
 
-    border-radius: 13px;
+            .swap-button {
+                width: 38px;
+                height: 38px;
 
-    background:
-        #0c1b2c;
+                font-size: 16px;
+            }
 
-    box-shadow:
+            .search-button {
+                height: 42px;
 
-        0 18px 40px
-        rgba(0, 0, 0, .38);
+                margin-top: 12px;
 
-}
+                font-size: 12px;
+            }
 
+            .result-header {
+                margin-top: 22px;
+            }
 
-.suggestion-item {
+            .result-title {
+                font-size: 12px;
+            }
 
-    padding:
-        13px
-        14px;
+            .result-count {
+                font-size: 9px;
+            }
 
-    color: #d3dce5;
+            .result-card {
+                padding: 13px;
 
-    font-size: 13px;
+                border-radius: 14px;
+            }
 
-    cursor: pointer;
+            .result-train {
+                font-size: 15px;
+            }
 
-    transition:
+            .result-route {
+                font-size: 10px;
+            }
 
-        background .2s ease,
+            .special-route {
+                font-size: 9px;
+            }
 
-        color .2s ease,
+            .fare-list {
+                gap: 6px;
+            }
 
-        padding-left .2s ease;
+            .fare-item {
+                padding:
+                    8px 5px;
+            }
 
-}
+            .fare-label {
+                font-size: 8px;
+            }
 
+            .fare-price {
+                font-size: 11px;
+            }
+        }
 
-.suggestion-item:hover {
+        @media (max-width: 360px) {
 
-    padding-left: 18px;
+            .app {
+                padding-left: 9px;
+                padding-right: 9px;
+            }
 
-    color: #ffffff;
+            .search-panel {
+                padding: 12px;
+            }
 
-    background:
-        rgba(255, 107, 26, .09);
+            .route-wrapper {
+                grid-template-columns:
+                    1fr 34px 1fr;
 
-}
+                gap: 5px;
+            }
 
+            .swap-button {
+                width: 34px;
+                height: 36px;
+            }
 
-/* =========================================
-   SWAP
-========================================= */
+            .brand-name {
+                font-size: 20px;
+            }
+        }
 
-.swap-button {
+    </style>
 
-    width: 48px;
-
-    height: 48px;
-
-    border:
-        1px solid
-        rgba(255, 107, 26, .25);
-
-    border-radius: 14px;
-
-    outline: none;
-
-    color: #ff7b32;
-
-    background:
-        rgba(255, 107, 26, .07);
-
-    cursor: pointer;
-
-    font-family: inherit;
-
-    font-size: 20px;
-
-    -webkit-tap-highlight-color:
-        transparent;
-
-    transition:
-
-        transform .4s
-        cubic-bezier(.2,.8,.2,1),
-
-        background .25s ease,
-
-        border-color .25s ease,
-
-        color .25s ease;
-
-}
-
-
-.swap-button:hover {
-
-    background:
-        rgba(255, 107, 26, .15);
-
-    border-color:
-        rgba(255, 107, 26, .55);
-
-    color: #ff914f;
-
-    transform:
-        rotate(180deg);
-
-}
-
-
-.swap-button:active {
-
-    transform:
-        rotate(180deg)
-        scale(.92);
-
-}
-
-
-.swap-button:focus,
-.swap-button:focus-visible {
-
-    outline: none;
-
-    box-shadow: none;
-
-}
-
-
-/* =========================================
-   SEARCH BUTTON
-========================================= */
-
-.search-button {
-
-    width: 100%;
-
-    height: 52px;
-
-    margin-top: 15px;
-
-    border: none;
-
-    border-radius: 13px;
-
-    outline: none;
-
-    color: #ffffff;
-
-    background:
-
-        linear-gradient(
-            100deg,
-            #e9570a,
-            #ff762d
-        );
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    letter-spacing: .02em;
-
-    cursor: pointer;
-
-    -webkit-tap-highlight-color:
-        transparent;
-
-    box-shadow:
-
-        0 10px 28px
-        rgba(255, 107, 26, .16);
-
-    transition:
-
-        transform .2s ease,
-
-        box-shadow .25s ease,
-
-        filter .25s ease;
-
-}
-
-
-.search-button:hover {
-
-    filter:
-        brightness(1.08);
-
-    box-shadow:
-
-        0 13px 32px
-        rgba(255, 107, 26, .23);
-
-    transform:
-        translateY(-1px);
-
-}
-
-
-.search-button:active {
-
-    transform:
-        translateY(1px)
-        scale(.99);
-
-}
-
-
-.search-button:focus,
-.search-button:focus-visible {
-
-    outline: none;
-
-    box-shadow:
-
-        0 10px 28px
-        rgba(255, 107, 26, .16);
-
-}
-
-
-/* =========================================
-   DATABASE STATUS
-========================================= */
-
-.database-status {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 7px;
-
-    margin-top: 13px;
-
-    color: #718196;
-
-    font-size: 11px;
-
-}
-
-
-.status-dot {
-
-    width: 6px;
-
-    height: 6px;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    background:
-        #ff762d;
-
-    box-shadow:
-        0 0 10px
-        rgba(255, 118, 45, .65);
-
-    animation:
-        statusPulse 2s ease-in-out infinite;
-
-}
-
-
-@keyframes statusPulse {
-
-    0%,
-    100% {
-
-        opacity: .55;
-
-        transform:
-            scale(.9);
-
-    }
-
-    50% {
-
-        opacity: 1;
-
-        transform:
-            scale(1.15);
-
-    }
-
-}
-      /* =========================================
-   RESULT HEADER
-========================================= */
-
-.result-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin:
-        32px
-        3px
-        13px;
-
-}
-
-
-.result-title {
-
-    color: #ffffff;
-
-    font-family:
-        "Manrope",
-        "Inter",
-        sans-serif;
-
-    font-size: 15px;
-
-    font-weight: 800;
-
-}
-
-
-.result-count {
-
-    color: #7d8da0;
-
-    font-size: 11px;
-
-}
-
-
-/* =========================================
-   RESULTS
-========================================= */
-
-#results {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-
-}
-
-
-.result-card {
-
-    position: relative;
-
-    padding: 18px;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .065);
-
-    border-radius: 17px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(17, 34, 53, .94),
-            rgba(9, 22, 37, .94)
-        );
-
-    box-shadow:
-
-        0 10px 30px
-        rgba(0, 0, 0, .17);
-
-    animation:
-        resultEnter .45s ease both;
-
-    transition:
-
-        border-color .25s ease,
-
-        transform .25s ease,
-
-        box-shadow .25s ease;
-
-}
-
-
-.result-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    top: 0;
-
-    bottom: 0;
-
-    width: 3px;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            #ff6b1a,
-            rgba(255, 107, 26, .12)
-        );
-
-    opacity: .85;
-
-}
-
-
-.result-card::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 140px;
-
-    height: 140px;
-
-    top: -90px;
-
-    right: -70px;
-
-    border-radius: 50%;
-
-    background:
-
-        radial-gradient(
-            circle,
-            rgba(255, 107, 26, .08),
-            transparent 70%
-        );
-
-    pointer-events: none;
-
-}
-
-
-.result-card:hover {
-
-    transform:
-        translateY(-2px);
-
-    border-color:
-        rgba(255, 107, 26, .18);
-
-    box-shadow:
-
-        0 15px 35px
-        rgba(0, 0, 0, .24);
-
-}
-
-
-@keyframes resultEnter {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(8px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-/* =========================================
-   TRAIN
-========================================= */
-
-.result-train {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    color: #ffffff;
-
-    font-family:
-        "Manrope",
-        "Inter",
-        sans-serif;
-
-    font-size: 17px;
-
-    font-weight: 800;
-
-    margin-bottom: 8px;
-
-}
-
-
-/* =========================================
-   USER ROUTE
-========================================= */
-
-.result-route {
-
-    color: #a9b5c1;
-
-    font-size: 13px;
-
-    font-weight: 500;
-
-    margin-bottom: 14px;
-
-}
-
-
-/* =========================================
-   SPECIAL ROUTE
-========================================= */
-
-.special-route {
-
-    padding:
-        11px
-        12px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .04);
-
-    border-radius: 10px;
-
-    color: #909eae;
-
-    background:
-        rgba(255, 255, 255, .035);
-
-    font-size: 12px;
-
-    line-height: 1.65;
-
-}
-
-
-.special-route strong {
-
-    color: #ff8745;
-
-    font-weight: 700;
-
-}
-
-
-/* =========================================
-   FARE LIST
-========================================= */
-
-.fare-list {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 8px;
-
-    margin-top: 12px;
-
-}
-
-
-.fare-item {
-
-    padding:
-        11px
-        9px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .05);
-
-    border-radius: 10px;
-
-    background:
-        rgba(4, 13, 24, .42);
-
-    text-align: center;
-
-    transition:
-
-        background .2s ease,
-
-        border-color .2s ease;
-
-}
-
-
-.fare-item:hover {
-
-    border-color:
-        rgba(255, 107, 26, .15);
-
-    background:
-        rgba(255, 107, 26, .035);
-
-}
-
-
-.fare-label {
-
-    color: #7c8b9c;
-
-    font-size: 10px;
-
-    font-weight: 600;
-
-    margin-bottom: 6px;
-
-}
-
-
-.fare-price {
-
-    color: #f1f5f8;
-
-    font-family:
-        "Manrope",
-        "Inter",
-        sans-serif;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-}
-
-
-/* =========================================
-   LOADING
-========================================= */
-
-.loading {
-
-    display: none;
-
-    padding: 28px;
-
-    text-align: center;
-
-    color: #8291a3;
-
-    font-size: 12px;
-
-}
-
-
-.loading-spinner {
-
-    width: 25px;
-
-    height: 25px;
-
-    margin:
-        0
-        auto
-        11px;
-
-    border:
-        2px solid
-        rgba(255, 255, 255, .08);
-
-    border-top-color:
-        #ff6b1a;
-
-    border-radius: 50%;
-
-    animation:
-        spin .8s linear infinite;
-
-}
-
-
-@keyframes spin {
-
-    to {
-
-        transform:
-            rotate(360deg);
-
-    }
-
-}
-
-
-/* =========================================
-   EMPTY / ERROR
-========================================= */
-
-.empty,
-.error-box {
-
-    display: none;
-
-    margin-top: 13px;
-
-    padding:
-        27px
-        19px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .06);
-
-    border-radius: 15px;
-
-    text-align: center;
-
-    color: #7d8da0;
-
-    background:
-        rgba(11, 25, 41, .65);
-
-    font-size: 12px;
-
-    line-height: 1.65;
-
-}
-
-
-.error-box {
-
-    color: #ff9b75;
-
-    border-color:
-        rgba(255, 107, 26, .15);
-
-      }
-      /* =========================================
-   FOOTER
-========================================= */
-
-.footer {
-
-    margin-top: 40px;
-
-    padding-top: 5px;
-
-    text-align: center;
-
-    color: #4d5d6f;
-
-    font-size: 10px;
-
-    font-weight: 500;
-
-    letter-spacing: .05em;
-
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 560px) {
-
-
-    .app {
-
-        padding:
-            20px
-            13px
-            45px;
-
-    }
-
-
-    /* HEADER */
-
-    .header {
-
-        padding:
-            18px
-            4px
-            29px;
-
-    }
-
-
-    .brand {
-
-        gap: 10px;
-
-    }
-
-
-    .brand-mark {
-
-        width: 40px;
-
-        height: 40px;
-
-        border-radius: 12px;
-
-        font-size: 18px;
-
-    }
-
-
-    .brand-name {
-
-        font-size: 23px;
-
-        letter-spacing: .07em;
-
-    }
-
-
-    .brand-name::after {
-
-        bottom: -6px;
-
-        width: 24px;
-
-    }
-
-
-    .subtitle {
-
-        font-size: 10px;
-
-        letter-spacing: .07em;
-
-    }
-
-
-    /* SEARCH PANEL */
-
-    .search-panel {
-
-        padding: 15px;
-
-        border-radius: 17px;
-
-    }
-
-
-    /* ROUTE */
-
-    .route-wrapper {
-
-        grid-template-columns:
-            1fr 42px 1fr;
-
-        gap: 7px;
-
-    }
-
-
-    .field-label {
-
-        font-size: 10px;
-
-    }
-
-
-    /* INPUT */
-
-    .station-input {
-
-        height: 49px;
-
-        padding:
-            0
-            11px;
-
-        border-radius: 12px;
-
-        font-size: 13px;
-
-    }
-
-
-    /* SWAP */
-
-    .swap-button {
-
-        width: 42px;
-
-        height: 42px;
-
-        border-radius: 12px;
-
-        font-size: 18px;
-
-    }
-
-
-    /* SEARCH */
-
-    .search-button {
-
-        height: 49px;
-
-        margin-top: 13px;
-
-        border-radius: 12px;
-
-        font-size: 13px;
-
-    }
-
-
-    /* STATUS */
-
-    .database-status {
-
-        font-size: 10px;
-
-    }
-
-
-    /* RESULT HEADER */
-
-    .result-header {
-
-        margin:
-            28px
-            2px
-            12px;
-
-    }
-
-
-    .result-title {
-
-        font-size: 14px;
-
-    }
-
-
-    .result-count {
-
-        font-size: 10px;
-
-    }
-
-
-    /* CARD */
-
-    .result-card {
-
-        padding: 16px;
-
-        border-radius: 15px;
-
-    }
-
-
-    .result-train {
-
-        font-size: 16px;
-
-    }
-
-
-    .result-route {
-
-        font-size: 12px;
-
-    }
-
-
-    .special-route {
-
-        font-size: 11px;
-
-        line-height: 1.6;
-
-    }
-
-
-    /* FARE */
-
-    .fare-list {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 6px;
-
-    }
-
-
-    .fare-item {
-
-        display: flex;
-
-        justify-content:
-            space-between;
-
-        align-items: center;
-
-        padding:
-            10px
-            12px;
-
-        text-align: left;
-
-    }
-
-
-    .fare-label {
-
-        margin-bottom: 0;
-
-        font-size: 10px;
-
-    }
-
-
-    .fare-price {
-
-        font-size: 13px;
-
-    }
-
-
-    /* AUTOCOMPLETE */
-
-    .suggestion-item {
-
-        padding:
-            12px
-            13px;
-
-        font-size: 12px;
-
-    }
-
-
-    /* FOOTER */
-
-    .footer {
-
-        margin-top: 32px;
-
-        font-size: 9px;
-
-    }
-
-}
-
-
-/* =========================================
-   VERY SMALL PHONE
-========================================= */
-
-@media (max-width: 360px) {
-
-
-    .app {
-
-        padding-left: 10px;
-
-        padding-right: 10px;
-
-    }
-
-
-    .brand-name {
-
-        font-size: 20px;
-
-    }
-
-
-    .brand-mark {
-
-        width: 36px;
-
-        height: 36px;
-
-        font-size: 16px;
-
-    }
-
-
-    .station-input {
-
-        font-size: 12px;
-
-    }
-
-
-    .result-train {
-
-        font-size: 15px;
-
-    }
-
-
-    .result-route {
-
-        font-size: 11px;
-
-    }
-
-
-    .special-route {
-
-        font-size: 10px;
-
-    }
-
-
-}
-
-
-/* =========================================
-   ANDROID TOUCH
-========================================= */
-
-button,
-input {
-
-    -webkit-tap-highlight-color:
-        transparent;
-
-}
-
-
-button {
-
-    -webkit-appearance: none;
-
-    appearance: none;
-
-}
-
-
-button:focus,
-button:focus-visible {
-
-    outline: none;
-
-}
-
-
-/* =========================================
-   REMOVE BUTTON GLOW
-========================================= */
-
-.search-button:focus,
-.search-button:focus-visible {
-
-    outline: none;
-
-    box-shadow:
-        0 10px 28px
-        rgba(255, 107, 26, .16);
-
-}
-
-
-.swap-button:focus,
-.swap-button:focus-visible {
-
-    outline: none;
-
-    box-shadow: none;
-
-}
-
-
-/* =========================================
-   REDUCE MOTION
-========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation-duration:
-            .01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        scroll-behavior:
-            auto !important;
-
-        transition-duration:
-            .01ms !important;
-
-    }
-
-}
-
-</style>
 </head>
-
-
 <body>
 
+    <main class="app">
 
-<main class="app">
+        <header class="header">
 
+            <div class="brand">
 
-    <!-- =====================================
-         HEADER
-    ====================================== -->
+                <div class="brand-mark">
+                    🚆
+                </div>
 
-    <header class="header">
+                <div class="brand-name">
+                    TARSUS
+                </div>
 
-
-        <div class="brand">
-
-
-            <div class="brand-mark">
-                🚆
             </div>
 
-
-            <div class="brand-name">
-                TARSUS FINDER
+            <div class="subtitle">
+                Tarif Khusus Kereta Api
             </div>
 
-
-        </div>
-
-
-        <p class="subtitle">
-            Pencarian Tarif Khusus Kereta Api
-        </p>
+        </header>
 
 
-    </header>
+        <section class="search-panel">
+
+            <div class="route-wrapper">
 
 
+                <!-- ASAL -->
 
-    <!-- =====================================
-         SEARCH PANEL
-    ====================================== -->
+                <div class="field">
 
-    <section class="search-panel">
+                    <label
+                        class="field-label"
+                        for="asal">
 
+                        Stasiun Asal
 
-        <div class="route-wrapper">
+                    </label>
 
+                    <div class="input-wrap">
 
-            <!-- ASAL -->
+                        <input
+                            id="asal"
+                            class="station-input"
+                            type="text"
+                            placeholder="Contoh: Purwokerto"
+                            autocomplete="off"
+                            spellcheck="false">
 
-            <div class="field">
+                        <div
+                            id="suggestionsAsal"
+                            class="suggestions">
+                        </div>
 
-
-                <label
-                    class="field-label"
-                    for="asal"
-                >
-                    Stasiun Asal
-                </label>
-
-
-                <div class="input-wrap">
-
-
-                    <input
-                        type="text"
-                        id="asal"
-                        class="station-input"
-                        placeholder="Contoh: Kroya"
-                        autocomplete="off"
-                    >
-
-
-                    <div
-                        id="suggestionsAsal"
-                        class="suggestions"
-                    ></div>
-
+                    </div>
 
                 </div>
 
 
+                <!-- TUKAR -->
+
+                <button
+                    id="swapBtn"
+                    class="swap-button"
+                    type="button"
+                    aria-label="Tukar stasiun">
+
+                    ⇄
+
+                </button>
+
+
+                <!-- TUJUAN -->
+
+                <div class="field">
+
+                    <label
+                        class="field-label"
+                        for="tujuan">
+
+                        Stasiun Tujuan
+
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            id="tujuan"
+                            class="station-input"
+                            type="text"
+                            placeholder="Contoh: Yogyakarta"
+                            autocomplete="off"
+                            spellcheck="false">
+
+                        <div
+                            id="suggestionsTujuan"
+                            class="suggestions">
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-
-
-
-            <!-- SWAP -->
-
             <button
-                type="button"
-                id="swapBtn"
-                class="swap-button"
-                aria-label="Tukar stasiun"
-                title="Tukar stasiun"
-            >
-                ⇄
+                id="searchBtn"
+                class="search-button"
+                type="button">
+
+                🔎 Cari Tarif Khusus
+
             </button>
 
 
+            <div
+                id="loading"
+                class="loading">
 
-            <!-- TUJUAN -->
-
-            <div class="field">
-
-
-                <label
-                    class="field-label"
-                    for="tujuan"
-                >
-                    Stasiun Tujuan
-                </label>
-
-
-                <div class="input-wrap">
-
-
-                    <input
-                        type="text"
-                        id="tujuan"
-                        class="station-input"
-                        placeholder="Contoh: Yogyakarta"
-                        autocomplete="off"
-                    >
-
-
-                    <div
-                        id="suggestionsTujuan"
-                        class="suggestions"
-                    ></div>
-
-
+                <div
+                    class="loading-spinner">
                 </div>
 
+                Menghubungkan database...
 
             </div>
 
 
-        </div>
+            <div
+                class="database-status">
+
+                <span
+                    class="status-dot">
+                </span>
+
+                <span id="status">
+                    Menghubungkan database...
+                </span>
+
+            </div>
 
 
+            <div
+                id="errorBox"
+                class="error-box">
+            </div>
 
-        <!-- SEARCH BUTTON -->
-
-        <button
-            type="button"
-            id="searchBtn"
-            class="search-button"
-        >
-            Cari Tarif Khusus
-        </button>
+        </section>
 
 
+        <section>
 
-        <!-- DATABASE STATUS -->
+            <div
+                class="result-header">
 
-        <div class="database-status">
+                <div
+                    class="result-title">
 
-            <span class="status-dot"></span>
+                    Hasil Pencarian
 
-            <span id="status">
-                Menghubungkan database...
-            </span>
+                </div>
 
-        </div>
+                <div
+                    id="resultCount"
+                    class="result-count">
 
+                    Belum ada pencarian
 
-    </section>
+                </div>
 
-
-
-    <!-- =====================================
-         RESULT HEADER
-    ====================================== -->
-
-    <div class="result-header">
+            </div>
 
 
-        <div class="result-title">
-            Hasil Pencarian
-        </div>
+            <div
+                id="results">
+            </div>
 
 
-        <div
-            id="resultCount"
-            class="result-count"
-        >
-            Belum ada pencarian
-        </div>
+            <div
+                id="empty"
+                class="empty">
+
+                Tidak ditemukan tarif khusus
+                untuk rute yang kamu cari.
+
+            </div>
+
+        </section>
+        <footer class="footer">
+
+            TARSUS FINDER
+            •
+            Database Tarif Khusus Kereta Api
+
+            <br>
+
+            Data mengikuti informasi yang
+            tersedia pada database.
+
+        </footer>
+
+    </main>
 
 
-    </div>
-
-
-
-    <!-- =====================================
-         LOADING
-    ====================================== -->
-
-    <div
-        id="loading"
-        class="loading"
-    >
-
-        <div class="loading-spinner"></div>
-
-        Memuat database...
-
-    </div>
-
-
-
-    <!-- =====================================
-         ERROR
-    ====================================== -->
-
-    <div
-        id="errorBox"
-        class="error-box"
-    ></div>
-
-
-
-    <!-- =====================================
-         EMPTY
-    ====================================== -->
-
-    <div
-        id="empty"
-        class="empty"
-    >
-
-        Tarif khusus tidak ditemukan
-        untuk rute tersebut.
-
-    </div>
-
-
-
-    <!-- =====================================
-         RESULTS
-    ====================================== -->
-
-    <div id="results"></div>
-
-
-
-    <!-- =====================================
-         FOOTER
-    ====================================== -->
-
-    <footer class="footer">
-
-        TARSUS FINDER
-        •
-        Tarif Khusus Kereta Api
-
-    </footer>
-
-
-</main>
-
-
-
-<!-- =========================================
-     DATA JAVASCRIPT
-========================================= -->
-
-<script src="data.js"></script>
-
+    <script
+        src="data.js">
+    </script>
 
 </body>
-
 
 </html>
