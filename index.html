@@ -1,1253 +1,1910 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TARSUS FINDER</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================================================
-   ROOT
-========================================================= */
-
-:root {
-    --bg: #080b10;
-    --bg-soft: #0d1219;
-    --card: rgba(18, 24, 32, 0.78);
-    --card-hover: rgba(24, 31, 41, 0.92);
-
-    --gold: #d9b56d;
-    --gold-soft: #b99555;
-    --gold-light: #f0d79b;
-
-    --text: #f4f5f7;
-    --text-soft: #aeb5bf;
-    --muted: #727b87;
-
-    --border: rgba(255,255,255,.075);
-    --border-gold: rgba(217,181,109,.25);
-
-    --green: #8bd7ad;
-
-    --radius: 22px;
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    min-height: 100vh;
-    font-family: "DM Sans", sans-serif;
-    color: var(--text);
-
-    background:
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(217,181,109,.08),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 30%,
-            rgba(83,110,145,.07),
-            transparent 30%
-        ),
-        linear-gradient(
-            145deg,
-            #07090d 0%,
-            #0b1016 50%,
-            #080b10 100%
-        );
 
-    overflow-x: hidden;
-}
-
+    <meta charset="UTF-8">
 
-/* =========================================================
-   DECORATIVE BACKGROUND
-========================================================= */
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
+    <title>TARSUS FINDER — KAI 121</title>
 
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
-        );
 
-    background-size: 42px 42px;
+    <!-- FONT -->
 
-    mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 75%
-    );
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    pointer-events: none;
-    z-index: -2;
-}
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-body::after {
-    content: "";
-    position: fixed;
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    width: 480px;
-    height: 480px;
 
-    top: -260px;
-    right: -180px;
+    <style>
 
-    border: 1px solid rgba(217,181,109,.08);
-    border-radius: 50%;
+        /* =====================================================
+           COLOR SYSTEM
+        ===================================================== */
 
-    box-shadow:
-        0 0 0 40px rgba(217,181,109,.015),
-        0 0 0 80px rgba(217,181,109,.012);
+        :root {
 
-    pointer-events: none;
-    z-index: -1;
-}
+            --navy-deep: #040b16;
+            --navy: #071426;
+            --navy-light: #0c1d34;
+            --navy-card: #0b1a2d;
 
+            --orange: #ff982f;
+            --gold: #ffc75b;
+            --amber: #ffad3d;
 
-/* =========================================================
-   APP
-========================================================= */
+            --white: #f7f9fc;
+            --soft: #c0c9d6;
+            --muted: #738095;
 
-.app {
-    width: min(920px, calc(100% - 32px));
-    margin: auto;
-    padding: 44px 0 70px;
-}
+            --border:
+                rgba(255,255,255,.075);
 
+            --orange-border:
+                rgba(255,160,55,.18);
+        }
 
-/* =========================================================
-   HEADER
-========================================================= */
 
-.header {
-    text-align: center;
-    margin-bottom: 36px;
+        /* =====================================================
+           RESET
+        ===================================================== */
 
-    animation: fadeDown .7s ease both;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.brand-mark {
-    width: 54px;
-    height: 54px;
 
-    margin: 0 auto 18px;
+        html {
+            scroll-behavior: smooth;
+        }
 
-    display: grid;
-    place-items: center;
 
-    border: 1px solid var(--border-gold);
-    border-radius: 18px;
+        body {
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(217,181,109,.14),
-            rgba(217,181,109,.025)
-        );
+            min-height: 100vh;
 
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 12px 40px rgba(0,0,0,.25);
+            color: var(--white);
 
-    color: var(--gold-light);
+            font-family:
+                "DM Sans",
+                sans-serif;
 
-    font-family: Manrope, sans-serif;
-    font-size: 21px;
-    font-weight: 800;
+            overflow-x: hidden;
 
-    position: relative;
-}
+            background:
 
-.brand-mark::before {
-    content: "";
-    position: absolute;
-    inset: 6px;
+                radial-gradient(
+                    circle at 50% -15%,
+                    rgba(255,153,47,.15),
+                    transparent 31%
+                ),
 
-    border: 1px solid rgba(217,181,109,.12);
-    border-radius: 13px;
-}
+                radial-gradient(
+                    circle at 0% 50%,
+                    rgba(19,68,125,.18),
+                    transparent 32%
+                ),
 
-.brand-mark span {
-    position: relative;
-    z-index: 2;
-}
+                linear-gradient(
+                    145deg,
+                    var(--navy-deep),
+                    var(--navy) 48%,
+                    #030914
+                );
+        }
 
-.header h1 {
-    font-family: Manrope, sans-serif;
-    font-size: clamp(27px, 5vw, 40px);
-    font-weight: 800;
-    letter-spacing: .08em;
 
-    background:
-        linear-gradient(
-            120deg,
-            #fff,
-            var(--gold-light),
-            #fff
-        );
+        /* =====================================================
+           BACKGROUND GRID
+        ===================================================== */
 
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
+        body::before {
 
-.header p {
-    margin-top: 9px;
+            content: "";
 
-    color: var(--text-soft);
-    font-size: 13px;
-    letter-spacing: .05em;
-}
+            position: fixed;
 
+            inset: 0;
 
-/* =========================================================
-   SEARCH PANEL
-========================================================= */
+            pointer-events: none;
 
-.search-panel {
-    position: relative;
+            opacity: .45;
 
-    padding: 25px;
+            background-image:
 
-    border: 1px solid var(--border);
-    border-radius: 28px;
+                linear-gradient(
+                    rgba(255,255,255,.018) 1px,
+                    transparent 1px
+                ),
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(24,30,39,.78),
-            rgba(12,16,22,.82)
-        );
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.018) 1px,
+                    transparent 1px
+                );
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+            background-size:
+                48px 48px;
 
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.32),
-        inset 0 1px 0 rgba(255,255,255,.035);
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 88%
+                );
 
-    animation: fadeUp .75s .1s ease both;
-}
+            z-index: -10;
+        }
 
-.search-panel::before {
-    content: "";
 
-    position: absolute;
-    top: 0;
-    left: 13%;
-    right: 13%;
+        /* =====================================================
+           FLOATING ORNAMENT
+        ===================================================== */
 
-    height: 1px;
+        .bg-orbit {
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(217,181,109,.45),
-            transparent
-        );
-}
+            position: fixed;
 
+            width: 470px;
+            height: 470px;
 
-/* =========================================================
-   ROUTE AREA
-========================================================= */
+            top: -260px;
+            right: -220px;
 
-.route-grid {
-    display: grid;
-    grid-template-columns: 1fr 64px 1fr;
-    align-items: end;
-    gap: 14px;
-}
+            border:
+                1px solid
+                rgba(255,177,70,.065);
 
+            border-radius: 50%;
 
-/* =========================================================
-   FIELD
-========================================================= */
+            pointer-events: none;
 
-.field {
-    position: relative;
-}
+            z-index: -3;
 
-.field-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+            animation:
+                orbitSpin
+                22s
+                linear
+                infinite;
+        }
 
-    margin-bottom: 9px;
 
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 700;
+        .bg-orbit::before {
 
-    letter-spacing: .13em;
-    text-transform: uppercase;
-}
+            content: "";
 
-.field-label .dot {
-    width: 5px;
-    height: 5px;
+            position: absolute;
 
-    border-radius: 50%;
-    background: var(--gold);
-    box-shadow: 0 0 10px rgba(217,181,109,.45);
-}
+            inset: 50px;
 
-.input-wrap {
-    position: relative;
-}
+            border:
+                1px solid
+                rgba(255,177,70,.045);
 
-.input-wrap input {
-    width: 100%;
-    height: 58px;
+            border-radius: 50%;
+        }
 
-    padding: 0 18px;
 
-    border: 1px solid var(--border);
-    border-radius: 16px;
+        .bg-orbit::after {
 
-    outline: none;
+            content: "";
 
-    color: var(--text);
+            position: absolute;
 
-    background:
-        rgba(7,10,14,.68);
+            inset: 105px;
 
-    font-family: "DM Sans", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
+            border:
+                1px solid
+                rgba(255,177,70,.035);
 
-    transition:
-        border .25s ease,
-        background .25s ease,
-        box-shadow .25s ease,
-        transform .25s ease;
-}
+            border-radius: 50%;
+        }
 
-.input-wrap input::placeholder {
-    color: #59616d;
-    font-weight: 400;
-}
 
-.input-wrap input:focus {
-    border-color: rgba(217,181,109,.45);
+        /* =====================================================
+           APP
+        ===================================================== */
 
-    background: rgba(7,10,14,.88);
+        .app {
 
-    box-shadow:
-        0 0 0 4px rgba(217,181,109,.055),
-        0 10px 30px rgba(0,0,0,.18);
-}
+            width:
+                min(
+                    920px,
+                    calc(100% - 28px)
+                );
 
+            margin:
+                0 auto;
 
-/* =========================================================
-   SUGGESTIONS
-========================================================= */
+            padding:
+                25px 0 35px;
+        }
 
-.suggestions {
-    position: absolute;
 
-    top: calc(100% + 8px);
-    left: 0;
-    right: 0;
+        /* =====================================================
+           HEADER
+        ===================================================== */
 
-    z-index: 100;
+        .header {
 
-    overflow: hidden;
+            position: relative;
 
-    border: 1px solid rgba(255,255,255,.09);
-    border-radius: 15px;
+            text-align: center;
 
-    background:
-        rgba(14,19,26,.97);
+            padding:
+                25px 10px 42px;
 
-    backdrop-filter: blur(18px);
+            overflow: hidden;
 
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.45);
+            animation:
+                headerReveal
+                .8s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
 
-    animation: suggestionIn .18s ease both;
-}
 
-.suggestion-item {
-    padding: 13px 16px;
+        .header::before {
 
-    color: #dfe3e8;
+            content: "";
 
-    font-size: 14px;
-    font-weight: 500;
+            position: absolute;
 
-    cursor: pointer;
+            width: 360px;
+            height: 170px;
 
-    border-bottom: 1px solid rgba(255,255,255,.045);
+            left: 50%;
+            top: 0;
 
-    transition:
-        background .2s ease,
-        color .2s ease,
-        padding-left .2s ease;
-}
+            transform:
+                translateX(-50%);
 
-.suggestion-item:last-child {
-    border-bottom: 0;
-}
+            background:
+                radial-gradient(
+                    ellipse,
+                    rgba(255,155,47,.18),
+                    transparent 68%
+                );
 
-.suggestion-item:hover {
-    padding-left: 20px;
+            filter:
+                blur(15px);
 
-    background:
-        rgba(217,181,109,.075);
+            animation:
+                headerGlow
+                4.5s
+                ease-in-out
+                infinite;
 
-    color: var(--gold-light);
-}
+            pointer-events: none;
+        }
 
 
-/* =========================================================
-   SWAP BUTTON
-========================================================= */
+        .header::after {
 
-.swap-wrap {
-    display: flex;
-    justify-content: center;
-}
+            content: "";
 
-#swapBtn {
-    width: 48px;
-    height: 48px;
+            position: absolute;
 
-    border: 1px solid rgba(217,181,109,.22);
-    border-radius: 15px;
+            left: 50%;
+            bottom: 20px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(217,181,109,.12),
-            rgba(217,181,109,.035)
-        );
+            width: 240px;
+            height: 1px;
 
-    color: var(--gold-light);
+            transform:
+                translateX(-50%);
 
-    font-size: 19px;
+            background:
 
-    cursor: pointer;
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,177,73,.5),
+                    transparent
+                );
+        }
 
-    transition:
-        transform .3s cubic-bezier(.2,.8,.2,1),
-        background .25s ease,
-        border .25s ease,
-        box-shadow .25s ease;
-}
 
-#swapBtn:hover {
-    transform: rotate(180deg);
+        .kai-label {
 
-    border-color: rgba(217,181,109,.5);
+            position: relative;
 
-    background:
-        rgba(217,181,109,.14);
+            display: inline-flex;
 
-    box-shadow:
-        0 8px 25px rgba(217,181,109,.09);
-}
+            align-items: center;
 
-#swapBtn:active {
-    transform: rotate(180deg) scale(.92);
-}
+            gap: 9px;
 
+            margin-bottom: 13px;
 
-/* =========================================================
-   SEARCH BUTTON
-========================================================= */
+            color:
+                var(--gold);
 
-.search-button {
-    width: 100%;
-    height: 57px;
+            font-family:
+                Manrope,
+                sans-serif;
 
-    margin-top: 21px;
+            font-size:
+                10px;
 
-    border: 1px solid rgba(217,181,109,.35);
-    border-radius: 16px;
+            font-weight:
+                800;
 
-    color: #16130d;
+            letter-spacing:
+                .27em;
+        }
 
-    background:
-        linear-gradient(
-            135deg,
-            #e8cc91,
-            #c99f52
-        );
 
-    font-family: Manrope, sans-serif;
-    font-size: 14px;
-    font-weight: 800;
+        .kai-label::before,
+        .kai-label::after {
 
-    letter-spacing: .07em;
-    text-transform: uppercase;
+            content: "";
 
-    cursor: pointer;
+            width: 23px;
+            height: 1px;
 
-    position: relative;
-    overflow: hidden;
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--orange)
+                );
+        }
 
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.25);
 
-    transition:
-        transform .2s ease,
-        box-shadow .25s ease;
-}
+        .kai-label::after {
 
-.search-button::before {
-    content: "";
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--orange),
+                    transparent
+                );
+        }
 
-    position: absolute;
 
-    top: 0;
-    left: -100%;
+        .header h1 {
 
-    width: 70%;
-    height: 100%;
+            position: relative;
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.35),
-            transparent
-        );
+            font-family:
+                Manrope,
+                sans-serif;
 
-    transform: skewX(-20deg);
+            font-size:
+                clamp(
+                    33px,
+                    7vw,
+                    54px
+                );
 
-    transition: left .7s ease;
-}
+            font-weight:
+                800;
 
-.search-button:hover::before {
-    left: 130%;
-}
+            line-height:
+                1;
 
-.search-button:hover {
-    transform: translateY(-2px);
+            letter-spacing:
+                .075em;
 
-    box-shadow:
-        0 16px 38px rgba(0,0,0,.35),
-        0 0 30px rgba(217,181,109,.07);
-}
+            background:
 
-.search-button:active {
-    transform: translateY(0) scale(.99);
-}
+                linear-gradient(
+                    105deg,
+                    #fff0d0,
+                    #ff9b30,
+                    #ffd36b,
+                    #ff9228,
+                    #fff1d1
+                );
 
+            background-size:
+                260% auto;
 
-/* =========================================================
-   STATUS
-========================================================= */
+            -webkit-background-clip:
+                text;
 
-#status {
-    min-height: 20px;
+            background-clip:
+                text;
 
-    margin: 23px 4px 0;
+            color:
+                transparent;
 
-    color: var(--muted);
+            animation:
+                titleGradient
+                5s
+                ease-in-out
+                infinite;
+        }
 
-    font-size: 12px;
-    text-align: center;
-}
 
+        .subtitle {
 
-/* =========================================================
-   RESULTS
-========================================================= */
+            position: relative;
 
-#results {
-    margin-top: 26px;
-}
+            margin-top:
+                13px;
 
-.results-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+            color:
+                var(--soft);
 
-    margin-bottom: 13px;
+            font-size:
+                12px;
 
-    padding: 0 4px;
-}
+            letter-spacing:
+                .06em;
+        }
 
-.results-heading span:first-child {
-    color: var(--text-soft);
 
-    font-size: 12px;
-    font-weight: 700;
+        /* =====================================================
+           SEARCH PANEL
+        ===================================================== */
 
-    letter-spacing: .12em;
-    text-transform: uppercase;
-}
+        .search-panel {
 
-.results-heading span:last-child {
-    color: var(--muted);
-    font-size: 11px;
-}
+            position: relative;
 
+            padding:
+                25px;
 
-/* =========================================================
-   RESULT CARD
-========================================================= */
+            border:
+                1px solid
+                var(--border);
 
-.result-card {
-    position: relative;
+            border-radius:
+                25px;
 
-    padding: 22px 23px;
+            background:
 
-    margin-bottom: 12px;
+                linear-gradient(
+                    145deg,
+                    rgba(12,31,53,.86),
+                    rgba(5,15,27,.83)
+                );
 
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+            backdrop-filter:
+                blur(18px);
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(22,28,36,.83),
-            rgba(12,16,22,.82)
-        );
+            -webkit-backdrop-filter:
+                blur(18px);
 
-    box-shadow:
-        0 14px 35px rgba(0,0,0,.18),
-        inset 0 1px 0 rgba(255,255,255,.025);
+            box-shadow:
 
-    overflow: hidden;
+                0 25px 70px
+                rgba(0,0,0,.35),
 
-    animation: resultIn .45s cubic-bezier(.2,.8,.2,1) both;
+                inset 0 1px 0
+                rgba(255,255,255,.035);
 
-    transition:
-        transform .25s ease,
-        border .25s ease,
-        background .25s ease;
-}
+            animation:
+                panelReveal
+                .8s
+                .08s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+        }
 
-.result-card::before {
-    content: "";
 
-    position: absolute;
+        .search-panel::before {
 
-    left: 0;
-    top: 18px;
-    bottom: 18px;
+            content: "";
 
-    width: 2px;
+            position: absolute;
 
-    border-radius: 2px;
+            top: 0;
+            left: 14%;
+            right: 14%;
 
-    background:
-        linear-gradient(
-            to bottom,
-            transparent,
-            var(--gold),
-            transparent
-        );
+            height: 1px;
 
-    opacity: .65;
-}
+            background:
 
-.result-card:hover {
-    transform: translateY(-3px);
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,172,67,.65),
+                    transparent
+                );
+        }
 
-    border-color:
-        rgba(217,181,109,.18);
 
-    background:
-        var(--card-hover);
-}
+        /* =====================================================
+           INPUT AREA
+        ===================================================== */
 
+        .route-grid {
 
-/* =========================================================
-   RESULT CONTENT
-========================================================= */
+            display: grid;
 
-.result-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+            grid-template-columns:
+                1fr 58px 1fr;
 
-    gap: 20px;
-}
+            align-items:
+                end;
 
-.result-name {
-    font-family: Manrope, sans-serif;
+            gap:
+                14px;
+        }
 
-    color: #fff;
 
-    font-size: 18px;
-    font-weight: 800;
+        .field {
+            position: relative;
+        }
 
-    letter-spacing: .01em;
-}
 
-.result-route {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+        .field-label {
 
-    margin-top: 9px;
+            display: flex;
 
-    color: var(--text-soft);
+            align-items:
+                center;
 
-    font-size: 13px;
-    font-weight: 500;
-}
+            gap:
+                8px;
 
-.route-arrow {
-    color: var(--gold);
-    font-size: 14px;
-}
+            margin-bottom:
+                9px;
 
+            color:
+                var(--muted);
 
-/* =========================================================
-   FARE
-========================================================= */
+            font-size:
+                9px;
 
-.fare-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+            font-weight:
+                800;
 
-    gap: 7px;
-}
+            letter-spacing:
+                .16em;
 
-.fare-item {
-    min-width: 92px;
+            text-transform:
+                uppercase;
+        }
 
-    padding: 9px 12px;
 
-    border: 1px solid rgba(255,255,255,.065);
-    border-radius: 11px;
+        .field-label .dot {
 
-    background:
-        rgba(255,255,255,.025);
+            width: 5px;
+            height: 5px;
 
-    text-align: center;
-}
+            border-radius:
+                50%;
 
-.fare-class {
-    display: block;
+            background:
+                var(--orange);
 
-    margin-bottom: 3px;
+            box-shadow:
+                0 0 12px
+                rgba(255,154,47,.7);
+        }
 
-    color: var(--muted);
 
-    font-size: 9px;
-    font-weight: 800;
+        .input-wrap {
+            position: relative;
+        }
 
-    letter-spacing: .12em;
-}
 
-.fare-price {
-    display: block;
+        .input-wrap input {
 
-    color: var(--gold-light);
+            width: 100%;
+            height: 58px;
 
-    font-family: Manrope, sans-serif;
+            padding:
+                0 16px;
 
-    font-size: 13px;
-    font-weight: 800;
-}
+            outline: none;
 
-.fare-unavailable {
-    color: #535b66;
-}
+            border:
+                1px solid
+                rgba(255,255,255,.08);
 
+            border-radius:
+                15px;
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
+            color:
+                var(--white);
 
-.empty-state {
-    padding: 50px 25px;
+            background:
+                rgba(2,9,18,.64);
 
-    border: 1px dashed rgba(255,255,255,.08);
-    border-radius: 22px;
+            font-family:
+                "DM Sans",
+                sans-serif;
 
-    text-align: center;
+            font-size:
+                14px;
 
-    background:
-        rgba(255,255,255,.015);
+            font-weight:
+                600;
 
-    animation: fadeUp .4s ease both;
-}
+            transition:
+                .25s ease;
+        }
 
-.empty-symbol {
-    width: 52px;
-    height: 52px;
 
-    margin: 0 auto 15px;
+        .input-wrap input::placeholder {
 
-    display: grid;
-    place-items: center;
+            color:
+                #566477;
 
-    border: 1px solid rgba(217,181,109,.15);
-    border-radius: 16px;
+            font-weight:
+                400;
+        }
 
-    color: var(--gold-soft);
 
-    font-size: 19px;
-}
+        .input-wrap input:focus {
 
-.empty-state h3 {
-    color: #dfe3e8;
+            border-color:
+                rgba(255,159,49,.45);
 
-    font-family: Manrope, sans-serif;
+            box-shadow:
 
-    font-size: 15px;
-}
+                0 0 0 4px
+                rgba(255,157,49,.055),
 
-.empty-state p {
-    max-width: 370px;
+                0 12px 35px
+                rgba(0,0,0,.2);
+        }
 
-    margin: 7px auto 0;
 
-    color: var(--muted);
+        /* =====================================================
+           SUGGESTIONS
+        ===================================================== */
 
-    font-size: 12px;
-    line-height: 1.7;
-}
+        .suggestions {
 
+            position: absolute;
 
-/* =========================================================
-   FOOTER
-========================================================= */
+            top:
+                calc(100% + 8px);
 
-.footer {
-    margin-top: 38px;
+            left: 0;
+            right: 0;
 
-    color: #454d58;
+            z-index: 50;
 
-    font-size: 10px;
-    text-align: center;
+            overflow: hidden;
 
-    letter-spacing: .1em;
-    text-transform: uppercase;
-}
+            border:
+                1px solid
+                rgba(255,255,255,.08);
 
+            border-radius:
+                14px;
 
-/* =========================================================
-   ANIMATION
-========================================================= */
+            background:
+                rgba(6,17,30,.98);
 
-@keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-14px);
-    }
+            backdrop-filter:
+                blur(18px);
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+            box-shadow:
+                0 20px 55px
+                rgba(0,0,0,.45);
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
+            animation:
+                suggestionReveal
+                .18s
+                ease
+                both;
+        }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-@keyframes resultIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px) scale(.985);
-    }
+        .suggestion-item {
 
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
+            padding:
+                13px 15px;
 
-@keyframes suggestionIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.045);
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+            color:
+                #dfe6ef;
 
+            font-size:
+                13px;
 
-/* =========================================================
-   MOBILE
-========================================================= */
+            cursor:
+                pointer;
 
-@media (max-width: 680px) {
+            transition:
+                .2s ease;
+        }
 
-    .app {
-        width: min(100% - 20px, 920px);
-        padding-top: 28px;
-    }
 
-    .header {
-        margin-bottom: 25px;
-    }
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
 
-    .brand-mark {
-        width: 48px;
-        height: 48px;
 
-        border-radius: 15px;
+        .suggestion-item:hover {
 
-        font-size: 18px;
-    }
+            padding-left:
+                19px;
 
-    .header h1 {
-        font-size: 27px;
-    }
+            color:
+                var(--gold);
 
-    .header p {
-        font-size: 11px;
-    }
+            background:
+                rgba(255,157,49,.07);
+        }
 
-    .search-panel {
-        padding: 18px;
 
-        border-radius: 22px;
-    }
+        /* =====================================================
+           SWAP
+        ===================================================== */
 
-    .route-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
+        .swap-wrap {
 
-    .swap-wrap {
-        position: absolute;
+            display:
+                flex;
 
-        right: 30px;
-        top: 94px;
+            justify-content:
+                center;
+        }
 
-        z-index: 5;
-    }
 
-    #swapBtn {
-        width: 40px;
-        height: 40px;
+        #swapBtn {
 
-        border-radius: 13px;
+            width: 45px;
+            height: 45px;
 
-        font-size: 16px;
-    }
+            border:
+                1px solid
+                rgba(255,158,49,.25);
 
-    .input-wrap input {
-        height: 54px;
-    }
+            border-radius:
+                14px;
 
-    .field:nth-child(3) .field-label {
-        margin-top: 5px;
-    }
+            color:
+                var(--gold);
 
-    .result-card {
-        padding: 19px;
-    }
+            background:
+                rgba(255,158,49,.06);
 
-    .result-top {
-        display: block;
-    }
+            font-size:
+                20px;
 
-    .fare-list {
-        justify-content: flex-start;
+            cursor:
+                pointer;
 
-        margin-top: 16px;
-    }
+            transition:
+                .3s
+                cubic-bezier(.2,.8,.2,1);
+        }
 
-    .fare-item {
-        min-width: 88px;
-    }
 
-}
+        #swapBtn:hover {
 
+            transform:
+                rotate(180deg);
 
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
+            border-color:
+                rgba(255,158,49,.5);
 
-@media (prefers-reduced-motion: reduce) {
+            background:
+                rgba(255,158,49,.12);
 
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-    }
+            box-shadow:
+                0 10px 30px
+                rgba(255,158,49,.08);
+        }
 
-}
 
-</style>
+        /* =====================================================
+           SEARCH BUTTON
+        ===================================================== */
+
+        .search-button {
+
+            width: 100%;
+            height: 56px;
+
+            margin-top:
+                21px;
+
+            border: none;
+
+            border-radius:
+                15px;
+
+            color:
+                #101722;
+
+            background:
+
+                linear-gradient(
+                    105deg,
+                    #ff9028,
+                    #ffd06a,
+                    #ff9b30,
+                    #ffc65b
+                );
+
+            background-size:
+                250% auto;
+
+            font-family:
+                Manrope,
+                sans-serif;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .12em;
+
+            text-transform:
+                uppercase;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 14px 36px
+                rgba(255,140,30,.13);
+
+            transition:
+                .25s ease;
+
+            animation:
+                buttonGradient
+                5s
+                ease
+                infinite;
+        }
+
+
+        .search-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 18px 42px
+                rgba(255,140,30,.2);
+        }
+
+
+        .search-button:active {
+
+            transform:
+                translateY(0)
+                scale(.99);
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        #status {
+
+            min-height:
+                18px;
+
+            margin:
+                17px 2px 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+
+            text-align:
+                center;
+        }
+
+
+        /* =====================================================
+           RESULTS
+        ===================================================== */
+
+        #results {
+            margin-top: 27px;
+        }
+
+
+        .results-heading {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin:
+                0 4px 12px;
+        }
+
+
+        .results-heading span:first-child {
+
+            color:
+                var(--soft);
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .16em;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .results-heading span:last-child {
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           RESULT CARD
+        ===================================================== */
+
+        .result-card {
+
+            position:
+                relative;
+
+            margin-bottom:
+                13px;
+
+            padding:
+                21px;
+
+            overflow:
+                hidden;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                21px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(12,29,50,.88),
+                    rgba(5,15,27,.88)
+                );
+
+            box-shadow:
+
+                0 16px 40px
+                rgba(0,0,0,.22),
+
+                inset 0 1px 0
+                rgba(255,255,255,.025);
+
+            animation:
+                resultReveal
+                .5s
+                cubic-bezier(.2,.8,.2,1)
+                both;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .result-card::before {
+
+            content: "";
+
+            position:
+                absolute;
+
+            left: 0;
+
+            top: 18px;
+            bottom: 18px;
+
+            width: 2px;
+
+            border-radius:
+                2px;
+
+            background:
+
+                linear-gradient(
+                    to bottom,
+                    transparent,
+                    var(--orange),
+                    var(--gold),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 13px
+                rgba(255,155,48,.25);
+        }
+
+
+        .result-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(255,159,49,.17);
+        }
+
+
+        /* =====================================================
+           TRAIN NAME
+        ===================================================== */
+
+        .result-name {
+
+            font-family:
+                Manrope,
+                sans-serif;
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            color:
+                #ffffff;
+        }
+
+
+        /* =====================================================
+           ACTUAL JOURNEY
+        ===================================================== */
+
+        .journey {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+            margin-top:
+                7px;
+
+            color:
+                var(--soft);
+
+            font-size:
+                12px;
+
+            font-weight:
+                500;
+        }
+
+
+        .journey-arrow {
+
+            color:
+                var(--orange);
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           ACUAN TARIF
+        ===================================================== */
+
+        .reference-box {
+
+            margin-top:
+                17px;
+
+            padding:
+                14px 15px;
+
+            border:
+                1px solid
+                var(--orange-border);
+
+            border-radius:
+                14px;
+
+            background:
+
+                linear-gradient(
+                    110deg,
+                    rgba(255,157,48,.065),
+                    rgba(255,255,255,.015)
+                );
+        }
+
+
+        .reference-label {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                8px;
+
+            color:
+                var(--gold);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .16em;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .reference-label::before {
+
+            content: "";
+
+            width: 5px;
+            height: 5px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--orange);
+
+            box-shadow:
+                0 0 9px
+                rgba(255,157,47,.7);
+        }
+
+
+        .reference-route {
+
+            color:
+                #e6ebf2;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            line-height:
+                1.7;
+        }
+
+
+        .relation-arrow {
+
+            margin:
+                0 5px;
+
+            color:
+                var(--orange);
+        }
+
+
+        /* =====================================================
+           FARE
+        ===================================================== */
+
+        .fare-list {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                7px;
+
+            margin-top:
+                14px;
+        }
+
+
+        .fare-item {
+
+            min-width:
+                105px;
+
+            padding:
+                10px 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(255,255,255,.025);
+        }
+
+
+        .fare-class {
+
+            display:
+                block;
+
+            margin-bottom:
+                3px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .13em;
+        }
+
+
+        .fare-price {
+
+            display:
+                block;
+
+            color:
+                var(--gold);
+
+            font-family:
+                Manrope,
+                sans-serif;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+        }
+
+
+        .fare-unavailable {
+
+            color:
+                #526074;
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            padding:
+                48px 25px;
+
+            border:
+                1px dashed
+                rgba(255,255,255,.08);
+
+            border-radius:
+                20px;
+
+            text-align:
+                center;
+
+            background:
+                rgba(255,255,255,.012);
+
+            animation:
+                resultReveal
+                .4s
+                ease
+                both;
+        }
+
+
+        .empty-symbol {
+
+            width: 50px;
+            height: 50px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            margin:
+                0 auto 15px;
+
+            border:
+                1px solid
+                rgba(255,157,48,.18);
+
+            border-radius:
+                15px;
+
+            color:
+                var(--orange);
+
+            font-size:
+                18px;
+        }
+
+
+        .empty-state h3 {
+
+            font-family:
+                Manrope,
+                sans-serif;
+
+            font-size:
+                15px;
+        }
+
+
+        .empty-state p {
+
+            max-width:
+                400px;
+
+            margin:
+                7px auto 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+
+            padding:
+                35px 0 5px;
+
+            text-align:
+                center;
+
+            color:
+                #526075;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                .14em;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .footer strong {
+
+            color:
+                rgba(255,187,86,.7);
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           ANIMATION
+        ===================================================== */
+
+        @keyframes headerReveal {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(-16px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes panelReveal {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes resultReveal {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(12px)
+                    scale(.985);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        @keyframes suggestionReveal {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes headerGlow {
+
+            0%,
+            100% {
+
+                opacity:
+                    .55;
+
+                transform:
+                    translateX(-50%)
+                    scale(.92);
+            }
+
+            50% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(-50%)
+                    scale(1.08);
+            }
+
+        }
+
+
+        @keyframes titleGradient {
+
+            0% {
+                background-position:
+                    0% center;
+            }
+
+            50% {
+                background-position:
+                    100% center;
+            }
+
+            100% {
+                background-position:
+                    0% center;
+            }
+
+        }
+
+
+        @keyframes buttonGradient {
+
+            0% {
+                background-position:
+                    0% center;
+            }
+
+            50% {
+                background-position:
+                    100% center;
+            }
+
+            100% {
+                background-position:
+                    0% center;
+            }
+
+        }
+
+
+        @keyframes orbitSpin {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 680px) {
+
+            .app {
+
+                width:
+                    calc(100% - 20px);
+
+                padding-top:
+                    14px;
+            }
+
+
+            .header {
+
+                padding:
+                    23px 5px 36px;
+            }
+
+
+            .header h1 {
+
+                font-size:
+                    31px;
+            }
+
+
+            .subtitle {
+
+                font-size:
+                    10px;
+
+                letter-spacing:
+                    .035em;
+            }
+
+
+            .search-panel {
+
+                padding:
+                    18px;
+
+                border-radius:
+                    21px;
+            }
+
+
+            .route-grid {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    10px;
+            }
+
+
+            .swap-wrap {
+
+                position:
+                    absolute;
+
+                top:
+                    85px;
+
+                right:
+                    26px;
+
+                z-index:
+                    10;
+            }
+
+
+            #swapBtn {
+
+                width:
+                    40px;
+
+                height:
+                    40px;
+
+                border-radius:
+                    12px;
+            }
+
+
+            .input-wrap input {
+
+                height:
+                    54px;
+            }
+
+
+            .result-card {
+
+                padding:
+                    18px;
+            }
+
+
+            .fare-item {
+
+                min-width:
+                    88px;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCE MOTION
+        ===================================================== */
+
+        @media (
+            prefers-reduced-motion: reduce
+        ) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
 <body>
 
-<div class="app">
+
+    <div class="bg-orbit"></div>
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
-    <header class="header">
-
-        <div class="brand-mark">
-            <span>✦</span>
-        </div>
-
-        <h1>TARSUS FINDER</h1>
-
-        <p>
-            Special Fare Search System
-        </p>
-
-    </header>
+    <main class="app">
 
 
+        <!-- HEADER -->
 
-    <!-- =====================================================
-         SEARCH
-    ====================================================== -->
+        <header class="header">
 
-    <section class="search-panel">
-
-        <div class="route-grid">
+            <div class="kai-label">
+                KAI 121
+            </div>
 
 
-            <!-- ASAL -->
+            <h1>
+                TARSUS FINDER
+            </h1>
 
-            <div class="field">
 
-                <div class="field-label">
-                    <span class="dot"></span>
-                    Stasiun Asal
+            <p class="subtitle">
+                Tarif Khusus Perjalanan Kereta Api
+            </p>
+
+        </header>
+
+
+
+        <!-- SEARCH -->
+
+        <section class="search-panel">
+
+
+            <div class="route-grid">
+
+
+                <!-- ASAL -->
+
+                <div class="field">
+
+                    <div class="field-label">
+
+                        <span class="dot"></span>
+
+                        Stasiun Asal
+
+                    </div>
+
+
+                    <div class="input-wrap">
+
+                        <input
+                            id="asal"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Cari stasiun asal..."
+                        >
+
+
+                        <div
+                            id="asal-suggestions"
+                            class="suggestions"
+                        ></div>
+
+                    </div>
+
                 </div>
 
-                <div class="input-wrap">
 
-                    <input
-                        type="text"
-                        id="asal"
-                        autocomplete="off"
-                        placeholder="Cari stasiun asal..."
+
+                <!-- SWAP -->
+
+                <div class="swap-wrap">
+
+                    <button
+                        id="swapBtn"
+                        type="button"
+                        title="Tukar stasiun"
                     >
-
-                    <div
-                        id="asal-suggestions"
-                        class="suggestions"
-                    ></div>
+                        ⇄
+                    </button>
 
                 </div>
+
+
+
+                <!-- TUJUAN -->
+
+                <div class="field">
+
+                    <div class="field-label">
+
+                        <span class="dot"></span>
+
+                        Stasiun Tujuan
+
+                    </div>
+
+
+                    <div class="input-wrap">
+
+                        <input
+                            id="tujuan"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Cari stasiun tujuan..."
+                        >
+
+
+                        <div
+                            id="tujuan-suggestions"
+                            class="suggestions"
+                        ></div>
+
+                    </div>
+
+                </div>
+
 
             </div>
 
 
-
-            <!-- SWAP -->
-
-            <div class="swap-wrap">
-
-                <button
-                    id="swapBtn"
-                    type="button"
-                    title="Tukar stasiun"
-                >
-                    ⇄
-                </button>
-
-            </div>
+            <button
+                id="searchBtn"
+                class="search-button"
+                type="button"
+            >
+                Temukan Tarif Khusus
+            </button>
 
 
-
-            <!-- TUJUAN -->
-
-            <div class="field">
-
-                <div class="field-label">
-                    <span class="dot"></span>
-                    Stasiun Tujuan
-                </div>
-
-                <div class="input-wrap">
-
-                    <input
-                        type="text"
-                        id="tujuan"
-                        autocomplete="off"
-                        placeholder="Cari stasiun tujuan..."
-                    >
-
-                    <div
-                        id="tujuan-suggestions"
-                        class="suggestions"
-                    ></div>
-
-                </div>
-
-            </div>
+            <div id="status"></div>
 
 
-        </div>
-
-
-        <button
-            id="searchBtn"
-            class="search-button"
-            type="button"
-        >
-            Temukan Tarif Khusus
-        </button>
-
-
-        <div id="status"></div>
-
-    </section>
+        </section>
 
 
 
-    <!-- =====================================================
-         RESULTS
-    ====================================================== -->
+        <!-- RESULTS -->
 
-    <section id="results"></section>
+        <section id="results"></section>
 
 
 
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
+        <!-- FOOTER -->
 
-    <div class="footer">
-        TARSUS FINDER · KAI Special Fare Database
-    </div>
+        <footer class="footer">
 
+            Created by
+            <strong>prima_adis</strong>
 
-</div>
+        </footer>
 
 
-
-<!-- =========================================================
-     DATA ENGINE
-========================================================= -->
-
-<script src="data.js"></script>
+    </main>
 
 
-<script>
-
-/* =========================================================
-   TAMBAHAN TAMPILAN
-   Tidak mengubah mesin pencarian utama.
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const results = document.getElementById("results");
-
-    /*
-       Jika data.js menghasilkan elemen hasil dengan
-       struktur lama, kita biarkan mesin pencari bekerja.
-
-       Observer ini hanya memberi animasi pada hasil baru.
-    */
-
-    if (!results) return;
-
-    const observer = new MutationObserver(() => {
-
-        const cards =
-            results.querySelectorAll(
-                ".result-card"
-            );
-
-        cards.forEach((card, index) => {
-
-            card.style.animationDelay =
-                `${Math.min(index * 70, 350)}ms`;
-
-        });
-
-    });
-
-    observer.observe(results, {
-        childList: true,
-        subtree: true
-    });
-
-});
-
-
-/* =========================================================
-   ICON SWAP
-========================================================= */
-
-const swapBtn =
-    document.getElementById("swapBtn");
-
-if (swapBtn) {
-
-    swapBtn.addEventListener("click", () => {
-
-        swapBtn.animate(
-            [
-                {
-                    transform: "rotate(0deg)"
-                },
-                {
-                    transform: "rotate(180deg)"
-                }
-            ],
-            {
-                duration: 350,
-                easing: "cubic-bezier(.2,.8,.2,1)"
-            }
-        );
-
-    });
-
-}
-
-</script>
+    <script src="data.js"></script>
 
 </body>
+
 </html>
