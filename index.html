@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 
@@ -45,6 +46,16 @@
             --orange: #ff982f;
             --gold: #ffc75b;
             --amber: #ffad3d;
+
+            /* aksen pelengkap */
+
+            --kai-red: #d71920;
+            --kai-red-light: #ef4b50;
+
+            --kai-white: #f5f7fa;
+
+            --kai-green: #3fae68;
+            --kai-green-light: #70c98d;
 
             --white: #f7f9fc;
             --soft: #c0c9d6;
@@ -465,7 +476,7 @@
 
             bottom: 7px;
 
-            height: 19px;
+            height: 42px;
 
             overflow: hidden;
 
@@ -474,6 +485,10 @@
             z-index: 2;
         }
 
+
+        /* =====================================================
+           RAIL
+        ===================================================== */
 
         .train-track::before {
 
@@ -486,15 +501,15 @@
 
             bottom: 3px;
 
-            height: 1px;
+            height: 2px;
 
             background:
                 linear-gradient(
                     90deg,
                     transparent,
-                    rgba(255,166,65,.12) 10%,
+                    rgba(255,166,65,.12) 8%,
                     rgba(255,166,65,.38) 50%,
-                    rgba(255,166,65,.12) 90%,
+                    rgba(255,166,65,.12) 92%,
                     transparent
                 );
         }
@@ -517,269 +532,917 @@
                 linear-gradient(
                     90deg,
                     transparent,
-                    rgba(255,255,255,.05),
+                    rgba(255,255,255,.07),
                     transparent
                 );
         }
 
 
+        /* =====================================================
+           FULL RANGKAIAN
+           Arah gerak → kanan
+           Gerbong di kiri
+           Lokomotif di kanan
+        ===================================================== */
+
         .mini-train {
 
             position: absolute;
 
-            left: -130px;
+            left: -390px;
 
-            bottom: 4px;
+            bottom: 5px;
 
-            width: 105px;
+            width: 365px;
 
-            height: 15px;
+            height: 32px;
 
             opacity: 0;
 
             animation:
                 trainPass
-                17s
+                20s
                 cubic-bezier(.45,.02,.55,.98)
                 infinite;
         }
 
 
-        /* body */
+        /* =====================================================
+           GERBONG
+        ===================================================== */
 
-        .mini-train .train-body {
+        .train-coach {
 
             position: absolute;
 
-            left: 7px;
-            bottom: 4px;
+            bottom: 7px;
 
-            width: 83px;
-            height: 9px;
+            width: 69px;
+
+            height: 17px;
 
             border-radius:
-                3px 6px 3px 3px;
+                3px 4px 3px 3px;
 
             background:
                 linear-gradient(
-                    90deg,
-                    #ff922c,
-                    #ffc45b,
-                    #ff9a30
+                    180deg,
+                    #f7f8fa 0%,
+                    #e8edf1 52%,
+                    #cfd6dc 100%
                 );
-
-            box-shadow:
-                0 0 10px
-                rgba(255,154,47,.20);
-        }
-
-
-        /* cabin */
-
-        .mini-train .train-cabin {
-
-            position: absolute;
-
-            left: 12px;
-            bottom: 13px;
-
-            width: 29px;
-            height: 9px;
-
-            border-radius:
-                4px 4px 0 0;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffb23f,
-                    #ffd477
-                );
-        }
-
-
-        /* windows */
-
-        .mini-train .train-window {
-
-            position: absolute;
-
-            left: 17px;
-            bottom: 15px;
-
-            width: 7px;
-            height: 5px;
-
-            border-radius: 1px;
-
-            background:
-                #14263c;
-
-            box-shadow:
-                11px 0 0 #14263c;
-        }
-
-
-        /* front */
-
-        .mini-train .train-front {
-
-            position: absolute;
-
-            right: 0;
-
-            bottom: 5px;
-
-            width: 17px;
-            height: 8px;
-
-            border-radius:
-                0 6px 4px 0;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ffad3c,
-                    #ffd16c
-                );
-        }
-
-
-        /* head lamp */
-
-        .mini-train .train-light {
-
-            position: absolute;
-
-            right: -1px;
-
-            bottom: 8px;
-
-            width: 3px;
-            height: 3px;
-
-            border-radius: 50%;
-
-            background:
-                #fff3bf;
-
-            box-shadow:
-                0 0 6px
-                rgba(255,224,143,.85);
-        }
-
-
-        /* wheels */
-
-        .mini-train .wheel {
-
-            position: absolute;
-
-            bottom: 1px;
-
-            width: 6px;
-            height: 6px;
-
-            border-radius: 50%;
-
-            background:
-                #17273a;
 
             border:
                 1px solid
-                rgba(255,190,83,.45);
+                rgba(255,255,255,.5);
+
+            box-shadow:
+                0 0 8px
+                rgba(255,255,255,.08);
         }
 
 
-        .mini-train .wheel-one {
-            left: 17px;
+        /* =====================================================
+           POSISI GERBONG
+           Semua di BELAKANG lokomotif
+        ===================================================== */
+
+        .train-coach.coach-one {
+            left: 0;
         }
 
 
-        .mini-train .wheel-two {
-            left: 66px;
+        .train-coach.coach-two {
+            left: 72px;
         }
 
 
-        /* tiny rail reflection */
+        .train-coach.coach-three {
+            left: 144px;
+        }
 
-        .mini-train .train-glow {
+
+        .train-coach.coach-four {
+            left: 216px;
+        }
+
+
+        /* =====================================================
+           STRIPE MERAH GERBONG
+        ===================================================== */
+
+        .train-coach {
+
+            background:
+
+                linear-gradient(
+                    to bottom,
+                    #f7f8fa 0%,
+                    #f7f8fa 38%,
+                    var(--kai-red) 39%,
+                    var(--kai-red) 48%,
+                    #e6ebef 49%,
+                    #d0d7dd 100%
+                );
+        }
+
+
+        /* =====================================================
+           AKSEN HIJAU TIPIS
+        ===================================================== */
+
+        .train-coach::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 4px;
+            right: 4px;
+
+            bottom: 2px;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(63,174,104,.75),
+                    rgba(112,201,141,.55),
+                    rgba(63,174,104,.75)
+                );
+
+            border-radius: 3px;
+        }
+
+
+        /* =====================================================
+           JENDELA GERBONG
+        ===================================================== */
+
+        .train-coach::before {
+
+            content: "";
 
             position: absolute;
 
             left: 8px;
 
+            top: 4px;
+
+            width: 9px;
+
+            height: 6px;
+
+            border-radius: 1px;
+
+            background:
+                #10243a;
+
+            box-shadow:
+                14px 0 0 #10243a,
+                28px 0 0 #10243a,
+                42px 0 0 #10243a;
+        }
+
+
+        /* =====================================================
+           LOKOMOTIF
+        ===================================================== */
+
+        .train-locomotive {
+
+            position: absolute;
+
+            left: 288px;
+
+            bottom: 7px;
+
+            width: 69px;
+
+            height: 20px;
+
+            border-radius:
+                4px 5px 3px 3px;
+
+            background:
+
+                linear-gradient(
+                    180deg,
+                    #f7f8fa 0%,
+                    #ffffff 32%,
+                    var(--kai-red) 33%,
+                    var(--kai-red) 47%,
+                    #e6ebef 48%,
+                    #cbd3d9 100%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.55);
+
+            box-shadow:
+
+                0 0 12px
+                rgba(255,255,255,.12),
+
+                0 0 15px
+                rgba(215,25,32,.10);
+        }
+
+
+        /* =====================================================
+           NOSE / DEPAN LOKOMOTIF
+        ===================================================== */
+
+        .train-locomotive::after {
+
+            content: "";
+
+            position: absolute;
+
+            right: -8px;
+
             bottom: 0;
 
-            width: 82px;
+            width: 13px;
+
+            height: 15px;
+
+            border-radius:
+                0 6px 4px 0;
+
+            background:
+
+                linear-gradient(
+                    180deg,
+                    #ffffff,
+                    #eef1f3 45%,
+                    var(--kai-red) 46%,
+                    var(--kai-red) 60%,
+                    #d5dce1 61%
+                );
+
+            clip-path:
+                polygon(
+                    0 0,
+                    72% 15%,
+                    100% 50%,
+                    72% 85%,
+                    0 100%
+                );
+        }
+
+
+        /* =====================================================
+           AKSEN HIJAU LOKOMOTIF
+        ===================================================== */
+
+        .train-locomotive::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 4px;
+
+            right: 3px;
+
+            bottom: 2px;
 
             height: 2px;
+
+            border-radius: 2px;
+
+            background:
+                var(--kai-green);
+
+            opacity:
+                .85;
+        }
+
+
+        /* =====================================================
+           KABIN
+        ===================================================== */
+
+        .train-cabin {
+
+            position: absolute;
+
+            left: 298px;
+
+            bottom: 19px;
+
+            width: 31px;
+
+            height: 13px;
+
+            border-radius:
+                5px 5px 0 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f6f8,
+                    #ffffff
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.55);
+
+            z-index: 3;
+        }
+
+
+        /* =====================================================
+           ATAP KABIN
+        ===================================================== */
+
+        .train-roof {
+
+            position: absolute;
+
+            left: 295px;
+
+            bottom: 30px;
+
+            width: 38px;
+
+            height: 3px;
+
+            border-radius: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7c8792,
+                    #f3f5f7,
+                    #7c8792
+                );
+
+            z-index: 3;
+        }
+
+
+        /* =====================================================
+           JENDELA KABIN
+        ===================================================== */
+
+        .train-window {
+
+            position: absolute;
+
+            left: 303px;
+
+            bottom: 23px;
+
+            width: 8px;
+
+            height: 6px;
+
+            border-radius: 1px;
+
+            background:
+                #102a3b;
+
+            box-shadow:
+                12px 0 0 #102a3b;
+
+            border:
+                1px solid
+                rgba(63,174,104,.65);
+
+            z-index: 4;
+        }
+
+
+        /* =====================================================
+           CEROBONG
+        ===================================================== */
+
+        .train-chimney {
+
+            position: absolute;
+
+            left: 336px;
+
+            bottom: 25px;
+
+            width: 7px;
+
+            height: 10px;
+
+            border-radius:
+                2px 2px 1px 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #737e89,
+                    #f0f3f5,
+                    #737e89
+                );
+
+            z-index: 3;
+        }
+
+
+        .train-chimney::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: -3px;
+
+            top: -2px;
+
+            width: 13px;
+
+            height: 3px;
+
+            border-radius: 4px;
+
+            background:
+                #65717d;
+        }
+
+
+        /* =====================================================
+           ASAP
+        ===================================================== */
+
+        .train-smoke {
+
+            position: absolute;
+
+            left: 333px;
+
+            bottom: 36px;
+
+            width: 8px;
+
+            height: 8px;
 
             border-radius: 50%;
 
             background:
-                rgba(255,167,62,.35);
+                rgba(240,243,246,.25);
 
             filter:
-                blur(2px);
+                blur(1px);
+
+            opacity: 0;
+
+            animation:
+                smokeOne
+                2.8s
+                ease-out
+                infinite;
         }
 
 
-        /* train motion */
+        .train-smoke::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 6px;
+
+            top: -6px;
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(240,243,246,.18);
+        }
+
+
+        .train-smoke::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -5px;
+
+            top: -11px;
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(240,243,246,.13);
+        }
+
+
+        /* asap kedua */
+
+        .train-smoke-two {
+
+            position: absolute;
+
+            left: 339px;
+
+            bottom: 38px;
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(240,243,246,.19);
+
+            filter:
+                blur(1px);
+
+            opacity: 0;
+
+            animation:
+                smokeTwo
+                2.8s
+                1.25s
+                ease-out
+                infinite;
+        }
+
+
+        /* =====================================================
+           HEADLIGHT
+        ===================================================== */
+
+        .train-light {
+
+            position: absolute;
+
+            right: -8px;
+
+            bottom: 14px;
+
+            width: 5px;
+
+            height: 5px;
+
+            border-radius: 50%;
+
+            background:
+                #fffef0;
+
+            box-shadow:
+
+                0 0 4px
+                #ffffff,
+
+                0 0 9px
+                rgba(255,224,143,.85);
+
+            z-index: 5;
+        }
+
+
+        /* =====================================================
+           COUPLER
+        ===================================================== */
+
+        .train-coupler {
+
+            position: absolute;
+
+            bottom: 11px;
+
+            width: 8px;
+
+            height: 3px;
+
+            border-radius: 2px;
+
+            background:
+                #596273;
+
+            z-index: 2;
+        }
+
+
+        .coupler-one {
+            left: 67px;
+        }
+
+
+        .coupler-two {
+            left: 139px;
+        }
+
+
+        .coupler-three {
+            left: 211px;
+        }
+
+
+        .coupler-four {
+            left: 283px;
+        }
+
+
+        /* =====================================================
+           RODA
+        ===================================================== */
+
+        .mini-train .wheel {
+
+            position: absolute;
+
+            bottom: 2px;
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #eef1f3 0 18%,
+                    #56616c 20% 43%,
+                    #172536 45% 68%,
+                    #0b1522 70%
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.45);
+
+            z-index: 6;
+
+            animation:
+                wheelSpin
+                .8s
+                linear
+                infinite;
+        }
+
+
+        /* roda gerbong */
+
+        .wheel-coach-one {
+            left: 11px;
+        }
+
+
+        .wheel-coach-two {
+            left: 51px;
+        }
+
+
+        .wheel-coach-three {
+            left: 83px;
+        }
+
+
+        .wheel-coach-four {
+            left: 123px;
+        }
+
+
+        .wheel-coach-five {
+            left: 155px;
+        }
+
+
+        .wheel-coach-six {
+            left: 195px;
+        }
+
+
+        .wheel-coach-seven {
+            left: 227px;
+        }
+
+
+        .wheel-coach-eight {
+            left: 267px;
+        }
+
+
+        /* roda lokomotif */
+
+        .wheel-loco-one {
+            left: 299px;
+        }
+
+
+        .wheel-loco-two {
+            left: 339px;
+        }
+
+
+        /* =====================================================
+           GLOW
+        ===================================================== */
+
+        .train-glow {
+
+            position: absolute;
+
+            left: 4px;
+
+            bottom: 0;
+
+            width: 355px;
+
+            height: 3px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(63,174,104,.10),
+                    rgba(255,167,62,.32),
+                    rgba(215,25,32,.12)
+                );
+
+            filter:
+                blur(3px);
+        }
+
+
+        /* =====================================================
+           TRAIN MOTION
+        ===================================================== */
 
         @keyframes trainPass {
 
             0% {
 
                 left:
-                    -130px;
+                    -390px;
 
                 opacity:
                     0;
-
             }
 
 
-            7% {
+            6% {
 
                 opacity:
                     .72;
-
             }
 
 
-            18% {
+            14% {
 
                 opacity:
-                    .88;
-
+                    .92;
             }
 
 
-            72% {
+            76% {
 
                 opacity:
-                    .88;
-
+                    .92;
             }
 
 
-            91% {
+            93% {
 
                 opacity:
-                    .45;
-
+                    .42;
             }
 
 
             100% {
 
                 left:
-                    calc(100% + 130px);
+                    calc(100% + 390px);
+
+                opacity:
+                    0;
+            }
+
+        }
+
+
+        /* =====================================================
+           WHEEL MOTION
+        ===================================================== */
+
+        @keyframes wheelSpin {
+
+            from {
+
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        /* =====================================================
+           SMOKE
+        ===================================================== */
+
+        @keyframes smokeOne {
+
+            0% {
 
                 opacity:
                     0;
 
+                transform:
+                    translate(0, 5px)
+                    scale(.55);
+            }
+
+
+            20% {
+
+                opacity:
+                    .45;
+            }
+
+
+            60% {
+
+                opacity:
+                    .22;
+
+                transform:
+                    translate(-5px, -13px)
+                    scale(1.05);
+            }
+
+
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(-10px, -23px)
+                    scale(1.35);
+            }
+
+        }
+
+
+        @keyframes smokeTwo {
+
+            0% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(0, 4px)
+                    scale(.45);
+            }
+
+
+            20% {
+
+                opacity:
+                    .35;
+            }
+
+
+            65% {
+
+                opacity:
+                    .16;
+
+                transform:
+                    translate(5px, -12px)
+                    scale(1);
+            }
+
+
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(8px, -21px)
+                    scale(1.3);
             }
 
         }
@@ -2046,12 +2709,6 @@
             }
 
 
-            /*
-               Kereta sedikit lebih kecil
-               di layar HP agar tidak terlalu
-               menarik perhatian.
-            */
-
             .mini-train {
 
                 transform:
@@ -2130,19 +2787,78 @@
 
                 <div class="mini-train">
 
-                    <div class="train-body"></div>
+
+                    <!-- ASAP -->
+
+                    <div class="train-smoke"></div>
+
+                    <div class="train-smoke-two"></div>
+
+
+                    <!-- GERBONG -->
+                    
+                    <div class="train-coach coach-one"></div>
+
+                    <div class="train-coach coach-two"></div>
+
+                    <div class="train-coach coach-three"></div>
+
+                    <div class="train-coach coach-four"></div>
+
+
+                    <!-- SAMBUNGAN -->
+
+                    <div class="train-coupler coupler-one"></div>
+
+                    <div class="train-coupler coupler-two"></div>
+
+                    <div class="train-coupler coupler-three"></div>
+
+                    <div class="train-coupler coupler-four"></div>
+
+
+                    <!-- LOKOMOTIF -->
+
+                    <div class="train-locomotive"></div>
 
                     <div class="train-cabin"></div>
 
+                    <div class="train-roof"></div>
+
                     <div class="train-window"></div>
 
-                    <div class="train-front"></div>
+                    <div class="train-chimney"></div>
 
                     <div class="train-light"></div>
 
-                    <div class="wheel wheel-one"></div>
 
-                    <div class="wheel wheel-two"></div>
+                    <!-- RODA GERBONG -->
+
+                    <div class="wheel wheel-coach-one"></div>
+
+                    <div class="wheel wheel-coach-two"></div>
+
+                    <div class="wheel wheel-coach-three"></div>
+
+                    <div class="wheel wheel-coach-four"></div>
+
+                    <div class="wheel wheel-coach-five"></div>
+
+                    <div class="wheel wheel-coach-six"></div>
+
+                    <div class="wheel wheel-coach-seven"></div>
+
+                    <div class="wheel wheel-coach-eight"></div>
+
+
+                    <!-- RODA LOKOMOTIF -->
+
+                    <div class="wheel wheel-loco-one"></div>
+
+                    <div class="wheel wheel-loco-two"></div>
+
+
+                    <!-- GLOW -->
 
                     <div class="train-glow"></div>
 
@@ -2288,3 +3004,4 @@
 </body>
 
 </html>
+```
