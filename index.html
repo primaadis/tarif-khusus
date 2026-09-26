@@ -12,6 +12,10 @@
 
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -24,23 +28,22 @@ html {
 
 body {
     font-family:
-        Arial,
-        Helvetica,
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
         sans-serif;
-
-    min-height: 100vh;
-
-    color: #102a43;
 
     background:
         linear-gradient(
             180deg,
-            #eef6fc 0%,
-            #f7fbfe 55%,
-            #edf4f9 100%
+            #eef8ff 0%,
+            #f7fbff 45%,
+            #ffffff 100%
         );
 
-    overflow-x: hidden;
+    color: #10243e;
+    min-height: 100vh;
 }
 
 
@@ -49,77 +52,35 @@ body {
 ========================= */
 
 .hero {
-
     position: relative;
-
-    min-height: 410px;
-
-    padding:
-        45px
-        20px
-        135px;
-
     overflow: hidden;
 
-    text-align: center;
-
-    color: white;
+    padding:
+        28px 20px
+        75px;
 
     background:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(44,164,255,.22),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 80% 35%,
-            rgba(0,204,255,.14),
+            circle at 15% 15%,
+            rgba(0, 217, 255, .18),
             transparent 32%
         ),
-
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(0, 119, 255, .20),
+            transparent 30%
+        ),
         linear-gradient(
             135deg,
-            #061524,
-            #092842 48%,
-            #061827
+            #06172c,
+            #092b4d 55%,
+            #06182d
         );
+
+    color: white;
 }
-
-
-/* =========================
-   GLOW
-========================= */
 
 .hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 280px;
-    height: 280px;
-
-    border-radius: 50%;
-
-    top: -130px;
-    left: -80px;
-
-    background:
-        rgba(53,175,255,.12);
-
-    filter: blur(10px);
-
-    animation:
-        floatingGlow
-        7s
-        ease-in-out
-        infinite;
-}
-
-
-.hero::after {
-
     content: "";
 
     position: absolute;
@@ -127,193 +88,129 @@ body {
     width: 350px;
     height: 350px;
 
+    right: -160px;
+    bottom: -180px;
+
     border-radius: 50%;
 
-    right: -160px;
-    bottom: -190px;
-
     background:
-        rgba(0,174,255,.10);
+        rgba(0, 211, 255, .08);
 
-    filter: blur(15px);
+    filter: blur(20px);
 
     animation:
-        floatingGlow
-        9s
-        ease-in-out
-        infinite
-        reverse;
+        floatingGlow 7s ease-in-out infinite;
 }
-
 
 @keyframes floatingGlow {
 
-    0%,100% {
-        transform:
-            translate(0,0)
-            scale(1);
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
     }
 
     50% {
-        transform:
-            translate(25px,18px)
-            scale(1.08);
+        transform: translateY(-25px) scale(1.08);
     }
-
 }
 
 
 /* =========================
-   BASIC TEXT
-========================= */
-
-.hero h1 {
-
-    position: relative;
-
-    z-index: 5;
-
-    font-size:
-        clamp(
-            42px,
-            11vw,
-            72px
-        );
-
-    line-height: 1;
-
-    font-weight: 900;
-
-    letter-spacing: -3px;
-
-    color: #ffffff;
-}
-
-
-.hero h1 span {
-
-    color: #70c9ff;
-
-}
-
-
-.hero-subtitle {
-
-    position: relative;
-
-    z-index: 5;
-
-    max-width: 420px;
-
-    margin:
-        17px
-        auto
-        0;
-
-    color: #94abc0;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-
-}
-    /* =========================
-   KAI 121 IDENTITY
+   MINI BRAND
 ========================= */
 
 .brand-mini {
-
     position: relative;
-
-    z-index: 10;
 
     display: inline-flex;
 
     align-items: center;
 
-    gap: 8px;
+    padding:
+        7px 12px;
 
     margin-bottom: 28px;
 
-    padding: 7px 13px;
-
-    border: 1px solid rgba(255,255,255,.12);
+    border:
+        1px solid
+        rgba(255,255,255,.16);
 
     border-radius: 999px;
 
     background:
-        rgba(255,255,255,.045);
+        rgba(255,255,255,.06);
 
-    color: #b9cddd;
+    backdrop-filter:
+        blur(10px);
 
     font-size: 11px;
 
     font-weight: 700;
 
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
 
-    backdrop-filter: blur(10px);
-
-}
-
-
-.brand-mini .dot {
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: #64c8ff;
-
-    box-shadow:
-        0 0 8px #64c8ff,
-        0 0 18px rgba(100,200,255,.7);
-
-    animation:
-        pulseDot
-        1.8s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes pulseDot {
-
-    0%,100% {
-        opacity: .55;
-        transform: scale(.85);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.15);
-    }
-
+    color:
+        rgba(255,255,255,.82);
 }
 
 
 /* =========================
-   EYEBROW
+   HERO TEXT
 ========================= */
 
 .eyebrow {
-
     position: relative;
 
-    z-index: 5;
+    margin-bottom: 10px;
 
-    margin-bottom: 12px;
-
-    color: #6bbfff;
-
-    font-size: 10px;
+    font-size: 11px;
 
     font-weight: 800;
 
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 
-    text-transform: uppercase;
+    color:
+        #54dcff;
+}
+
+.hero h1 {
+    position: relative;
+
+    font-size:
+        clamp(
+            38px,
+            10vw,
+            68px
+        );
+
+    line-height: .95;
+
+    font-weight: 900;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 17px;
+}
+
+.hero h1 span {
+    color: #55dcff;
+
+    text-shadow:
+        0 0 22px
+        rgba(65,218,255,.35);
+}
+
+.hero-subtitle {
+    position: relative;
+
+    max-width: 620px;
+
+    color:
+        rgba(255,255,255,.68);
+
+    font-size: 14px;
+
+    line-height: 1.7;
 }
 
 
@@ -322,39 +219,45 @@ body {
 ========================= */
 
 .digital-rail {
+    position: relative;
 
+    height: 36px;
+
+    margin-top: 40px;
+
+    opacity: .8;
+
+    overflow: hidden;
+}
+
+.rail-sleepers {
     position: absolute;
-
-    z-index: 1;
 
     left: 0;
     right: 0;
 
-    bottom: 48px;
+    bottom: 4px;
 
-    height: 85px;
+    height: 7px;
 
-    opacity: .75;
-
-    transform:
-        perspective(500px)
-        rotateX(58deg);
-
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 20px,
+            rgba(255,255,255,.14) 21px,
+            rgba(255,255,255,.14) 25px
+        );
 }
 
-
-/* rail lines */
-
-.digital-rail::before,
-.digital-rail::after {
-
-    content: "";
-
+.rail-light {
     position: absolute;
 
-    left: -10%;
+    left: -20%;
 
-    width: 120%;
+    bottom: 12px;
+
+    width: 25%;
 
     height: 2px;
 
@@ -362,200 +265,73 @@ body {
         linear-gradient(
             90deg,
             transparent,
-            rgba(89,195,255,.15),
-            rgba(89,195,255,.8),
-            rgba(89,195,255,.15),
+            #55dcff,
             transparent
         );
 
-    box-shadow:
-        0 0 10px rgba(89,195,255,.45);
-
-}
-
-
-.digital-rail::before {
-    top: 20px;
-}
-
-
-.digital-rail::after {
-    top: 62px;
-}
-
-
-/* sleepers */
-
-.rail-sleepers {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 28px,
-            rgba(91,190,245,.18) 29px,
-            rgba(91,190,245,.18) 31px,
-            transparent 32px,
-            transparent 58px
+    filter:
+        drop-shadow(
+            0 0 8px
+            #55dcff
         );
 
     animation:
-        railMove
-        2.5s
-        linear
-        infinite;
+        railMove 4s linear infinite;
 }
-
 
 @keyframes railMove {
 
     from {
-        transform: translateX(0);
+        transform:
+            translateX(0);
     }
 
     to {
-        transform: translateX(-58px);
+        transform:
+            translateX(500%);
     }
-
 }
 
 
 /* =========================
-   MOVING LIGHT
-========================= */
-
-.rail-light {
-
-    position: absolute;
-
-    top: 18px;
-
-    left: -80px;
-
-    width: 75px;
-
-    height: 45px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(110,211,255,.9) 0%,
-            rgba(110,211,255,.25) 35%,
-            transparent 72%
-        );
-
-    filter: blur(2px);
-
-    animation:
-        railLight
-        4s
-        linear
-        infinite;
-}
-
-
-@keyframes railLight {
-
-    0% {
-        left: -100px;
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    80% {
-        opacity: .9;
-    }
-
-    100% {
-        left: calc(100% + 100px);
-        opacity: 0;
-    }
-
-}
-
-
-/* =========================
-   SEARCH WRAPPER
+   SEARCH AREA
 ========================= */
 
 .search-wrap {
-
     position: relative;
 
-    z-index: 20;
+    margin-top: -42px;
 
-    width: min(
-        920px,
-        calc(100% - 28px)
-    );
+    padding:
+        0 16px;
 
-    margin:
-        -92px
-        auto
-        0;
-
+    z-index: 10;
 }
 
-
-/* =========================
-   SEARCH CARD
-========================= */
-
 .search-card {
+    max-width: 980px;
 
-    position: relative;
+    margin:
+        0 auto;
 
-    padding: 25px;
+    padding:
+        20px;
 
     border:
         1px solid
-        rgba(255,255,255,.7);
+        rgba(12, 73, 116, .10);
 
-    border-radius: 24px;
+    border-radius: 22px;
 
     background:
-        rgba(255,255,255,.94);
+        rgba(255,255,255,.96);
 
     box-shadow:
-        0 25px 70px rgba(14,52,78,.15),
-        0 8px 25px rgba(14,52,78,.08);
+        0 20px 50px
+        rgba(13, 55, 91, .12);
 
     backdrop-filter:
-        blur(20px);
-
-    animation:
-        cardAppear
-        .7s
-        ease-out
-        both;
-}
-
-
-@keyframes cardAppear {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(25px)
-            scale(.97);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
+        blur(18px);
 }
 
 
@@ -564,132 +340,100 @@ body {
 ========================= */
 
 .search-grid {
-
     display: grid;
 
     grid-template-columns:
         1fr
         48px
         1fr
-        150px;
-
-    align-items: end;
+        auto;
 
     gap: 12px;
 
+    align-items: end;
 }
-
-
-/* =========================
-   FIELD
-========================= */
 
 .field {
-
     position: relative;
-
-    min-width: 0;
 }
 
-
 .field-label {
-
     display: block;
 
-    margin:
-        0
-        0
-        8px
-        4px;
-
-    color: #60788c;
+    margin-bottom: 7px;
 
     font-size: 10px;
 
     font-weight: 800;
 
-    letter-spacing: 1.4px;
+    letter-spacing: 1.3px;
 
     text-transform: uppercase;
+
+    color:
+        #7890a8;
 }
 
-
 .field-box {
-
     position: relative;
+
+    height: 52px;
 
     display: flex;
 
     align-items: center;
 
-    height: 54px;
-
-    overflow: hidden;
-
     border:
         1px solid
-        #d9e5ee;
+        #d9e7f2;
 
-    border-radius: 15px;
+    border-radius: 14px;
 
-    background: #f8fbfd;
+    background:
+        #f9fcff;
 
     transition:
-        border-color .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        .2s ease;
 }
 
-
 .field-box:focus-within {
+    border-color:
+        #48cbed;
 
-    border-color: #55bfff;
-
-    background: #ffffff;
+    background:
+        white;
 
     box-shadow:
         0 0 0 4px
-        rgba(63,185,255,.10);
+        rgba(72,203,237,.10);
 }
-
-
-.field-icon {
-
-    flex: 0 0 42px;
-
-    text-align: center;
-
-    color: #53aede;
-
-    font-size: 17px;
-}
-
 
 .field input {
-
     width: 100%;
 
     height: 100%;
+
+    padding:
+        0 15px;
 
     border: none;
 
     outline: none;
 
-    background: transparent;
+    background:
+        transparent;
 
-    color: #15364d;
-
-    font-family: inherit;
+    color:
+        #173552;
 
     font-size: 14px;
 
     font-weight: 600;
 }
 
-
 .field input::placeholder {
-
-    color: #9aabba;
+    color:
+        #a5b5c4;
 
     font-weight: 500;
 }
@@ -699,134 +443,100 @@ body {
    SWAP BUTTON
 ========================= */
 
-.swap-area {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding-bottom: 5px;
-}
-
-
 .swap-btn {
+    width: 48px;
+    height: 48px;
 
-    width: 42px;
-    height: 42px;
+    border: none;
 
-    border:
-        1px solid
-        #d5e3ec;
+    border-radius: 14px;
 
-    border-radius: 50%;
+    background:
+        #e9f8fd;
 
-    background: #ffffff;
-
-    color: #409ac9;
+    color:
+        #159cc5;
 
     cursor: pointer;
 
     font-size: 20px;
 
-    box-shadow:
-        0 5px 16px rgba(22,72,103,.10);
-
     transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        .2s ease;
 }
-
 
 .swap-btn:hover {
-
     transform:
-        rotate(180deg)
-        scale(1.05);
+        rotate(180deg);
 
-    background: #eef9ff;
-
-    box-shadow:
-        0 8px 20px
-        rgba(38,151,207,.18);
+    background:
+        #d9f4fc;
 }
 
-
 .swap-btn:active {
-
     transform:
-        rotate(180deg)
-        scale(.92);
+        scale(.94)
+        rotate(180deg);
 }
 
 
 /* =========================
-   SUGGESTION DROPDOWN
+   SUGGESTIONS
 ========================= */
 
 .suggestions {
-
     position: absolute;
 
-    z-index: 100;
-
-    top: calc(100% + 8px);
+    top: calc(100% + 7px);
 
     left: 0;
     right: 0;
 
-    display: none;
+    z-index: 100;
 
-    max-height: 230px;
+    max-height: 220px;
 
     overflow-y: auto;
-
-    padding: 6px;
-
-    border:
-        1px solid
-        #dce8ef;
 
     border-radius: 14px;
 
     background:
-        rgba(255,255,255,.98);
+        white;
 
     box-shadow:
-        0 18px 35px
-        rgba(20,65,90,.16);
+        0 15px 35px
+        rgba(17, 52, 78, .15);
+
+    border:
+        1px solid
+        #e2edf4;
+
+    display: none;
 }
 
-
 .suggestion-item {
-
     padding:
-        11px
-        12px;
+        12px 14px;
 
-    border-radius: 10px;
-
-    color: #294b62;
+    cursor: pointer;
 
     font-size: 13px;
 
     font-weight: 600;
 
-    cursor: pointer;
+    color:
+        #294762;
 
     transition:
-        background .2s ease,
-        color .2s ease;
+        .15s ease;
 }
 
-
 .suggestion-item:hover {
+    background:
+        #effaff;
 
-    background: #edf8fe;
-
-    color: #1686c2;
+    color:
+        #0b99c5;
 }
 
 
@@ -835,48 +545,46 @@ body {
 ========================= */
 
 .search-btn {
+    height: 52px;
 
-    position: relative;
-
-    height: 54px;
-
-    overflow: hidden;
+    padding:
+        0 22px;
 
     border: none;
 
-    border-radius: 15px;
+    border-radius: 14px;
+
+    cursor: pointer;
 
     background:
         linear-gradient(
             135deg,
-            #087db8,
-            #27b7ed
+            #09afd9,
+            #0878c9
         );
 
-    color: white;
-
-    font-family: inherit;
+    color:
+        white;
 
     font-size: 13px;
 
     font-weight: 800;
 
-    letter-spacing: .8px;
-
-    cursor: pointer;
+    letter-spacing: .4px;
 
     box-shadow:
-        0 10px 24px
-        rgba(20,139,194,.25);
+        0 8px 22px
+        rgba(8,143,205,.22);
+
+    position: relative;
+
+    overflow: hidden;
 
     transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        .2s ease;
 }
 
-
-.search-btn::before {
-
+.search-btn::after {
     content: "";
 
     position: absolute;
@@ -884,15 +592,15 @@ body {
     top: 0;
     bottom: 0;
 
-    left: -80px;
+    width: 70px;
 
-    width: 50px;
+    left: -100px;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.55),
+            rgba(255,255,255,.35),
             transparent
         );
 
@@ -900,124 +608,134 @@ body {
         skewX(-20deg);
 
     animation:
-        buttonShine
-        3.2s
-        ease-in-out
-        infinite;
+        buttonShine 3.5s infinite;
 }
-
 
 @keyframes buttonShine {
 
     0% {
-        left: -80px;
+        left: -100px;
     }
 
-    45%,100% {
-        left: calc(100% + 80px);
+    45%,
+    100% {
+        left: 130%;
     }
-
 }
-
 
 .search-btn:hover {
-
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 
     box-shadow:
-        0 14px 30px
-        rgba(20,139,194,.32);
+        0 12px 28px
+        rgba(8,143,205,.30);
 }
 
-
 .search-btn:active {
-
     transform:
         translateY(0)
         scale(.98);
 }
-
-
-.search-btn span {
-
-    position: relative;
-
-    z-index: 2;
-                      }
-    /* =========================
-   CONTENT AREA
+          
+/* =========================
+   MAIN CONTENT
 ========================= */
 
 .content {
-
-    width: min(
-        920px,
-        calc(100% - 28px)
-    );
+    max-width: 980px;
 
     margin:
-        42px
-        auto
-        0;
+        0 auto;
 
+    padding:
+        38px 16px
+        70px;
 }
 
 
 /* =========================
-   SECTION TITLE
+   SECTION HEADER
 ========================= */
 
 .section-head {
-
     display: flex;
 
-    align-items: center;
+    align-items: flex-end;
 
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 20px;
 
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
-
 .section-title {
-
-    color: #173b53;
-
-    font-size: 18px;
+    font-size: 21px;
 
     font-weight: 850;
 
-    letter-spacing: -.4px;
-}
+    letter-spacing:
+        -.5px;
 
+    color:
+        #123250;
+}
 
 .section-desc {
+    margin-top: 5px;
 
-    margin-top: 4px;
+    font-size: 12px;
 
-    color: #8296a5;
+    color:
+        #7890a8;
 
-    font-size: 11px;
+    line-height: 1.5;
 }
 
-
-/* =========================
-   STATUS
-========================= */
-
 .status {
+    flex-shrink: 0;
 
-    min-height: 20px;
+    display: inline-flex;
 
-    color: #7690a1;
+    align-items: center;
 
-    font-size: 11px;
+    gap: 7px;
 
-    font-weight: 600;
+    padding:
+        7px 11px;
 
-    text-align: right;
+    border-radius:
+        999px;
+
+    background:
+        #eef9fc;
+
+    color:
+        #1596ba;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .7px;
+}
+
+.status::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #20c997;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(32,201,151,.10);
 }
 
 
@@ -1026,84 +744,74 @@ body {
 ========================= */
 
 .loading {
-
     display: none;
 
-    align-items: center;
+    padding:
+        45px 20px;
 
-    justify-content: center;
+    text-align: center;
 
-    gap: 7px;
-
-    min-height: 120px;
-
-    color: #6d899c;
-
-    font-size: 12px;
+    color:
+        #7890a8;
 }
 
+.loading-text {
+    font-size: 13px;
 
-.loading.active {
-
-    display: flex;
+    font-weight: 600;
 }
-
 
 .loading-dots {
+    display: inline-flex;
 
-    display: flex;
+    gap: 5px;
 
-    gap: 4px;
+    margin-left: 6px;
 }
 
-
-.loading-dots i {
-
-    display: block;
-
-    width: 6px;
-    height: 6px;
+.loading-dots span {
+    width: 5px;
+    height: 5px;
 
     border-radius: 50%;
 
-    background: #39aee4;
+    background:
+        #20acd2;
 
     animation:
-        loadingDot
-        1s
-        ease-in-out
-        infinite;
+        loadingDot 1.2s
+        infinite ease-in-out;
 }
 
-
-.loading-dots i:nth-child(2) {
-
-    animation-delay: .15s;
+.loading-dots span:nth-child(2) {
+    animation-delay:
+        .15s;
 }
 
-
-.loading-dots i:nth-child(3) {
-
-    animation-delay: .3s;
+.loading-dots span:nth-child(3) {
+    animation-delay:
+        .3s;
 }
-
 
 @keyframes loadingDot {
 
-    0%,80%,100% {
+    0%,
+    80%,
+    100% {
+        transform:
+            scale(.65);
 
-        transform: translateY(0);
-
-        opacity: .35;
+        opacity:
+            .4;
     }
 
     40% {
+        transform:
+            scale(1);
 
-        transform: translateY(-5px);
-
-        opacity: 1;
+        opacity:
+            1;
     }
-
 }
 
 
@@ -1112,45 +820,120 @@ body {
 ========================= */
 
 .empty {
-
     display: none;
 
-    padding: 35px 20px;
+    padding:
+        55px 20px;
+
+    text-align: center;
 
     border:
         1px dashed
-        #cfdee7;
+        #d5e5ef;
 
-    border-radius: 18px;
+    border-radius:
+        18px;
 
     background:
-        rgba(255,255,255,.55);
-
-    color: #78909f;
-
-    font-size: 12px;
-
-    text-align: center;
+        rgba(255,255,255,.65);
 }
 
+.empty-icon {
+    display: flex;
 
-.empty.active {
+    align-items: center;
 
-    display: block;
+    justify-content: center;
 
+    width: 54px;
+    height: 54px;
+
+    margin:
+        0 auto 14px;
+
+    border-radius:
+        17px;
+
+    background:
+        #eef9fc;
+
+    color:
+        #12a1c9;
+
+    font-size:
+        23px;
+}
+
+.empty-title {
+    margin-bottom: 6px;
+
+    color:
+        #28455f;
+
+    font-size:
+        15px;
+
+    font-weight:
+        800;
+}
+
+.empty-text {
+    max-width:
+        430px;
+
+    margin:
+        0 auto;
+
+    color:
+        #8497a9;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.6;
 }
 
 
 /* =========================
-   RESULT LIST
+   RESULTS
 ========================= */
 
 .results {
+    display:
+        grid;
 
-    display: grid;
+    gap:
+        14px;
+}
 
-    gap: 14px;
 
+/* =========================
+   RESULT COUNT
+========================= */
+
+.result-count {
+    display: none;
+
+    margin-bottom:
+        14px;
+
+    font-size:
+        12px;
+
+    color:
+        #7890a8;
+
+    font-weight:
+        600;
+}
+
+.result-count strong {
+    color:
+        #159cc5;
+
+    font-weight:
+        800;
 }
 
 
@@ -1159,50 +942,37 @@ body {
 ========================= */
 
 .train-card {
-
     position: relative;
 
     overflow: hidden;
 
-    padding: 20px;
+    padding:
+        18px;
 
     border:
         1px solid
-        #e0eaf0;
+        #deebf3;
 
-    border-radius: 19px;
+    border-radius:
+        18px;
 
-    background: #ffffff;
+    background:
+        rgba(255,255,255,.96);
 
     box-shadow:
         0 8px 25px
-        rgba(24,67,91,.07);
-
-    animation:
-        resultAppear
-        .5s
-        ease-out
-        both;
+        rgba(18,55,85,.06);
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+
+    animation:
+        cardAppear .45s ease both;
 }
-
-
-.train-card:hover {
-
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 14px 32px
-        rgba(24,67,91,.11);
-}
-
 
 .train-card::before {
-
     content: "";
 
     position: absolute;
@@ -1216,30 +986,41 @@ body {
     background:
         linear-gradient(
             180deg,
-            #2db8f2,
-            #087db8
+            #13b8df,
+            #087dc5
         );
+
+    opacity:
+        .85;
 }
 
+.train-card:hover {
+    transform:
+        translateY(-3px);
 
-@keyframes resultAppear {
+    border-color:
+        #c9e7f2;
+
+    box-shadow:
+        0 14px 32px
+        rgba(18,55,85,.10);
+}
+
+@keyframes cardAppear {
 
     from {
-
         opacity: 0;
 
         transform:
-            translateY(12px);
+            translateY(10px);
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0);
     }
-
 }
 
 
@@ -1248,81 +1029,77 @@ body {
 ========================= */
 
 .train-header {
+    display:
+        flex;
 
-    display: flex;
+    align-items:
+        flex-start;
 
-    align-items: flex-start;
+    justify-content:
+        space-between;
 
-    justify-content: space-between;
+    gap:
+        15px;
 
-    gap: 15px;
-
-    margin-bottom: 17px;
+    margin-bottom:
+        15px;
 }
-
 
 .train-name {
+    color:
+        #102f4b;
 
-    color: #143b54;
+    font-size:
+        16px;
 
-    font-size: 16px;
+    font-weight:
+        850;
 
-    font-weight: 850;
+    letter-spacing:
+        -.2px;
 }
-
 
 .route {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    margin-top: 7px;
-
-    color: #718999;
-
-    font-size: 11px;
-
-    font-weight: 600;
-}
-
-
-.route-line {
-
-    display: inline-block;
-
-    width: 25px;
-
-    height: 1px;
-
-    background:
-        #b7cbd8;
-}
-
-
-.availability {
-
-    flex-shrink: 0;
-
-    padding:
-        6px
-        9px;
-
-    border-radius: 999px;
-
-    background:
-        #eaf9f2;
+    margin-top:
+        5px;
 
     color:
-        #269261;
+        #688198;
 
-    font-size: 9px;
+    font-size:
+        12px;
 
-    font-weight: 800;
+    font-weight:
+        600;
 
-    letter-spacing: .7px;
+    line-height:
+        1.5;
+}
+
+.availability {
+    flex-shrink:
+        0;
+
+    padding:
+        6px 9px;
+
+    border-radius:
+        999px;
+
+    background:
+        #effaf7;
+
+    color:
+        #159b78;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .6px;
 }
 
 
@@ -1331,90 +1108,117 @@ body {
 ========================= */
 
 .fare-grid {
-
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(
-                150px,
-                1fr
-            )
-        );
+        repeat(3, 1fr);
 
-    gap: 9px;
+    gap:
+        9px;
 }
 
-
 .fare-item {
+    min-width:
+        0;
 
     padding:
-        13px
-        14px;
+        12px;
 
     border:
         1px solid
-        #e4edf2;
+        #e2edf3;
 
-    border-radius: 13px;
+    border-radius:
+        13px;
 
     background:
         #f8fbfd;
 }
 
-
 .fare-class {
+    margin-bottom:
+        6px;
 
-    margin-bottom: 5px;
+    color:
+        #8a9bac;
 
-    color: #8297a5;
+    font-size:
+        9px;
 
-    font-size: 9px;
+    font-weight:
+        800;
 
-    font-weight: 800;
+    letter-spacing:
+        .8px;
 
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 }
-
 
 .fare-price {
+    color:
+        #173b5a;
 
-    color: #17638a;
+    font-size:
+        14px;
 
-    font-size: 15px;
+    font-weight:
+        850;
 
-    font-weight: 850;
+    white-space:
+        nowrap;
 }
 
+.fare-item.unavailable {
+    background:
+        #fafcfd;
 
-.fare-time {
+    border-color:
+        #edf2f5;
+}
 
-    margin-top: 5px;
+.fare-item.unavailable .fare-price {
+    color:
+        #b7c2ca;
 
-    color: #8196a5;
-
-    font-size: 10px;
-
-    font-weight: 600;
+    font-weight:
+        650;
 }
 
 
 /* =========================
-   RESULT COUNT
+   ERROR
 ========================= */
 
-.result-count {
+.error-box {
+    display:
+        none;
 
-    margin-top: 20px;
+    margin-bottom:
+        18px;
 
-    color: #91a2ad;
+    padding:
+        13px 15px;
 
-    font-size: 10px;
+    border:
+        1px solid
+        #ffd9d9;
 
-    text-align: center;
+    border-radius:
+        13px;
+
+    background:
+        #fff6f6;
+
+    color:
+        #b34b4b;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.6;
 }
 
 
@@ -1422,70 +1226,30 @@ body {
    FOOTER
 ========================= */
 
-.footer {
-
-    width: min(
-        920px,
-        calc(100% - 28px)
-    );
-
-    margin:
-        70px
-        auto
-        25px;
-
-    padding-top: 18px;
-
-    border-top:
-        1px solid
-        #dfe9ef;
-
-    color: #91a1ac;
-
-    font-size: 10px;
-
-    text-align: center;
-
-    letter-spacing: .5px;
-}
-
-
-/* =========================
-   ERROR MESSAGE
-========================= */
-
-.error-box {
-
-    display: none;
-
-    margin-bottom: 15px;
-
+footer {
     padding:
-        13px
-        15px;
+        24px 20px
+        35px;
 
-    border:
-        1px solid
-        #f0d7d7;
-
-    border-radius: 13px;
-
-    background:
-        #fff7f7;
+    text-align:
+        center;
 
     color:
-        #b45f5f;
+        #9aacba;
 
-    font-size: 11px;
+    font-size:
+        10px;
 
-    line-height: 1.6;
+    letter-spacing:
+        .5px;
 }
 
+footer strong {
+    color:
+        #668096;
 
-.error-box.active {
-
-    display: block;
-
+    font-weight:
+        750;
 }
 
 
@@ -1494,28 +1258,29 @@ body {
 ========================= */
 
 ::-webkit-scrollbar {
+    width:
+        7px;
 
-    width: 7px;
+    height:
+        7px;
 }
-
 
 ::-webkit-scrollbar-track {
-
-    background: #edf3f7;
+    background:
+        #edf5f9;
 }
-
 
 ::-webkit-scrollbar-thumb {
+    border-radius:
+        99px;
 
-    border-radius: 10px;
-
-    background: #b7d1df;
+    background:
+        #b8d4e2;
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
-
-    background: #8fb8cd;
+    background:
+        #8fb9cd;
 }
 
 
@@ -1523,300 +1288,160 @@ body {
    MOBILE
 ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
 
     .hero {
-
-        min-height: 390px;
-
         padding:
-            32px
-            14px
-            120px;
+            23px 18px
+            68px;
     }
-
-
-    .brand-mini {
-
-        margin-bottom: 23px;
-
-        padding:
-            6px
-            11px;
-
-        font-size: 9px;
-
-        letter-spacing: 1.5px;
-    }
-
-
-    .eyebrow {
-
-        font-size: 8px;
-
-        letter-spacing: 3px;
-    }
-
 
     .hero h1 {
-
         font-size:
-            clamp(
-                42px,
-                16vw,
-                60px
-            );
+            47px;
 
-        letter-spacing: -2.5px;
+        letter-spacing:
+            -2.5px;
     }
-
 
     .hero-subtitle {
-
-        max-width: 330px;
-
-        margin-top: 14px;
-
-        font-size: 11px;
-
-        line-height: 1.65;
+        font-size:
+            13px;
     }
-
-
-    .digital-rail {
-
-        bottom: 40px;
-
-        height: 70px;
-    }
-
 
     .search-wrap {
-
-        width:
-            calc(100% - 20px);
-
-        margin-top: -82px;
+        padding:
+            0 12px;
     }
-
 
     .search-card {
+        padding:
+            16px;
 
-        padding: 17px;
-
-        border-radius: 20px;
+        border-radius:
+            19px;
     }
-
 
     .search-grid {
-
         grid-template-columns:
             1fr;
-
-        gap: 10px;
     }
-
-
-    .swap-area {
-
-        position: absolute;
-
-        z-index: 5;
-
-        right: 25px;
-
-        top: 76px;
-
-        padding: 0;
-    }
-
 
     .swap-btn {
+        width:
+            100%;
 
-        width: 37px;
-        height: 37px;
-
-        font-size: 17px;
+        height:
+            40px;
     }
-
-
-    .field-box {
-
-        height: 51px;
-
-        padding-right: 35px;
-    }
-
 
     .search-btn {
-
-        height: 51px;
-
-        margin-top: 3px;
-    }
-
-
-    .content {
-
         width:
-            calc(100% - 20px);
-
-        margin-top: 32px;
+            100%;
     }
-
 
     .section-head {
+        align-items:
+            flex-start;
 
-        align-items: flex-end;
+        flex-direction:
+            column;
 
-        margin-bottom: 14px;
-    }
-
-
-    .section-title {
-
-        font-size: 16px;
-    }
-
-
-    .section-desc {
-
-        font-size: 10px;
-    }
-
-
-    .status {
-
-        font-size: 9px;
-    }
-
-
-    .train-card {
-
-        padding: 16px;
-
-        border-radius: 17px;
-    }
-
-
-    .train-header {
-
-        gap: 8px;
-    }
-
-
-    .train-name {
-
-        font-size: 14px;
-    }
-
-
-    .route {
-
-        font-size: 10px;
-
-        flex-wrap: wrap;
-    }
-
-
-    .availability {
-
-        padding:
-            5px
-            7px;
-
-        font-size: 8px;
-    }
-
-
-    .fare-grid {
-
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
-    }
-
-
-    .fare-item {
-
-        padding:
-            11px
+        gap:
             10px;
     }
 
+    .content {
+        padding:
+            30px 12px
+            55px;
+    }
+
+    .train-card {
+        padding:
+            16px;
+    }
+
+    .train-header {
+        flex-direction:
+            column;
+
+        gap:
+            9px;
+    }
+
+    .availability {
+        align-self:
+            flex-start;
+    }
+
+    .fare-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .fare-item {
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            space-between;
+
+        gap:
+            10px;
+    }
+
+    .fare-class {
+        margin-bottom:
+            0;
+    }
 
     .fare-price {
-
-        font-size: 13px;
+        font-size:
+            13px;
     }
-
-
-    .fare-time {
-
-        font-size: 9px;
-    }
-
-
-    .footer {
-
-        width:
-            calc(100% - 20px);
-
-        margin-top: 55px;
-    }
-
 }
 
 
 /* =========================
-   VERY SMALL SCREEN
+   SMALL PHONE
 ========================= */
 
-@media (max-width: 380px) {
+@media (max-width: 390px) {
 
     .hero h1 {
-
-        font-size: 40px;
+        font-size:
+            41px;
     }
 
-
-    .search-card {
-
-        padding: 14px;
+    .hero {
+        padding-bottom:
+            62px;
     }
 
-
-    .fare-grid {
-
-        grid-template-columns:
-            1fr;
+    .section-title {
+        font-size:
+            19px;
     }
 
-
-    .train-header {
-
-        flex-direction: column;
+    .train-name {
+        font-size:
+            15px;
     }
 
-
-    .availability {
-
-        align-self: flex-start;
+    .fare-item {
+        padding:
+            11px;
     }
+}
 
-    }
-    </style>
-
+</style>
 </head>
 
-
 <body>
-
 
 <!-- =========================
      HERO
@@ -1824,52 +1449,29 @@ body {
 
 <section class="hero">
 
-
     <div class="brand-mini">
-
-        <span class="dot"></span>
-
         KAI • 121
-
     </div>
-
 
     <div class="eyebrow">
-
         SPECIAL FARE
-
     </div>
-
 
     <h1>
-
-        TARSUS
-        <span>Finder</span>
-
+        TARSUS <span>Finder</span>
     </h1>
 
-
     <p class="hero-subtitle">
-
-        Temukan informasi tarif khusus
-        berdasarkan relasi perjalanan.
-
+        Cari tarif khusus perjalanan kereta berdasarkan
+        stasiun asal, tujuan, dan kelas layanan.
     </p>
 
-
-    <!-- DIGITAL RAIL -->
-
     <div class="digital-rail">
-
         <div class="rail-sleepers"></div>
-
         <div class="rail-light"></div>
-
     </div>
 
-
 </section>
-
 
 
 <!-- =========================
@@ -1878,135 +1480,95 @@ body {
 
 <div class="search-wrap">
 
-
     <div class="search-card">
 
-
         <div class="search-grid">
-
 
             <!-- ASAL -->
 
             <div class="field">
 
-                <label class="field-label">
-
+                <label
+                    class="field-label"
+                    for="asal">
                     Stasiun Asal
-
                 </label>
 
-
                 <div class="field-box">
-
-                    <div class="field-icon">
-
-                        ●
-
-                    </div>
-
 
                     <input
                         type="text"
                         id="asal"
-                        placeholder="Ketik stasiun asal..."
                         autocomplete="off"
-                    >
-
+                        placeholder="Contoh: Bandung">
 
                 </div>
 
-
                 <div
-                    class="suggestions"
-                    id="asalSuggestions">
+                    id="suggestionsAsal"
+                    class="suggestions">
                 </div>
 
             </div>
-
 
 
             <!-- SWAP -->
 
-            <div class="swap-area">
+            <button
+                type="button"
+                id="swapBtn"
+                class="swap-btn"
+                aria-label="Tukar stasiun">
 
-                <button
-                    type="button"
-                    class="swap-btn"
-                    id="swapBtn"
-                    title="Tukar stasiun"
-                >
+                ⇄
 
-                    ⇄
-
-                </button>
-
-            </div>
-
+            </button>
 
 
             <!-- TUJUAN -->
 
             <div class="field">
 
-                <label class="field-label">
-
+                <label
+                    class="field-label"
+                    for="tujuan">
                     Stasiun Tujuan
-
                 </label>
 
-
                 <div class="field-box">
-
-                    <div class="field-icon">
-
-                        ●
-
-                    </div>
-
 
                     <input
                         type="text"
                         id="tujuan"
-                        placeholder="Ketik stasiun tujuan..."
                         autocomplete="off"
-                    >
-
+                        placeholder="Contoh: Tasikmalaya">
 
                 </div>
 
-
                 <div
-                    class="suggestions"
-                    id="tujuanSuggestions">
+                    id="suggestionsTujuan"
+                    class="suggestions">
                 </div>
 
             </div>
-
 
 
             <!-- SEARCH BUTTON -->
 
             <button
                 type="button"
-                class="search-btn"
                 id="searchBtn"
-            >
+                class="search-btn">
 
-                <span>
-                    CARI TARIF
-                </span>
+                Cari Tarif
 
             </button>
 
-
         </div>
-
 
     </div>
 
-
 </div>
-
 
 
 <!-- =========================
@@ -2015,252 +1577,200 @@ body {
 
 <main class="content">
 
-
     <div class="section-head">
-
 
         <div>
 
             <div class="section-title">
-
-                Hasil Tarif Khusus
-
+                Hasil Pencarian
             </div>
-
 
             <div class="section-desc">
-
-                Pilih relasi untuk melihat tarif yang tersedia.
-
+                Menampilkan seluruh kereta yang memiliki
+                tarif khusus pada relasi yang dicari.
             </div>
 
         </div>
 
-
         <div
-            class="status"
             id="status"
-        >
+            class="status">
 
-            Memuat database...
+            Memuat data
 
         </div>
 
-
     </div>
-
 
 
     <!-- ERROR -->
 
     <div
-        class="error-box"
         id="errorBox"
-    ></div>
+        class="error-box">
+    </div>
 
+
+    <!-- RESULT COUNT -->
+
+    <div
+        id="resultCount"
+        class="result-count">
+    </div>
 
 
     <!-- LOADING -->
 
     <div
-        class="loading"
         id="loading"
-    >
+        class="loading">
 
-        <span>
-            Mencari
+        <span class="loading-text">
+            Memuat database
         </span>
-
 
         <span class="loading-dots">
 
-            <i></i>
-            <i></i>
-            <i></i>
+            <span></span>
+            <span></span>
+            <span></span>
 
         </span>
 
     </div>
-
 
 
     <!-- EMPTY -->
 
     <div
-        class="empty"
         id="empty"
-    >
+        class="empty">
 
-        Masukkan stasiun asal dan tujuan,
-        lalu tekan <b>CARI TARIF</b>.
+        <div class="empty-icon">
+            ⌕
+        </div>
+
+        <div class="empty-title">
+            Belum ada hasil
+        </div>
+
+        <div class="empty-text">
+            Masukkan stasiun asal dan tujuan,
+            lalu tekan tombol Cari Tarif.
+        </div>
 
     </div>
-
 
 
     <!-- RESULTS -->
 
     <div
-        class="results"
         id="results"
-    ></div>
-
-
-    <div
-        class="result-count"
-        id="resultCount"
-    ></div>
-
+        class="results">
+    </div>
 
 </main>
-
 
 
 <!-- =========================
      FOOTER
 ========================= -->
 
-<footer class="footer">
+<footer>
 
-    Created by Prima CC121
+    Created by
+    <strong>Prima CC121</strong>
 
 </footer>
 
 
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
 <script>
+      
+// ========================================
+// TARSUS FINDER
+// DATABASE & CORE SYSTEM
+// ========================================
 
 
-/* =========================
-   GOOGLE SHEETS
-========================= */
-
+// ========================================
+// GOOGLE SHEET DATABASE
+// ========================================
 
 const CSV_URL =
     "https://docs.google.com/spreadsheets/d/1a4Ln_wASazV35F2M3MKZcJHEmiAV8G-0WmkMmU4Csls/gviz/tq?tqx=out:csv&sheet=Tarif%20Khusus";
 
 
-/* =========================
-   ELEMENTS
-========================= */
-
+// ========================================
+// ELEMENT
+// ========================================
 
 const asalInput =
     document.getElementById("asal");
 
-
 const tujuanInput =
     document.getElementById("tujuan");
 
+const suggestionsAsal =
+    document.getElementById("suggestionsAsal");
 
-const asalSuggestions =
-    document.getElementById(
-        "asalSuggestions"
-    );
-
-
-const tujuanSuggestions =
-    document.getElementById(
-        "tujuanSuggestions"
-    );
-
+const suggestionsTujuan =
+    document.getElementById("suggestionsTujuan");
 
 const swapBtn =
     document.getElementById("swapBtn");
 
-
 const searchBtn =
     document.getElementById("searchBtn");
-
 
 const results =
     document.getElementById("results");
 
+const resultCount =
+    document.getElementById("resultCount");
 
 const loading =
     document.getElementById("loading");
 
-
 const empty =
     document.getElementById("empty");
 
+const errorBox =
+    document.getElementById("errorBox");
 
 const status =
     document.getElementById("status");
 
 
-const errorBox =
-    document.getElementById("errorBox");
-
-
-const resultCount =
-    document.getElementById("resultCount");
-
-
-/* =========================
-   DATABASE
-========================= */
-
+// ========================================
+// DATABASE
+// ========================================
 
 let database = [];
 
 let stations = [];
 
 
-/* =========================
-   NORMALIZE TEXT
-========================= */
+// ========================================
+// NORMALIZE TEXT
+// ========================================
 
-
-function normalize(text) {
+function normalizeText(text) {
 
     return String(text || "")
         .trim()
-        .toLowerCase()
-        .replace(/\s+/g, " ");
+        .replace(/\s+/g, " ")
+        .toLowerCase();
 
 }
 
 
-/* =========================
-   FORMAT PRICE
-========================= */
-
-
-function formatRupiah(value) {
-
-    const number =
-        Number(
-            String(value)
-                .replace(/[^\d]/g, "")
-        );
-
-
-    if (!number) {
-
-        return "-";
-
-    }
-
-
-    return "Rp " +
-        number.toLocaleString("id-ID");
-
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
+// ========================================
+// ESCAPE HTML
+// ========================================
 
 function escapeHTML(value) {
 
-    return String(value || "")
+    return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -2270,33 +1780,66 @@ function escapeHTML(value) {
 }
 
 
-/* =========================
-   CSV PARSER
-========================= */
+// ========================================
+// FORMAT RUPIAH
+// ========================================
+
+function formatRupiah(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        String(value).trim() === "" ||
+        String(value).trim() === "-"
+    ) {
+        return "-";
+    }
+
+    const number =
+        Number(
+            String(value)
+                .replace(/[^\d]/g, "")
+        );
+
+    if (!Number.isFinite(number)) {
+        return "-";
+    }
+
+    return "Rp" +
+        number.toLocaleString("id-ID");
+
+}
 
 
-function parseCSV(text) {
+// ========================================
+// PARSE CSV
+// ========================================
+
+function parseCSV(csv) {
 
     const rows = [];
 
     let row = [];
 
-    let cell = "";
+    let value = "";
 
     let insideQuotes = false;
 
 
     for (
         let i = 0;
-        i < text.length;
+        i < csv.length;
         i++
     ) {
 
-        const char = text[i];
+        const char =
+            csv[i];
 
         const next =
-            text[i + 1];
+            csv[i + 1];
 
+
+        // Quote
 
         if (
             char === '"' &&
@@ -2304,12 +1847,11 @@ function parseCSV(text) {
             next === '"'
         ) {
 
-            cell += '"';
+            value += '"';
 
             i++;
 
             continue;
-
         }
 
 
@@ -2319,23 +1861,25 @@ function parseCSV(text) {
                 !insideQuotes;
 
             continue;
-
         }
 
+
+        // Comma
 
         if (
             char === "," &&
             !insideQuotes
         ) {
 
-            row.push(cell);
+            row.push(value);
 
-            cell = "";
+            value = "";
 
             continue;
-
         }
 
+
+        // New line
 
         if (
             (char === "\n" ||
@@ -2347,91 +1891,85 @@ function parseCSV(text) {
                 char === "\r" &&
                 next === "\n"
             ) {
-
                 i++;
-
             }
 
+            row.push(value);
 
-            row.push(cell);
+            value = "";
 
-            rows.push(row);
+            if (
+                row.some(
+                    cell =>
+                        String(cell).trim() !== ""
+                )
+            ) {
+                rows.push(row);
+            }
 
             row = [];
 
-            cell = "";
-
             continue;
-
         }
 
 
-        cell += char;
-
+        value += char;
     }
 
 
+    // Last row
+
     if (
-        cell !== "" ||
+        value !== "" ||
         row.length > 0
     ) {
 
-        row.push(cell);
+        row.push(value);
 
-        rows.push(row);
-
+        if (
+            row.some(
+                cell =>
+                    String(cell).trim() !== ""
+            )
+        ) {
+            rows.push(row);
+        }
     }
 
 
     return rows;
-
 }
 
 
-/* =========================
-   LOAD DATABASE
-========================= */
-
+// ========================================
+// LOAD DATABASE
+// ========================================
 
 async function loadDatabase() {
 
     try {
 
-        status.textContent =
-            "Menghubungkan database...";
+        setLoading(true);
+
+        hideError();
 
 
         const response =
             await fetch(
-                CSV_URL +
-                "&t=" +
-                Date.now()
+                CSV_URL + "&_=" + Date.now()
             );
 
 
         if (!response.ok) {
 
             throw new Error(
-                "Google Sheets tidak dapat diakses."
+                "Database Google Sheet tidak dapat diakses."
             );
-
         }
 
 
         const csv =
             await response.text();
-
-
-        if (
-            !csv ||
-            csv.trim().length < 10
-        ) {
-
-            throw new Error(
-                "Data Google Sheets kosong."
-            );
-
-        }
 
 
         const rows =
@@ -2441,161 +1979,241 @@ async function loadDatabase() {
         if (!rows.length) {
 
             throw new Error(
-                "Database tidak memiliki data."
+                "Database kosong."
             );
-
         }
 
 
-        database = [];
+        // --------------------------------
+        // HEADER
+        // --------------------------------
+
+        const header =
+            rows[0].map(
+                item =>
+                    normalizeText(item)
+            );
 
 
-        /*
-         FORMAT DATABASE:
-
-         0 = kereta
-         1 = stasiunAsal
-         2 = stasiunTujuan
-         3 = kelas
-         4 = tarif
-         5 = keberangkatan
-        */
+        const expectedHeaders = [
+            "kereta",
+            "stasiunasal",
+            "stasiuntujuan",
+            "eksekutif",
+            "bisnis",
+            "ekonomi"
+        ];
 
 
-        rows.forEach(
-            (row, index) => {
-
-                if (
-                    index === 0 &&
-                    normalize(row[0])
-                        === "kereta"
-                ) {
-
-                    return;
-
-                }
+        const validHeader =
+            expectedHeaders.every(
+                item =>
+                    header.includes(item)
+            );
 
 
-                if (
-                    !row[0] ||
-                    !row[1] ||
-                    !row[2]
-                ) {
-
-                    return;
-
-                }
-
-
-                database.push({
-
-                    kereta:
-                        String(
-                            row[0] || ""
-                        ).trim(),
-
-                    asal:
-                        String(
-                            row[1] || ""
-                        ).trim(),
-
-                    tujuan:
-                        String(
-                            row[2] || ""
-                        ).trim(),
-
-                    kelas:
-                        String(
-                            row[3] || ""
-                        ).trim(),
-
-                    tarif:
-                        String(
-                            row[4] || ""
-                        ).trim(),
-
-                    keberangkatan:
-                        String(
-                            row[5] || ""
-                        ).trim()
-
-                });
-
-            }
-        );
-
-
-        stations = [
-            ...new Set(
-
-                database
-                    .flatMap(item => [
-                        item.asal,
-                        item.tujuan
-                    ])
-
-            )
-        ]
-        .filter(Boolean)
-        .sort(
-            (a, b) =>
-                a.localeCompare(
-                    b,
-                    "id"
-                )
-        );
-
-
-        if (!database.length) {
+        if (!validHeader) {
 
             throw new Error(
-                "Database terbaca, tetapi tidak ada baris tarif yang valid."
+                "Format Google Sheet tidak sesuai. Pastikan kolomnya: kereta, stasiunAsal, stasiunTujuan, eksekutif, bisnis, ekonomi."
             );
-
         }
 
 
+        // --------------------------------
+        // COLUMN INDEX
+        // --------------------------------
+
+        const keretaIndex =
+            header.indexOf("kereta");
+
+        const asalIndex =
+            header.indexOf("stasiunasal");
+
+        const tujuanIndex =
+            header.indexOf("stasiuntujuan");
+
+        const eksekutifIndex =
+            header.indexOf("eksekutif");
+
+        const bisnisIndex =
+            header.indexOf("bisnis");
+
+        const ekonomiIndex =
+            header.indexOf("ekonomi");
+
+
+        // --------------------------------
+        // BUILD DATABASE
+        // --------------------------------
+
+        database =
+            rows
+                .slice(1)
+                .map(row => {
+
+                    return {
+
+                        kereta:
+                            String(
+                                row[keretaIndex] || ""
+                            ).trim(),
+
+                        asal:
+                            String(
+                                row[asalIndex] || ""
+                            ).trim(),
+
+                        tujuan:
+                            String(
+                                row[tujuanIndex] || ""
+                            ).trim(),
+
+                        eksekutif:
+                            String(
+                                row[eksekutifIndex] || ""
+                            ).trim(),
+
+                        bisnis:
+                            String(
+                                row[bisnisIndex] || ""
+                            ).trim(),
+
+                        ekonomi:
+                            String(
+                                row[ekonomiIndex] || ""
+                            ).trim()
+
+                    };
+
+                })
+                .filter(item =>
+
+                    item.kereta &&
+                    item.asal &&
+                    item.tujuan
+
+                );
+
+
+        // --------------------------------
+        // REMOVE DUPLICATES
+        // --------------------------------
+
+        const unique =
+            new Map();
+
+
+        database.forEach(item => {
+
+            const key =
+                [
+                    normalizeText(item.kereta),
+                    normalizeText(item.asal),
+                    normalizeText(item.tujuan)
+                ].join("|");
+
+
+            if (!unique.has(key)) {
+
+                unique.set(
+                    key,
+                    item
+                );
+
+            }
+
+        });
+
+
+        database =
+            Array.from(
+                unique.values()
+            );
+
+
+        // --------------------------------
+        // BUILD STATION LIST
+        // --------------------------------
+
+        const stationMap =
+            new Map();
+
+
+        database.forEach(item => {
+
+            const asalKey =
+                normalizeText(item.asal);
+
+            const tujuanKey =
+                normalizeText(item.tujuan);
+
+
+            if (!stationMap.has(asalKey)) {
+
+                stationMap.set(
+                    asalKey,
+                    item.asal
+                );
+
+            }
+
+
+            if (!stationMap.has(tujuanKey)) {
+
+                stationMap.set(
+                    tujuanKey,
+                    item.tujuan
+                );
+
+            }
+
+        });
+
+
+        stations =
+            Array.from(
+                stationMap.values()
+            ).sort(
+                (a, b) =>
+                    a.localeCompare(
+                        b,
+                        "id"
+                    )
+            );
+
+
+        // --------------------------------
+        // DATABASE READY
+        // --------------------------------
+
         status.textContent =
-            database.length +
-            " data tarif";
+            "Database aktif";
 
 
-        empty.classList.add(
-            "active"
-        );
-
-
-        console.log(
-            "Database berhasil dimuat:",
-            database
-        );
+        setLoading(false);
 
 
     } catch (error) {
 
-        console.error(
-            "Database error:",
-            error
-        );
+        console.error(error);
+
+
+        database = [];
+
+        stations = [];
+
+
+        setLoading(false);
 
 
         status.textContent =
-            "Database gagal dimuat";
+            "Database error";
 
 
-        errorBox.textContent =
-            "Database tidak dapat dimuat. " +
-            error.message +
-            " Pastikan Google Sheet dapat diakses publik.";
-
-
-        errorBox.classList.add(
-            "active"
-        );
-
-
-        empty.classList.remove(
-            "active"
+        showError(
+            error.message ||
+            "Terjadi kesalahan saat membaca database."
         );
 
     }
@@ -2603,15 +2221,61 @@ async function loadDatabase() {
 }
 
 
-/* =========================
-   START DATABASE
-========================= */
+// ========================================
+// LOADING CONTROL
+// ========================================
+
+function setLoading(active) {
+
+    if (active) {
+
+        loading.style.display =
+            "block";
+
+        empty.style.display =
+            "none";
+
+        results.innerHTML =
+            "";
+
+    } else {
+
+        loading.style.display =
+            "none";
+    }
+
+}
 
 
-loadDatabase();
-    /* =========================
-   AUTOCOMPLETE
-========================= */
+// ========================================
+// ERROR
+// ========================================
+
+function showError(message) {
+
+    errorBox.textContent =
+        message;
+
+    errorBox.style.display =
+        "block";
+
+}
+
+
+function hideError() {
+
+    errorBox.textContent =
+        "";
+
+    errorBox.style.display =
+        "none";
+
+}
+
+
+// ========================================
+// AUTOCOMPLETE
+// ========================================
 
 function showSuggestions(
     input,
@@ -2619,10 +2283,9 @@ function showSuggestions(
 ) {
 
     const keyword =
-        normalize(input.value);
-
-
-    container.innerHTML = "";
+        normalizeText(
+            input.value
+        );
 
 
     if (!keyword) {
@@ -2630,72 +2293,79 @@ function showSuggestions(
         container.style.display =
             "none";
 
-        return;
+        container.innerHTML =
+            "";
 
+        return;
     }
 
 
-    const matches =
+    const filtered =
         stations
             .filter(station =>
-                normalize(station)
+                normalizeText(station)
                     .includes(keyword)
             )
             .slice(0, 8);
 
 
-    if (!matches.length) {
+    if (!filtered.length) {
 
         container.style.display =
             "none";
 
-        return;
+        container.innerHTML =
+            "";
 
+        return;
     }
 
 
-    matches.forEach(station => {
+    container.innerHTML =
+        filtered
+            .map(station => `
+                <div
+                    class="suggestion-item"
+                    data-value="${escapeHTML(station)}">
 
-        const item =
-            document.createElement("div");
+                    ${escapeHTML(station)}
 
-
-        item.className =
-            "suggestion-item";
-
-
-        item.textContent =
-            station;
-
-
-        item.addEventListener(
-            "click",
-            () => {
-
-                input.value =
-                    station;
-
-                container.style.display =
-                    "none";
-
-            }
-        );
-
-
-        container.appendChild(item);
-
-    });
+                </div>
+            `)
+            .join("");
 
 
     container.style.display =
         "block";
 
+
+    container
+        .querySelectorAll(
+            ".suggestion-item"
+        )
+        .forEach(item => {
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    input.value =
+                        item.dataset.value;
+
+                    container.style.display =
+                        "none";
+
+                }
+            );
+
+        });
+
 }
 
 
-/* =========================
-   INPUT EVENTS
-========================= */
+// ========================================
+// INPUT EVENTS
+// ========================================
 
 asalInput.addEventListener(
     "input",
@@ -2703,7 +2373,7 @@ asalInput.addEventListener(
 
         showSuggestions(
             asalInput,
-            asalSuggestions
+            suggestionsAsal
         );
 
     }
@@ -2716,69 +2386,29 @@ tujuanInput.addEventListener(
 
         showSuggestions(
             tujuanInput,
-            tujuanSuggestions
+            suggestionsTujuan
         );
 
     }
 );
 
 
-/* =========================
-   FOCUS EVENTS
-========================= */
-
-asalInput.addEventListener(
-    "focus",
-    () => {
-
-        if (asalInput.value) {
-
-            showSuggestions(
-                asalInput,
-                asalSuggestions
-            );
-
-        }
-
-    }
-);
-
-
-tujuanInput.addEventListener(
-    "focus",
-    () => {
-
-        if (tujuanInput.value) {
-
-            showSuggestions(
-                tujuanInput,
-                tujuanSuggestions
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================
-   CLOSE SUGGESTIONS
-========================= */
+// ========================================
+// CLOSE SUGGESTIONS
+// ========================================
 
 document.addEventListener(
     "click",
     event => {
 
         if (
-            !event.target.closest(
-                ".field"
-            )
+            !event.target.closest(".field")
         ) {
 
-            asalSuggestions.style.display =
+            suggestionsAsal.style.display =
                 "none";
 
-            tujuanSuggestions.style.display =
+            suggestionsTujuan.style.display =
                 "none";
 
         }
@@ -2787,237 +2417,149 @@ document.addEventListener(
 );
 
 
-/* =========================
-   SWAP STATION
-========================= */
+// ========================================
+// SWAP STATION
+// ========================================
 
 swapBtn.addEventListener(
     "click",
     () => {
 
-        const temporary =
+        const temp =
             asalInput.value;
-
 
         asalInput.value =
             tujuanInput.value;
 
-
         tujuanInput.value =
-            temporary;
+            temp;
 
 
-        asalSuggestions.style.display =
-            "none";
+        if (
+            asalInput.value &&
+            tujuanInput.value
+        ) {
 
+            searchTarif();
 
-        tujuanSuggestions.style.display =
-            "none";
+        }
 
     }
 );
 
 
-/* =========================
-   FIND DATA
-========================= */
+// ========================================
+// SEARCH DATABASE
+// ========================================
 
 function findTarif(
     asal,
     tujuan
 ) {
 
-    const origin =
-        normalize(asal);
+    const asalKey =
+        normalizeText(asal);
+
+    const tujuanKey =
+        normalizeText(tujuan);
 
 
-    const destination =
-        normalize(tujuan);
+    return database.filter(item =>
 
+        normalizeText(item.asal) ===
+            asalKey &&
 
-    return database.filter(
-        item =>
+        normalizeText(item.tujuan) ===
+            tujuanKey
 
-            normalize(item.asal)
-                === origin &&
-
-            normalize(item.tujuan)
-                === destination
     );
 
-}
+                  }
+      
+// ========================================
+// RENDER FARE ITEM
+// ========================================
 
-
-/* =========================
-   GROUP BY TRAIN
-========================= */
-
-function groupByTrain(
-    data
+function renderFareItem(
+    label,
+    value
 ) {
 
-    const grouped = {};
+    const unavailable =
+        !value ||
+        String(value).trim() === "" ||
+        String(value).trim() === "-";
 
 
-    data.forEach(item => {
+    return `
+        <div class="fare-item ${unavailable ? "unavailable" : ""}">
 
-        const train =
-            item.kereta;
+            <div class="fare-class">
+                ${label}
+            </div>
 
+            <div class="fare-price">
+                ${
+                    unavailable
+                        ? "-"
+                        : formatRupiah(value)
+                }
+            </div>
 
-        if (!grouped[train]) {
-
-            grouped[train] = [];
-
-        }
-
-
-        grouped[train].push(item);
-
-    });
-
-
-    return grouped;
-
-}
-
-
-/* =========================
-   CLASS ORDER
-========================= */
-
-function classPriority(
-    className
-) {
-
-    const value =
-        normalize(className);
-
-
-    if (
-        value.includes(
-            "executive"
-        ) ||
-        value.includes(
-            "eksekutif"
-        )
-    ) {
-
-        return 1;
-
-    }
-
-
-    if (
-        value.includes(
-            "business"
-        ) ||
-        value.includes(
-            "bisnis"
-        )
-    ) {
-
-        return 2;
-
-    }
-
-
-    if (
-        value.includes(
-            "economy"
-        ) ||
-        value.includes(
-            "ekonomi"
-        )
-    ) {
-
-        return 3;
-
-    }
-
-
-    return 4;
+        </div>
+    `;
 
 }
 
 
-/* =========================
-   RENDER RESULT
-========================= */
+// ========================================
+// RENDER RESULTS
+// ========================================
 
-function renderResults(
-    data,
-    asal,
-    tujuan
-) {
+function renderResults(data) {
 
-    results.innerHTML = "";
+    results.innerHTML =
+        "";
 
-    resultCount.textContent = "";
+    resultCount.style.display =
+        "none";
 
+
+    // --------------------------------
+    // NO RESULT
+    // --------------------------------
 
     if (!data.length) {
 
-        empty.innerHTML = `
-
-            <strong>
-                Tarif tidak ditemukan
-            </strong>
-
-            <br><br>
-
-            Belum ada data tarif khusus
-            untuk relasi
-
-            <b>
-                ${escapeHTML(asal)}
-            </b>
-
-            →
-
-            <b>
-                ${escapeHTML(tujuan)}
-            </b>.
-
-        `;
-
-
-        empty.classList.add(
-            "active"
-        );
-
+        empty.style.display =
+            "block";
 
         return;
 
     }
 
 
-    empty.classList.remove(
-        "active"
-    );
+    empty.style.display =
+        "none";
 
 
-    const grouped =
-        groupByTrain(data);
+    // --------------------------------
+    // RESULT COUNT
+    // --------------------------------
+
+    resultCount.innerHTML =
+        `Menampilkan <strong>${data.length}</strong> kereta dengan tarif khusus`;
+
+    resultCount.style.display =
+        "block";
 
 
-    const trainNames =
-        Object.keys(grouped);
+    // --------------------------------
+    // CREATE CARDS
+    // --------------------------------
 
-
-    trainNames.forEach(
-        (trainName, index) => {
-
-            const items =
-                grouped[trainName];
-
-
-            items.sort(
-                (a, b) =>
-                    classPriority(a.kelas) -
-                    classPriority(b.kelas)
-            );
-
+    data.forEach(
+        (item, index) => {
 
             const card =
                 document.createElement(
@@ -3030,62 +2572,7 @@ function renderResults(
 
 
             card.style.animationDelay =
-                (index * 80) + "ms";
-
-
-            const first =
-                items[0];
-
-
-            let fareHTML = "";
-
-
-            items.forEach(
-                item => {
-
-                    fareHTML += `
-
-                        <div class="fare-item">
-
-                            <div class="fare-class">
-
-                                ${escapeHTML(
-                                    item.kelas
-                                )}
-
-                            </div>
-
-                            <div class="fare-price">
-
-                                ${formatRupiah(
-                                    item.tarif
-                                )}
-
-                            </div>
-
-                            ${
-                                item.keberangkatan
-                                ?
-                                `
-                                <div class="fare-time">
-
-                                    Keberangkatan:
-                                    ${escapeHTML(
-                                        item.keberangkatan
-                                    )}
-
-                                </div>
-                                `
-                                :
-                                ""
-                            }
-
-                        </div>
-
-                    `;
-
-                }
-            );
+                `${index * 0.06}s`;
 
 
             card.innerHTML = `
@@ -3095,45 +2582,36 @@ function renderResults(
                     <div>
 
                         <div class="train-name">
-
                             ${escapeHTML(
-                                trainName
+                                item.kereta
                             )}
-
                         </div>
 
-
                         <div class="route">
+                            ${escapeHTML(
+                                item.asal
+                            )}
 
-                            <span>
-
-                                ${escapeHTML(
-                                    first.asal
-                                )}
-
+                            <span
+                                style="
+                                    margin:0 5px;
+                                    color:#18a9d2;
+                                    font-weight:800;
+                                "
+                            >
+                                →
                             </span>
 
-
-                            <span class="route-line"></span>
-
-
-                            <span>
-
-                                ${escapeHTML(
-                                    first.tujuan
-                                )}
-
-                            </span>
-
+                            ${escapeHTML(
+                                item.tujuan
+                            )}
                         </div>
 
                     </div>
 
 
                     <div class="availability">
-
-                        ● TERSEDIA
-
+                        TARIF KHUSUS
                     </div>
 
                 </div>
@@ -3141,7 +2619,20 @@ function renderResults(
 
                 <div class="fare-grid">
 
-                    ${fareHTML}
+                    ${renderFareItem(
+                        "Eksekutif",
+                        item.eksekutif
+                    )}
+
+                    ${renderFareItem(
+                        "Bisnis",
+                        item.bisnis
+                    )}
+
+                    ${renderFareItem(
+                        "Ekonomi",
+                        item.ekonomi
+                    )}
 
                 </div>
 
@@ -3155,62 +2646,49 @@ function renderResults(
         }
     );
 
-
-    resultCount.textContent =
-        trainNames.length +
-        " kereta • " +
-        data.length +
-        " tarif ditemukan";
-
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+// ========================================
+// SEARCH
+// ========================================
 
-function performSearch() {
+function searchTarif() {
+
+    hideError();
+
 
     const asal =
         asalInput.value.trim();
-
 
     const tujuan =
         tujuanInput.value.trim();
 
 
-    errorBox.classList.remove(
-        "active"
-    );
-
-
-    results.innerHTML = "";
-
-
-    resultCount.textContent = "";
-
+    // --------------------------------
+    // VALIDATION
+    // --------------------------------
 
     if (!asal || !tujuan) {
 
-        empty.innerHTML = `
+        empty.style.display =
+            "block";
 
-            Silakan isi
+        results.innerHTML =
+            "";
 
-            <b>Stasiun Asal</b>
+        resultCount.style.display =
+            "none";
 
-            dan
+        empty.querySelector(
+            ".empty-title"
+        ).textContent =
+            "Lengkapi stasiun";
 
-            <b>Stasiun Tujuan</b>
-
-            terlebih dahulu.
-
-        `;
-
-
-        empty.classList.add(
-            "active"
-        );
-
+        empty.querySelector(
+            ".empty-text"
+        ).textContent =
+            "Masukkan stasiun asal dan tujuan terlebih dahulu.";
 
         return;
 
@@ -3218,120 +2696,90 @@ function performSearch() {
 
 
     if (
-        normalize(asal) ===
-        normalize(tujuan)
+        normalizeText(asal) ===
+        normalizeText(tujuan)
     ) {
 
-        empty.innerHTML = `
+        empty.style.display =
+            "block";
 
-            Stasiun asal dan tujuan
-            tidak boleh sama.
+        results.innerHTML =
+            "";
 
-        `;
+        resultCount.style.display =
+            "none";
 
+        empty.querySelector(
+            ".empty-title"
+        ).textContent =
+            "Stasiun sama";
 
-        empty.classList.add(
-            "active"
-        );
-
+        empty.querySelector(
+            ".empty-text"
+        ).textContent =
+            "Stasiun asal dan tujuan harus berbeda.";
 
         return;
 
     }
 
 
-    loading.classList.add(
-        "active"
+    // --------------------------------
+    // SEARCH
+    // --------------------------------
+
+    const found =
+        findTarif(
+            asal,
+            tujuan
+        );
+
+
+    // --------------------------------
+    // SORT BY TRAIN NAME
+    // --------------------------------
+
+    found.sort(
+        (a, b) =>
+            a.kereta.localeCompare(
+                b.kereta,
+                "id"
+            )
     );
 
 
-    empty.classList.remove(
-        "active"
-    );
-
-
-    searchBtn.disabled =
-        true;
-
-
-    searchBtn.querySelector(
-        "span"
-    ).textContent =
-        "MENCARI...";
-
-
-    /*
-       Sedikit delay agar
-       animasi loading terasa
-       lebih smooth.
-    */
-
-    setTimeout(
-        () => {
-
-            const data =
-                findTarif(
-                    asal,
-                    tujuan
-                );
-
-
-            renderResults(
-                data,
-                asal,
-                tujuan
-            );
-
-
-            loading.classList.remove(
-                "active"
-            );
-
-
-            searchBtn.disabled =
-                false;
-
-
-            searchBtn.querySelector(
-                "span"
-            ).textContent =
-                "CARI TARIF";
-
-        },
-
-        350
-
+    renderResults(
+        found
     );
 
 }
 
 
-/* =========================
-   SEARCH BUTTON
-========================= */
+// ========================================
+// SEARCH BUTTON
+// ========================================
 
 searchBtn.addEventListener(
     "click",
-    performSearch
+    searchTarif
 );
 
 
-/* =========================
-   ENTER KEY
-========================= */
+// ========================================
+// ENTER KEY
+// ========================================
 
 asalInput.addEventListener(
     "keydown",
     event => {
 
         if (
-            event.key ===
-            "Enter"
+            event.key === "Enter"
         ) {
 
             event.preventDefault();
 
-            performSearch();
+            searchTarif();
 
         }
 
@@ -3344,13 +2792,12 @@ tujuanInput.addEventListener(
     event => {
 
         if (
-            event.key ===
-            "Enter"
+            event.key === "Enter"
         ) {
 
             event.preventDefault();
 
-            performSearch();
+            searchTarif();
 
         }
 
@@ -3358,21 +2805,18 @@ tujuanInput.addEventListener(
 );
 
 
-/* =========================
-   INITIAL STATE
-========================= */
+// ========================================
+// INITIAL LOAD
+// ========================================
 
-empty.classList.add(
-    "active"
-);
+loadDatabase();
 
 
-/* =========================
-   END
-========================= */
+// ========================================
+// END
+// ========================================
 
 </script>
-
 
 </body>
 
