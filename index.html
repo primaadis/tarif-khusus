@@ -452,6 +452,340 @@
 
 
         /* =====================================================
+           TRAIN ANIMATION
+           CSS ONLY — NO IMAGE / GIF / JAVASCRIPT
+        ===================================================== */
+
+        .train-track {
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: 7px;
+
+            height: 19px;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+
+        .train-track::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: 3px;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,166,65,.12) 10%,
+                    rgba(255,166,65,.38) 50%,
+                    rgba(255,166,65,.12) 90%,
+                    transparent
+                );
+        }
+
+
+        .train-track::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: 0;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.05),
+                    transparent
+                );
+        }
+
+
+        .mini-train {
+
+            position: absolute;
+
+            left: -130px;
+
+            bottom: 4px;
+
+            width: 105px;
+
+            height: 15px;
+
+            opacity: 0;
+
+            animation:
+                trainPass
+                17s
+                cubic-bezier(.45,.02,.55,.98)
+                infinite;
+        }
+
+
+        /* body */
+
+        .mini-train .train-body {
+
+            position: absolute;
+
+            left: 7px;
+            bottom: 4px;
+
+            width: 83px;
+            height: 9px;
+
+            border-radius:
+                3px 6px 3px 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff922c,
+                    #ffc45b,
+                    #ff9a30
+                );
+
+            box-shadow:
+                0 0 10px
+                rgba(255,154,47,.20);
+        }
+
+
+        /* cabin */
+
+        .mini-train .train-cabin {
+
+            position: absolute;
+
+            left: 12px;
+            bottom: 13px;
+
+            width: 29px;
+            height: 9px;
+
+            border-radius:
+                4px 4px 0 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffb23f,
+                    #ffd477
+                );
+        }
+
+
+        /* windows */
+
+        .mini-train .train-window {
+
+            position: absolute;
+
+            left: 17px;
+            bottom: 15px;
+
+            width: 7px;
+            height: 5px;
+
+            border-radius: 1px;
+
+            background:
+                #14263c;
+
+            box-shadow:
+                11px 0 0 #14263c;
+        }
+
+
+        /* front */
+
+        .mini-train .train-front {
+
+            position: absolute;
+
+            right: 0;
+
+            bottom: 5px;
+
+            width: 17px;
+            height: 8px;
+
+            border-radius:
+                0 6px 4px 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffad3c,
+                    #ffd16c
+                );
+        }
+
+
+        /* head lamp */
+
+        .mini-train .train-light {
+
+            position: absolute;
+
+            right: -1px;
+
+            bottom: 8px;
+
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+
+            background:
+                #fff3bf;
+
+            box-shadow:
+                0 0 6px
+                rgba(255,224,143,.85);
+        }
+
+
+        /* wheels */
+
+        .mini-train .wheel {
+
+            position: absolute;
+
+            bottom: 1px;
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background:
+                #17273a;
+
+            border:
+                1px solid
+                rgba(255,190,83,.45);
+        }
+
+
+        .mini-train .wheel-one {
+            left: 17px;
+        }
+
+
+        .mini-train .wheel-two {
+            left: 66px;
+        }
+
+
+        /* tiny rail reflection */
+
+        .mini-train .train-glow {
+
+            position: absolute;
+
+            left: 8px;
+
+            bottom: 0;
+
+            width: 82px;
+
+            height: 2px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,167,62,.35);
+
+            filter:
+                blur(2px);
+        }
+
+
+        /* train motion */
+
+        @keyframes trainPass {
+
+            0% {
+
+                left:
+                    -130px;
+
+                opacity:
+                    0;
+
+            }
+
+
+            7% {
+
+                opacity:
+                    .72;
+
+            }
+
+
+            18% {
+
+                opacity:
+                    .88;
+
+            }
+
+
+            72% {
+
+                opacity:
+                    .88;
+
+            }
+
+
+            91% {
+
+                opacity:
+                    .45;
+
+            }
+
+
+            100% {
+
+                left:
+                    calc(100% + 130px);
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
            SEARCH PANEL
         ===================================================== */
 
@@ -1711,6 +2045,22 @@
                     88px;
             }
 
+
+            /*
+               Kereta sedikit lebih kecil
+               di layar HP agar tidak terlalu
+               menarik perhatian.
+            */
+
+            .mini-train {
+
+                transform:
+                    scale(.82);
+
+                transform-origin:
+                    left bottom;
+            }
+
         }
 
 
@@ -1769,6 +2119,36 @@
             <p class="subtitle">
                 Tarif Khusus Perjalanan Kereta Api
             </p>
+
+
+            <!-- =================================================
+                 MINI TRAIN
+                 CSS ONLY
+            ================================================== -->
+
+            <div class="train-track">
+
+                <div class="mini-train">
+
+                    <div class="train-body"></div>
+
+                    <div class="train-cabin"></div>
+
+                    <div class="train-window"></div>
+
+                    <div class="train-front"></div>
+
+                    <div class="train-light"></div>
+
+                    <div class="wheel wheel-one"></div>
+
+                    <div class="wheel wheel-two"></div>
+
+                    <div class="train-glow"></div>
+
+                </div>
+
+            </div>
 
         </header>
 
