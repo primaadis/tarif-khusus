@@ -1,3006 +1,898 @@
-<!DOCTYPE html>
-<html lang="id">
+/* =====================================================
+   COLOR REFINEMENT
+   MODERN RAILWAY — BLUE / TEAL / GREEN / RED
+   ===================================================== */
 
-<head>
+:root {
+
+    /* PRIMARY */
+    --navy-deep: #06111f;
+    --navy: #091a2d;
+    --navy-light: #10283d;
+    --navy-card: #0d2135;
 
-    <meta charset="UTF-8">
+    /* BLUE */
+    --blue: #28789a;
+    --blue-light: #4b9ab4;
+    --blue-soft: #6bb2c1;
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    /* TEAL */
+    --teal: #2f8f8c;
+    --teal-light: #54b5a6;
 
-    <title>TARSUS FINDER — KAI 121</title>
+    /* GREEN */
+    --kai-green: #3f8f68;
+    --kai-green-light: #68b48a;
 
+    /* RED */
+    --kai-red: #b8323a;
+    --kai-red-light: #d65a5e;
 
-    <!-- FONT -->
+    /* WARM ACCENT */
+    --orange: #d99345;
+    --gold: #e5b968;
+    --amber: #e1a653;
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    /* NEUTRAL */
+    --kai-white: #edf2f3;
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    --white: #edf3f5;
+    --soft: #b9c9d2;
+    --muted: #718692;
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    --border:
+        rgba(143,190,201,.105);
 
+    --orange-border:
+        rgba(224,166,83,.16);
+}
 
-    <style>
 
-        /* =====================================================
-           COLOR SYSTEM
-        ===================================================== */
+/* =====================================================
+   BODY
+   ===================================================== */
 
-        :root {
+body {
 
-            --navy-deep: #040b16;
-            --navy: #071426;
-            --navy-light: #0c1d34;
-            --navy-card: #0b1a2d;
+    background:
 
-            --orange: #ff982f;
-            --gold: #ffc75b;
-            --amber: #ffad3d;
+        radial-gradient(
+            circle at 12% 18%,
+            rgba(38,115,145,.16),
+            transparent 30%
+        ),
 
-            /* aksen pelengkap */
+        radial-gradient(
+            circle at 88% 25%,
+            rgba(55,133,103,.12),
+            transparent 30%
+        ),
 
-            --kai-red: #d71920;
-            --kai-red-light: #ef4b50;
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(178,55,63,.07),
+            transparent 34%
+        ),
 
-            --kai-white: #f5f7fa;
+        linear-gradient(
+            140deg,
+            #06111f 0%,
+            #091a2d 38%,
+            #0a2032 67%,
+            #06111e 100%
+        );
+}
 
-            --kai-green: #3fae68;
-            --kai-green-light: #70c98d;
 
-            --white: #f7f9fc;
-            --soft: #c0c9d6;
-            --muted: #738095;
+/* =====================================================
+   BACKGROUND GRID
+   ===================================================== */
 
-            --border:
-                rgba(255,255,255,.075);
+body::before {
 
-            --orange-border:
-                rgba(255,160,55,.18);
-        }
+    opacity: .30;
 
+    background-image:
 
-        /* =====================================================
-           RESET
-        ===================================================== */
+        linear-gradient(
+            rgba(110,180,190,.022) 1px,
+            transparent 1px
+        ),
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        linear-gradient(
+            90deg,
+            rgba(110,180,190,.022) 1px,
+            transparent 1px
+        );
+}
 
 
-        html {
-            scroll-behavior: smooth;
-        }
+/* =====================================================
+   ORBIT
+   ===================================================== */
 
+.bg-orbit {
 
-        body {
+    border-color:
+        rgba(75,154,180,.075);
+}
 
-            min-height: 100vh;
+.bg-orbit::before {
 
-            color: var(--white);
+    border-color:
+        rgba(63,174,104,.055);
+}
 
-            font-family:
-                "DM Sans",
-                sans-serif;
+.bg-orbit::after {
 
-            overflow-x: hidden;
+    border-color:
+        rgba(215,70,75,.045);
+}
 
-            background:
 
-                radial-gradient(
-                    circle at 50% -15%,
-                    rgba(255,153,47,.15),
-                    transparent 31%
-                ),
+/* =====================================================
+   MAIN HEADER GLOW
+   ===================================================== */
 
-                radial-gradient(
-                    circle at 0% 50%,
-                    rgba(19,68,125,.18),
-                    transparent 32%
-                ),
+.header::before {
 
-                linear-gradient(
-                    145deg,
-                    var(--navy-deep),
-                    var(--navy) 48%,
-                    #030914
-                );
-        }
+    background:
 
+        radial-gradient(
+            ellipse,
+            rgba(42,130,157,.17),
+            rgba(48,126,96,.08) 42%,
+            transparent 70%
+        );
+}
 
-        /* =====================================================
-           BACKGROUND GRID
-        ===================================================== */
 
-        body::before {
+.header::after {
 
-            content: "";
+    background:
 
-            position: fixed;
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(72,151,165,.42),
+            rgba(205,76,81,.28),
+            transparent
+        );
+}
 
-            inset: 0;
 
-            pointer-events: none;
+/* =====================================================
+   KAI LABEL
+   ===================================================== */
 
-            opacity: .45;
+.kai-label {
 
-            background-image:
+    color:
+        #8fc4c8;
+}
 
-                linear-gradient(
-                    rgba(255,255,255,.018) 1px,
-                    transparent 1px
-                ),
 
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,.018) 1px,
-                    transparent 1px
-                );
+.kai-label::before {
 
-            background-size:
-                48px 48px;
+    background:
 
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 88%
-                );
+        linear-gradient(
+            90deg,
+            transparent,
+            #4f9da9
+        );
+}
 
-            z-index: -10;
-        }
 
+.kai-label::after {
 
-        /* =====================================================
-           FLOATING ORNAMENT
-        ===================================================== */
+    background:
 
-        .bg-orbit {
+        linear-gradient(
+            90deg,
+            #4f9da9,
+            transparent
+        );
+}
 
-            position: fixed;
 
-            width: 470px;
-            height: 470px;
+/* =====================================================
+   MAIN TITLE
+   ===================================================== */
 
-            top: -260px;
-            right: -220px;
+.header h1 {
 
-            border:
-                1px solid
-                rgba(255,177,70,.065);
+    background:
 
-            border-radius: 50%;
+        linear-gradient(
+            105deg,
+            #eaf3f4,
+            #6db7c0,
+            #9bcdb0,
+            #d8a95e,
+            #e9eff0
+        );
 
-            pointer-events: none;
+    background-size:
+        300% auto;
+}
 
-            z-index: -3;
 
-            animation:
-                orbitSpin
-                22s
-                linear
-                infinite;
-        }
+/* =====================================================
+   SEARCH PANEL
+   ===================================================== */
 
+.search-panel {
 
-        .bg-orbit::before {
+    background:
 
-            content: "";
+        linear-gradient(
+            145deg,
+            rgba(13,38,57,.90),
+            rgba(6,20,33,.90)
+        );
 
-            position: absolute;
+    border-color:
+        rgba(92,153,170,.12);
 
-            inset: 50px;
+    box-shadow:
 
-            border:
-                1px solid
-                rgba(255,177,70,.045);
+        0 25px 70px
+        rgba(0,0,0,.28),
 
-            border-radius: 50%;
-        }
+        inset 0 1px 0
+        rgba(137,194,202,.035);
+}
 
 
-        .bg-orbit::after {
+.search-panel::before {
 
-            content: "";
+    background:
 
-            position: absolute;
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(65,145,163,.55),
+            rgba(72,148,113,.42),
+            transparent
+        );
+}
 
-            inset: 105px;
 
-            border:
-                1px solid
-                rgba(255,177,70,.035);
+/* =====================================================
+   FIELD LABEL
+   ===================================================== */
 
-            border-radius: 50%;
-        }
+.field-label .dot {
 
+    background:
+        #4fa7a0;
 
-        /* =====================================================
-           APP
-        ===================================================== */
+    box-shadow:
+        0 0 11px
+        rgba(79,167,160,.55);
+}
 
-        .app {
 
-            width:
-                min(
-                    920px,
-                    calc(100% - 28px)
-                );
+/* =====================================================
+   INPUT
+   ===================================================== */
 
-            margin:
-                0 auto;
+.input-wrap input {
 
-            padding:
-                25px 0 35px;
-        }
+    border-color:
+        rgba(111,171,183,.11);
 
+    background:
+        rgba(3,15,27,.58);
+}
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
 
-        .header {
+.input-wrap input:focus {
 
-            position: relative;
+    border-color:
+        rgba(71,157,170,.46);
 
-            text-align: center;
+    box-shadow:
 
-            padding:
-                25px 10px 42px;
+        0 0 0 4px
+        rgba(60,150,166,.055),
 
-            overflow: hidden;
+        0 12px 35px
+        rgba(0,0,0,.20);
+}
 
-            animation:
-                headerReveal
-                .8s
-                cubic-bezier(.2,.8,.2,1)
-                both;
-        }
 
+/* =====================================================
+   SUGGESTIONS
+   ===================================================== */
 
-        .header::before {
+.suggestions {
 
-            content: "";
+    border-color:
+        rgba(95,163,174,.13);
 
-            position: absolute;
+    background:
+        rgba(7,25,39,.985);
+}
 
-            width: 360px;
-            height: 170px;
 
-            left: 50%;
-            top: 0;
+.suggestion-item:hover {
 
-            transform:
-                translateX(-50%);
+    color:
+        #91cfc1;
 
-            background:
-                radial-gradient(
-                    ellipse,
-                    rgba(255,155,47,.18),
-                    transparent 68%
-                );
+    background:
+        rgba(55,139,123,.085);
+}
 
-            filter:
-                blur(15px);
 
-            animation:
-                headerGlow
-                4.5s
-                ease-in-out
-                infinite;
+/* =====================================================
+   SWAP BUTTON
+   ===================================================== */
 
-            pointer-events: none;
-        }
+#swapBtn {
 
+    border-color:
+        rgba(67,151,160,.25);
 
-        .header::after {
+    color:
+        #7fc1bc;
 
-            content: "";
+    background:
+        rgba(53,135,139,.065);
+}
 
-            position: absolute;
 
-            left: 50%;
-            bottom: 20px;
+#swapBtn:hover {
 
-            width: 240px;
-            height: 1px;
+    border-color:
+        rgba(75,166,166,.50);
 
-            transform:
-                translateX(-50%);
+    background:
+        rgba(55,143,143,.12);
 
-            background:
+    box-shadow:
+        0 10px 30px
+        rgba(45,143,137,.10);
+}
 
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255,177,73,.5),
-                    transparent
-                );
-        }
 
+/* =====================================================
+   SEARCH BUTTON
+   ===================================================== */
 
-        .kai-label {
+.search-button {
 
-            position: relative;
+    color:
+        #10232d;
 
-            display: inline-flex;
+    background:
 
-            align-items: center;
+        linear-gradient(
+            105deg,
+            #4b9f9a,
+            #76b99b,
+            #d0a65e,
+            #6aaea9,
+            #4b9f9a
+        );
 
-            gap: 9px;
+    background-size:
+        300% auto;
 
-            margin-bottom: 13px;
+    box-shadow:
+        0 14px 36px
+        rgba(50,137,126,.12);
+}
 
-            color:
-                var(--gold);
 
-            font-family:
-                Manrope,
-                sans-serif;
+.search-button:hover {
 
-            font-size:
-                10px;
+    box-shadow:
+        0 18px 42px
+        rgba(54,145,132,.19);
+}
 
-            font-weight:
-                800;
 
-            letter-spacing:
-                .27em;
-        }
+/* =====================================================
+   RESULTS
+   ===================================================== */
 
+.result-card {
 
-        .kai-label::before,
-        .kai-label::after {
+    background:
 
-            content: "";
+        linear-gradient(
+            145deg,
+            rgba(13,35,54,.92),
+            rgba(6,20,33,.91)
+        );
 
-            width: 23px;
-            height: 1px;
+    border-color:
+        rgba(91,151,164,.105);
+}
 
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--orange)
-                );
-        }
 
+.result-card::before {
 
-        .kai-label::after {
+    background:
 
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--orange),
-                    transparent
-                );
-        }
+        linear-gradient(
+            to bottom,
+            transparent,
+            #4d9f9a,
+            #6eb59a,
+            transparent
+        );
 
+    box-shadow:
+        0 0 13px
+        rgba(65,145,130,.22);
+}
 
-        .header h1 {
 
-            position: relative;
+.result-card:hover {
 
-            font-family:
-                Manrope,
-                sans-serif;
+    border-color:
+        rgba(74,153,157,.20);
+}
 
-            font-size:
-                clamp(
-                    33px,
-                    7vw,
-                    54px
-                );
 
-            font-weight:
-                800;
+/* =====================================================
+   RESULT NAME
+   ===================================================== */
 
-            line-height:
-                1;
+.result-name {
 
-            letter-spacing:
-                .075em;
+    color:
+        #edf4f5;
+}
 
-            background:
 
-                linear-gradient(
-                    105deg,
-                    #fff0d0,
-                    #ff9b30,
-                    #ffd36b,
-                    #ff9228,
-                    #fff1d1
-                );
+/* =====================================================
+   JOURNEY
+   ===================================================== */
 
-            background-size:
-                260% auto;
+.journey-arrow {
 
-            -webkit-background-clip:
-                text;
+    color:
+        #62aaa5;
+}
 
-            background-clip:
-                text;
 
-            color:
-                transparent;
+/* =====================================================
+   REFERENCE BOX
+   ===================================================== */
 
-            animation:
-                titleGradient
-                5s
-                ease-in-out
-                infinite;
-        }
+.reference-box {
 
+    border-color:
+        rgba(79,148,139,.17);
 
-        .subtitle {
+    background:
 
-            position: relative;
+        linear-gradient(
+            110deg,
+            rgba(56,137,123,.075),
+            rgba(255,255,255,.012)
+        );
+}
 
-            margin-top:
-                13px;
 
-            color:
-                var(--soft);
+.reference-label {
 
-            font-size:
-                12px;
+    color:
+        #8bc3b0;
+}
 
-            letter-spacing:
-                .06em;
-        }
 
+.reference-label::before {
 
-        /* =====================================================
-           TRAIN ANIMATION
-           CSS ONLY — NO IMAGE / GIF / JAVASCRIPT
-        ===================================================== */
+    background:
+        #5da991;
 
-        .train-track {
+    box-shadow:
+        0 0 9px
+        rgba(80,166,141,.55);
+}
 
-            position: absolute;
 
-            left: 0;
-            right: 0;
+.relation-arrow {
 
-            bottom: 7px;
+    color:
+        #66a9a2;
+}
 
-            height: 42px;
 
-            overflow: hidden;
+/* =====================================================
+   FARE
+   ===================================================== */
 
-            pointer-events: none;
+.fare-item {
 
-            z-index: 2;
-        }
+    border-color:
+        rgba(111,170,180,.065);
 
+    background:
+        rgba(100,160,170,.025);
+}
 
-        /* =====================================================
-           RAIL
-        ===================================================== */
 
-        .train-track::before {
+.fare-price {
 
-            content: "";
+    color:
+        #d9b66e;
+}
 
-            position: absolute;
 
-            left: 0;
-            right: 0;
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
 
-            bottom: 3px;
+.empty-symbol {
 
-            height: 2px;
+    border-color:
+        rgba(73,153,151,.20);
 
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255,166,65,.12) 8%,
-                    rgba(255,166,65,.38) 50%,
-                    rgba(255,166,65,.12) 92%,
-                    transparent
-                );
-        }
+    color:
+        #67afa8;
+}
 
 
-        .train-track::after {
+/* =====================================================
+   FOOTER
+   ===================================================== */
 
-            content: "";
+.footer strong {
 
-            position: absolute;
+    color:
+        rgba(106,177,157,.78);
+}
 
-            left: 0;
-            right: 0;
 
-            bottom: 0;
+/* =====================================================
+   SPLASH — REFINED PALETTE
+   ===================================================== */
 
-            height: 1px;
+.splash {
 
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255,255,255,.07),
-                    transparent
-                );
-        }
+    background:
 
+        radial-gradient(
+            ellipse at 25% 25%,
+            rgba(37,113,145,.25),
+            transparent 34%
+        ),
 
-        /* =====================================================
-           FULL RANGKAIAN
-           Arah gerak → kanan
-           Gerbong di kiri
-           Lokomotif di kanan
-        ===================================================== */
+        radial-gradient(
+            ellipse at 78% 28%,
+            rgba(50,130,101,.19),
+            transparent 32%
+        ),
 
-        .mini-train {
+        radial-gradient(
+            ellipse at 50% 78%,
+            rgba(185,54,62,.10),
+            transparent 32%
+        ),
 
-            position: absolute;
+        radial-gradient(
+            ellipse at 50% 50%,
+            rgba(69,143,151,.09),
+            transparent 48%
+        ),
 
-            left: -390px;
+        linear-gradient(
+            135deg,
+            #04101c 0%,
+            #082033 35%,
+            #0a2936 63%,
+            #061520 100%
+        );
+}
 
-            bottom: 5px;
 
-            width: 365px;
+/* =====================================================
+   SPLASH LIGHT
+   ===================================================== */
 
-            height: 32px;
+.splash-light {
 
-            opacity: 0;
+    background:
 
-            animation:
-                trainPass
-                20s
-                cubic-bezier(.45,.02,.55,.98)
-                infinite;
-        }
+        radial-gradient(
+            circle,
+            rgba(70,159,163,.13),
+            rgba(66,137,106,.065) 34%,
+            rgba(207,161,82,.035) 52%,
+            transparent 70%
+        );
+}
 
 
-        /* =====================================================
-           GERBONG
-        ===================================================== */
+/* =====================================================
+   SPLASH TITLE
+   ===================================================== */
 
-        .train-coach {
+.splash-title {
 
-            position: absolute;
+    background:
 
-            bottom: 7px;
+        linear-gradient(
+            110deg,
+            #eef5f5 0%,
+            #79b9c0 20%,
+            #9bc8ad 40%,
+            #d4ac68 55%,
+            #7db6b5 72%,
+            #edf3f3 100%
+        );
 
-            width: 69px;
+    background-size:
+        280% auto;
+}
 
-            height: 17px;
 
-            border-radius:
-                3px 4px 3px 3px;
+.splash-title::after {
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #f7f8fa 0%,
-                    #e8edf1 52%,
-                    #cfd6dc 100%
-                );
+    background:
 
-            border:
-                1px solid
-                rgba(255,255,255,.5);
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(198,62,68,.55),
+            rgba(75,161,153,.72),
+            rgba(101,165,119,.55),
+            transparent
+        );
+}
 
-            box-shadow:
-                0 0 8px
-                rgba(255,255,255,.08);
-        }
 
+/* =====================================================
+   SPLASH TEXT
+   ===================================================== */
 
-        /* =====================================================
-           POSISI GERBONG
-           Semua di BELAKANG lokomotif
-        ===================================================== */
+.splash-kai {
 
-        .train-coach.coach-one {
-            left: 0;
-        }
+    color:
+        #a9c9ce;
+}
 
 
-        .train-coach.coach-two {
-            left: 72px;
-        }
+.splash-kai::before {
 
+    background:
 
-        .train-coach.coach-three {
-            left: 144px;
-        }
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(74,159,168,.8)
+        );
+}
 
 
-        .train-coach.coach-four {
-            left: 216px;
-        }
+.splash-kai::after {
 
+    background:
 
-        /* =====================================================
-           STRIPE MERAH GERBONG
-        ===================================================== */
+        linear-gradient(
+            90deg,
+            rgba(74,159,168,.8),
+            transparent
+        );
+}
 
-        .train-coach {
 
-            background:
+.splash-subtitle {
 
-                linear-gradient(
-                    to bottom,
-                    #f7f8fa 0%,
-                    #f7f8fa 38%,
-                    var(--kai-red) 39%,
-                    var(--kai-red) 48%,
-                    #e6ebef 49%,
-                    #d0d7dd 100%
-                );
-        }
+    color:
+        rgba(202,220,224,.72);
+}
 
 
-        /* =====================================================
-           AKSEN HIJAU TIPIS
-        ===================================================== */
+.splash-status {
 
-        .train-coach::after {
+    color:
+        rgba(111,183,157,.72);
+}
 
-            content: "";
 
-            position: absolute;
+/* =====================================================
+   SPLASH SPEED LINES
+   ===================================================== */
 
-            left: 4px;
-            right: 4px;
+.speed-lines span {
 
-            bottom: 2px;
+    background:
 
-            height: 2px;
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(83,163,171,.22),
+            rgba(104,181,151,.42),
+            transparent
+        );
+}
 
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(63,174,104,.75),
-                    rgba(112,201,141,.55),
-                    rgba(63,174,104,.75)
-                );
 
-            border-radius: 3px;
-        }
+/* =====================================================
+   SPLASH TRAIN
+   ===================================================== */
 
+.splash-train-glow {
 
-        /* =====================================================
-           JENDELA GERBONG
-        ===================================================== */
+    background:
 
-        .train-coach::before {
+        linear-gradient(
+            90deg,
+            rgba(54,142,112,.08),
+            rgba(68,155,158,.30),
+            rgba(206,161,83,.18),
+            rgba(184,57,64,.10)
+        );
+}
 
-            content: "";
 
-            position: absolute;
+/* =====================================================
+   SPLASH RAIL
+   ===================================================== */
 
-            left: 8px;
+.splash-track::before {
 
-            top: 4px;
+    background:
 
-            width: 9px;
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(84,151,164,.16) 12%,
+            rgba(105,176,166,.38) 38%,
+            rgba(218,174,98,.34) 55%,
+            rgba(185,65,71,.18) 72%,
+            transparent
+        );
+}
 
-            height: 6px;
 
-            border-radius: 1px;
+/* =====================================================
+   SPLASH TRAIN — RED MUTED
+   ===================================================== */
 
-            background:
-                #10243a;
+.splash-coach {
 
-            box-shadow:
-                14px 0 0 #10243a,
-                28px 0 0 #10243a,
-                42px 0 0 #10243a;
-        }
+    background:
 
+        linear-gradient(
+            to bottom,
+            #eef3f3 0%,
+            #e3eaeb 34%,
+            #b94349 35%,
+            #b94349 47%,
+            #dce3e5 48%,
+            #c3cdd2 100%
+        );
+}
 
-        /* =====================================================
-           LOKOMOTIF
-        ===================================================== */
 
-        .train-locomotive {
+.splash-coach::after {
 
-            position: absolute;
+    background:
 
-            left: 288px;
+        linear-gradient(
+            90deg,
+            rgba(60,135,100,.72),
+            rgba(93,171,137,.58),
+            rgba(60,135,100,.72)
+        );
+}
 
-            bottom: 7px;
 
-            width: 69px;
+/* =====================================================
+   LOCOMOTIVE
+   ===================================================== */
 
-            height: 20px;
+.splash-loco-body {
 
-            border-radius:
-                4px 5px 3px 3px;
+    background:
 
-            background:
+        linear-gradient(
+            to bottom,
+            #f1f5f5 0%,
+            #e7edef 27%,
+            #b94349 28%,
+            #b94349 43%,
+            #e1e7e9 44%,
+            #c1ccd1 100%
+        );
+}
 
-                linear-gradient(
-                    180deg,
-                    #f7f8fa 0%,
-                    #ffffff 32%,
-                    var(--kai-red) 33%,
-                    var(--kai-red) 47%,
-                    #e6ebef 48%,
-                    #cbd3d9 100%
-                );
 
-            border:
-                1px solid
-                rgba(255,255,255,.55);
+.splash-loco-body::after {
 
-            box-shadow:
+    background:
+        #4b9670;
+}
 
-                0 0 12px
-                rgba(255,255,255,.12),
 
-                0 0 15px
-                rgba(215,25,32,.10);
-        }
+.splash-loco-nose {
 
+    background:
 
-        /* =====================================================
-           NOSE / DEPAN LOKOMOTIF
-        ===================================================== */
+        linear-gradient(
+            to bottom,
+            #f1f5f5 0%,
+            #e4ebed 30%,
+            #b94349 31%,
+            #b94349 47%,
+            #d0d9dd 48%,
+            #b8c4ca 100%
+        );
+}
 
-        .train-locomotive::after {
 
-            content: "";
+/* =====================================================
+   HEADLIGHT
+   ===================================================== */
 
-            position: absolute;
+.splash-loco-light {
 
-            right: -8px;
+    background:
+        #edf8f2;
 
-            bottom: 0;
+    box-shadow:
 
-            width: 13px;
+        0 0 5px
+        #dff8ed,
 
-            height: 15px;
+        0 0 13px
+        rgba(99,190,158,.70),
 
-            border-radius:
-                0 6px 4px 0;
+        0 0 25px
+        rgba(76,159,145,.38);
+}
 
-            background:
 
-                linear-gradient(
-                    180deg,
-                    #ffffff,
-                    #eef1f3 45%,
-                    var(--kai-red) 46%,
-                    var(--kai-red) 60%,
-                    #d5dce1 61%
-                );
+/* =====================================================
+   MAIN TITLE — LESS GOLD
+   ===================================================== */
 
-            clip-path:
-                polygon(
-                    0 0,
-                    72% 15%,
-                    100% 50%,
-                    72% 85%,
-                    0 100%
-                );
-        }
+@keyframes titleGradient {
 
+    0% {
+        background-position:
+            0% center;
+    }
 
-        /* =====================================================
-           AKSEN HIJAU LOKOMOTIF
-        ===================================================== */
+    50% {
+        background-position:
+            100% center;
+    }
 
-        .train-locomotive::before {
+    100% {
+        background-position:
+            0% center;
+    }
+}
 
-            content: "";
 
-            position: absolute;
+/* =====================================================
+   BUTTON GRADIENT — NO LONGER GOLD DOMINANT
+   ===================================================== */
 
-            left: 4px;
+@keyframes buttonGradient {
 
-            right: 3px;
+    0% {
+        background-position:
+            0% center;
+    }
 
-            bottom: 2px;
+    50% {
+        background-position:
+            100% center;
+    }
 
-            height: 2px;
-
-            border-radius: 2px;
-
-            background:
-                var(--kai-green);
-
-            opacity:
-                .85;
-        }
-
-
-        /* =====================================================
-           KABIN
-        ===================================================== */
-
-        .train-cabin {
-
-            position: absolute;
-
-            left: 298px;
-
-            bottom: 19px;
-
-            width: 31px;
-
-            height: 13px;
-
-            border-radius:
-                5px 5px 0 0;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f4f6f8,
-                    #ffffff
-                );
-
-            border:
-                1px solid
-                rgba(255,255,255,.55);
-
-            z-index: 3;
-        }
-
-
-        /* =====================================================
-           ATAP KABIN
-        ===================================================== */
-
-        .train-roof {
-
-            position: absolute;
-
-            left: 295px;
-
-            bottom: 30px;
-
-            width: 38px;
-
-            height: 3px;
-
-            border-radius: 4px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #7c8792,
-                    #f3f5f7,
-                    #7c8792
-                );
-
-            z-index: 3;
-        }
-
-
-        /* =====================================================
-           JENDELA KABIN
-        ===================================================== */
-
-        .train-window {
-
-            position: absolute;
-
-            left: 303px;
-
-            bottom: 23px;
-
-            width: 8px;
-
-            height: 6px;
-
-            border-radius: 1px;
-
-            background:
-                #102a3b;
-
-            box-shadow:
-                12px 0 0 #102a3b;
-
-            border:
-                1px solid
-                rgba(63,174,104,.65);
-
-            z-index: 4;
-        }
-
-
-        /* =====================================================
-           CEROBONG
-        ===================================================== */
-
-        .train-chimney {
-
-            position: absolute;
-
-            left: 336px;
-
-            bottom: 25px;
-
-            width: 7px;
-
-            height: 10px;
-
-            border-radius:
-                2px 2px 1px 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #737e89,
-                    #f0f3f5,
-                    #737e89
-                );
-
-            z-index: 3;
-        }
-
-
-        .train-chimney::before {
-
-            content: "";
-
-            position: absolute;
-
-            left: -3px;
-
-            top: -2px;
-
-            width: 13px;
-
-            height: 3px;
-
-            border-radius: 4px;
-
-            background:
-                #65717d;
-        }
-
-
-        /* =====================================================
-           ASAP
-        ===================================================== */
-
-        .train-smoke {
-
-            position: absolute;
-
-            left: 333px;
-
-            bottom: 36px;
-
-            width: 8px;
-
-            height: 8px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(240,243,246,.25);
-
-            filter:
-                blur(1px);
-
-            opacity: 0;
-
-            animation:
-                smokeOne
-                2.8s
-                ease-out
-                infinite;
-        }
-
-
-        .train-smoke::before {
-
-            content: "";
-
-            position: absolute;
-
-            left: 6px;
-
-            top: -6px;
-
-            width: 10px;
-
-            height: 10px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(240,243,246,.18);
-        }
-
-
-        .train-smoke::after {
-
-            content: "";
-
-            position: absolute;
-
-            left: -5px;
-
-            top: -11px;
-
-            width: 7px;
-
-            height: 7px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(240,243,246,.13);
-        }
-
-
-        /* asap kedua */
-
-        .train-smoke-two {
-
-            position: absolute;
-
-            left: 339px;
-
-            bottom: 38px;
-
-            width: 7px;
-
-            height: 7px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(240,243,246,.19);
-
-            filter:
-                blur(1px);
-
-            opacity: 0;
-
-            animation:
-                smokeTwo
-                2.8s
-                1.25s
-                ease-out
-                infinite;
-        }
-
-
-        /* =====================================================
-           HEADLIGHT
-        ===================================================== */
-
-        .train-light {
-
-            position: absolute;
-
-            right: -8px;
-
-            bottom: 14px;
-
-            width: 5px;
-
-            height: 5px;
-
-            border-radius: 50%;
-
-            background:
-                #fffef0;
-
-            box-shadow:
-
-                0 0 4px
-                #ffffff,
-
-                0 0 9px
-                rgba(255,224,143,.85);
-
-            z-index: 5;
-        }
-
-
-        /* =====================================================
-           COUPLER
-        ===================================================== */
-
-        .train-coupler {
-
-            position: absolute;
-
-            bottom: 11px;
-
-            width: 8px;
-
-            height: 3px;
-
-            border-radius: 2px;
-
-            background:
-                #596273;
-
-            z-index: 2;
-        }
-
-
-        .coupler-one {
-            left: 67px;
-        }
-
-
-        .coupler-two {
-            left: 139px;
-        }
-
-
-        .coupler-three {
-            left: 211px;
-        }
-
-
-        .coupler-four {
-            left: 283px;
-        }
-
-
-        /* =====================================================
-           RODA
-        ===================================================== */
-
-        .mini-train .wheel {
-
-            position: absolute;
-
-            bottom: 2px;
-
-            width: 9px;
-
-            height: 9px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    #eef1f3 0 18%,
-                    #56616c 20% 43%,
-                    #172536 45% 68%,
-                    #0b1522 70%
-                );
-
-            border:
-                1px solid
-                rgba(255,255,255,.45);
-
-            z-index: 6;
-
-            animation:
-                wheelSpin
-                .8s
-                linear
-                infinite;
-        }
-
-
-        /* roda gerbong */
-
-        .wheel-coach-one {
-            left: 11px;
-        }
-
-
-        .wheel-coach-two {
-            left: 51px;
-        }
-
-
-        .wheel-coach-three {
-            left: 83px;
-        }
-
-
-        .wheel-coach-four {
-            left: 123px;
-        }
-
-
-        .wheel-coach-five {
-            left: 155px;
-        }
-
-
-        .wheel-coach-six {
-            left: 195px;
-        }
-
-
-        .wheel-coach-seven {
-            left: 227px;
-        }
-
-
-        .wheel-coach-eight {
-            left: 267px;
-        }
-
-
-        /* roda lokomotif */
-
-        .wheel-loco-one {
-            left: 299px;
-        }
-
-
-        .wheel-loco-two {
-            left: 339px;
-        }
-
-
-        /* =====================================================
-           GLOW
-        ===================================================== */
-
-        .train-glow {
-
-            position: absolute;
-
-            left: 4px;
-
-            bottom: 0;
-
-            width: 355px;
-
-            height: 3px;
-
-            border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(63,174,104,.10),
-                    rgba(255,167,62,.32),
-                    rgba(215,25,32,.12)
-                );
-
-            filter:
-                blur(3px);
-        }
-
-
-        /* =====================================================
-           TRAIN MOTION
-        ===================================================== */
-
-        @keyframes trainPass {
-
-            0% {
-
-                left:
-                    -390px;
-
-                opacity:
-                    0;
-            }
-
-
-            6% {
-
-                opacity:
-                    .72;
-            }
-
-
-            14% {
-
-                opacity:
-                    .92;
-            }
-
-
-            76% {
-
-                opacity:
-                    .92;
-            }
-
-
-            93% {
-
-                opacity:
-                    .42;
-            }
-
-
-            100% {
-
-                left:
-                    calc(100% + 390px);
-
-                opacity:
-                    0;
-            }
-
-        }
-
-
-        /* =====================================================
-           WHEEL MOTION
-        ===================================================== */
-
-        @keyframes wheelSpin {
-
-            from {
-
-                transform:
-                    rotate(0deg);
-            }
-
-            to {
-
-                transform:
-                    rotate(360deg);
-            }
-
-        }
-
-
-        /* =====================================================
-           SMOKE
-        ===================================================== */
-
-        @keyframes smokeOne {
-
-            0% {
-
-                opacity:
-                    0;
-
-                transform:
-                    translate(0, 5px)
-                    scale(.55);
-            }
-
-
-            20% {
-
-                opacity:
-                    .45;
-            }
-
-
-            60% {
-
-                opacity:
-                    .22;
-
-                transform:
-                    translate(-5px, -13px)
-                    scale(1.05);
-            }
-
-
-            100% {
-
-                opacity:
-                    0;
-
-                transform:
-                    translate(-10px, -23px)
-                    scale(1.35);
-            }
-
-        }
-
-
-        @keyframes smokeTwo {
-
-            0% {
-
-                opacity:
-                    0;
-
-                transform:
-                    translate(0, 4px)
-                    scale(.45);
-            }
-
-
-            20% {
-
-                opacity:
-                    .35;
-            }
-
-
-            65% {
-
-                opacity:
-                    .16;
-
-                transform:
-                    translate(5px, -12px)
-                    scale(1);
-            }
-
-
-            100% {
-
-                opacity:
-                    0;
-
-                transform:
-                    translate(8px, -21px)
-                    scale(1.3);
-            }
-
-        }
-
-
-        /* =====================================================
-           SEARCH PANEL
-        ===================================================== */
-
-        .search-panel {
-
-            position: relative;
-
-            padding:
-                25px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                25px;
-
-            background:
-
-                linear-gradient(
-                    145deg,
-                    rgba(12,31,53,.86),
-                    rgba(5,15,27,.83)
-                );
-
-            backdrop-filter:
-                blur(18px);
-
-            -webkit-backdrop-filter:
-                blur(18px);
-
-            box-shadow:
-
-                0 25px 70px
-                rgba(0,0,0,.35),
-
-                inset 0 1px 0
-                rgba(255,255,255,.035);
-
-            animation:
-                panelReveal
-                .8s
-                .08s
-                cubic-bezier(.2,.8,.2,1)
-                both;
-        }
-
-
-        .search-panel::before {
-
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-            left: 14%;
-            right: 14%;
-
-            height: 1px;
-
-            background:
-
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255,172,67,.65),
-                    transparent
-                );
-        }
-
-
-        /* =====================================================
-           INPUT AREA
-        ===================================================== */
-
-        .route-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 58px 1fr;
-
-            align-items:
-                end;
-
-            gap:
-                14px;
-        }
-
-
-        .field {
-            position: relative;
-        }
-
-
-        .field-label {
-
-            display: flex;
-
-            align-items:
-                center;
-
-            gap:
-                8px;
-
-            margin-bottom:
-                9px;
-
-            color:
-                var(--muted);
-
-            font-size:
-                9px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                .16em;
-
-            text-transform:
-                uppercase;
-        }
-
-
-        .field-label .dot {
-
-            width: 5px;
-            height: 5px;
-
-            border-radius:
-                50%;
-
-            background:
-                var(--orange);
-
-            box-shadow:
-                0 0 12px
-                rgba(255,154,47,.7);
-        }
-
-
-        .input-wrap {
-            position: relative;
-        }
-
-
-        .input-wrap input {
-
-            width: 100%;
-            height: 58px;
-
-            padding:
-                0 16px;
-
-            outline: none;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            border-radius:
-                15px;
-
-            color:
-                var(--white);
-
-            background:
-                rgba(2,9,18,.64);
-
-            font-family:
-                "DM Sans",
-                sans-serif;
-
-            font-size:
-                14px;
-
-            font-weight:
-                600;
-
-            transition:
-                .25s ease;
-        }
-
-
-        .input-wrap input::placeholder {
-
-            color:
-                #566477;
-
-            font-weight:
-                400;
-        }
-
-
-        .input-wrap input:focus {
-
-            border-color:
-                rgba(255,159,49,.45);
-
-            box-shadow:
-
-                0 0 0 4px
-                rgba(255,157,49,.055),
-
-                0 12px 35px
-                rgba(0,0,0,.2);
-        }
-
-
-        /* =====================================================
-           SUGGESTIONS
-        ===================================================== */
-
-        .suggestions {
-
-            position: absolute;
-
-            top:
-                calc(100% + 8px);
-
-            left: 0;
-            right: 0;
-
-            z-index: 50;
-
-            overflow: hidden;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            border-radius:
-                14px;
-
-            background:
-                rgba(6,17,30,.98);
-
-            backdrop-filter:
-                blur(18px);
-
-            box-shadow:
-                0 20px 55px
-                rgba(0,0,0,.45);
-
-            animation:
-                suggestionReveal
-                .18s
-                ease
-                both;
-        }
-
-
-        .suggestion-item {
-
-            padding:
-                13px 15px;
-
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.045);
-
-            color:
-                #dfe6ef;
-
-            font-size:
-                13px;
-
-            cursor:
-                pointer;
-
-            transition:
-                .2s ease;
-        }
-
-
-        .suggestion-item:last-child {
-            border-bottom: none;
-        }
-
-
-        .suggestion-item:hover {
-
-            padding-left:
-                19px;
-
-            color:
-                var(--gold);
-
-            background:
-                rgba(255,157,49,.07);
-        }
-
-
-        /* =====================================================
-           SWAP
-        ===================================================== */
-
-        .swap-wrap {
-
-            display:
-                flex;
-
-            justify-content:
-                center;
-        }
-
-
-        #swapBtn {
-
-            width: 45px;
-            height: 45px;
-
-            border:
-                1px solid
-                rgba(255,158,49,.25);
-
-            border-radius:
-                14px;
-
-            color:
-                var(--gold);
-
-            background:
-                rgba(255,158,49,.06);
-
-            font-size:
-                20px;
-
-            cursor:
-                pointer;
-
-            transition:
-                .3s
-                cubic-bezier(.2,.8,.2,1);
-        }
-
-
-        #swapBtn:hover {
-
-            transform:
-                rotate(180deg);
-
-            border-color:
-                rgba(255,158,49,.5);
-
-            background:
-                rgba(255,158,49,.12);
-
-            box-shadow:
-                0 10px 30px
-                rgba(255,158,49,.08);
-        }
-
-
-        /* =====================================================
-           SEARCH BUTTON
-        ===================================================== */
-
-        .search-button {
-
-            width: 100%;
-            height: 56px;
-
-            margin-top:
-                21px;
-
-            border: none;
-
-            border-radius:
-                15px;
-
-            color:
-                #101722;
-
-            background:
-
-                linear-gradient(
-                    105deg,
-                    #ff9028,
-                    #ffd06a,
-                    #ff9b30,
-                    #ffc65b
-                );
-
-            background-size:
-                250% auto;
-
-            font-family:
-                Manrope,
-                sans-serif;
-
-            font-size:
-                11px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                .12em;
-
-            text-transform:
-                uppercase;
-
-            cursor:
-                pointer;
-
-            box-shadow:
-                0 14px 36px
-                rgba(255,140,30,.13);
-
-            transition:
-                .25s ease;
-
-            animation:
-                buttonGradient
-                5s
-                ease
-                infinite;
-        }
-
-
-        .search-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 18px 42px
-                rgba(255,140,30,.2);
-        }
-
-
-        .search-button:active {
-
-            transform:
-                translateY(0)
-                scale(.99);
-        }
-
-
-        /* =====================================================
-           STATUS
-        ===================================================== */
-
-        #status {
-
-            min-height:
-                18px;
-
-            margin:
-                17px 2px 0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                10px;
-
-            text-align:
-                center;
-        }
-
-
-        /* =====================================================
-           RESULTS
-        ===================================================== */
-
-        #results {
-            margin-top: 27px;
-        }
-
-
-        .results-heading {
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            margin:
-                0 4px 12px;
-        }
-
-
-        .results-heading span:first-child {
-
-            color:
-                var(--soft);
-
-            font-size:
-                9px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                .16em;
-
-            text-transform:
-                uppercase;
-        }
-
-
-        .results-heading span:last-child {
-
-            color:
-                var(--muted);
-
-            font-size:
-                9px;
-        }
-
-
-        /* =====================================================
-           RESULT CARD
-        ===================================================== */
-
-        .result-card {
-
-            position:
-                relative;
-
-            margin-bottom:
-                13px;
-
-            padding:
-                21px;
-
-            overflow:
-                hidden;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                21px;
-
-            background:
-
-                linear-gradient(
-                    145deg,
-                    rgba(12,29,50,.88),
-                    rgba(5,15,27,.88)
-                );
-
-            box-shadow:
-
-                0 16px 40px
-                rgba(0,0,0,.22),
-
-                inset 0 1px 0
-                rgba(255,255,255,.025);
-
-            animation:
-                resultReveal
-                .5s
-                cubic-bezier(.2,.8,.2,1)
-                both;
-
-            transition:
-                .25s ease;
-        }
-
-
-        .result-card::before {
-
-            content: "";
-
-            position:
-                absolute;
-
-            left: 0;
-
-            top: 18px;
-            bottom: 18px;
-
-            width: 2px;
-
-            border-radius:
-                2px;
-
-            background:
-
-                linear-gradient(
-                    to bottom,
-                    transparent,
-                    var(--orange),
-                    var(--gold),
-                    transparent
-                );
-
-            box-shadow:
-                0 0 13px
-                rgba(255,155,48,.25);
-        }
-
-
-        .result-card:hover {
-
-            transform:
-                translateY(-3px);
-
-            border-color:
-                rgba(255,159,49,.17);
-        }
-
-
-        /* =====================================================
-           TRAIN NAME
-        ===================================================== */
-
-        .result-name {
-
-            font-family:
-                Manrope,
-                sans-serif;
-
-            font-size:
-                18px;
-
-            font-weight:
-                800;
-
-            color:
-                #ffffff;
-        }
-
-
-        /* =====================================================
-           ACTUAL JOURNEY
-        ===================================================== */
-
-        .journey {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                8px;
-
-            margin-top:
-                7px;
-
-            color:
-                var(--soft);
-
-            font-size:
-                12px;
-
-            font-weight:
-                500;
-        }
-
-
-        .journey-arrow {
-
-            color:
-                var(--orange);
-
-            font-weight:
-                800;
-        }
-
-
-        /* =====================================================
-           ACUAN TARIF
-        ===================================================== */
-
-        .reference-box {
-
-            margin-top:
-                17px;
-
-            padding:
-                14px 15px;
-
-            border:
-                1px solid
-                var(--orange-border);
-
-            border-radius:
-                14px;
-
-            background:
-
-                linear-gradient(
-                    110deg,
-                    rgba(255,157,48,.065),
-                    rgba(255,255,255,.015)
-                );
-        }
-
-
-        .reference-label {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                7px;
-
-            margin-bottom:
-                8px;
-
-            color:
-                var(--gold);
-
-            font-size:
-                8px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                .16em;
-
-            text-transform:
-                uppercase;
-        }
-
-
-        .reference-label::before {
-
-            content: "";
-
-            width: 5px;
-            height: 5px;
-
-            border-radius:
-                50%;
-
-            background:
-                var(--orange);
-
-            box-shadow:
-                0 0 9px
-                rgba(255,157,47,.7);
-        }
-
-
-        .reference-route {
-
-            color:
-                #e6ebf2;
-
-            font-size:
-                12px;
-
-            font-weight:
-                700;
-
-            line-height:
-                1.7;
-        }
-
-
-        .relation-arrow {
-
-            margin:
-                0 5px;
-
-            color:
-                var(--orange);
-        }
-
-
-        /* =====================================================
-           FARE
-        ===================================================== */
-
-        .fare-list {
-
-            display:
-                flex;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                7px;
-
-            margin-top:
-                14px;
-        }
-
-
-        .fare-item {
-
-            min-width:
-                105px;
-
-            padding:
-                10px 13px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.055);
-
-            border-radius:
-                12px;
-
-            background:
-                rgba(255,255,255,.025);
-        }
-
-
-        .fare-class {
-
-            display:
-                block;
-
-            margin-bottom:
-                3px;
-
-            color:
-                var(--muted);
-
-            font-size:
-                8px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                .13em;
-        }
-
-
-        .fare-price {
-
-            display:
-                block;
-
-            color:
-                var(--gold);
-
-            font-family:
-                Manrope,
-                sans-serif;
-
-            font-size:
-                13px;
-
-            font-weight:
-                800;
-        }
-
-
-        .fare-unavailable {
-
-            color:
-                #526074;
-        }
-
-
-        /* =====================================================
-           EMPTY STATE
-        ===================================================== */
-
-        .empty-state {
-
-            padding:
-                48px 25px;
-
-            border:
-                1px dashed
-                rgba(255,255,255,.08);
-
-            border-radius:
-                20px;
-
-            text-align:
-                center;
-
-            background:
-                rgba(255,255,255,.012);
-
-            animation:
-                resultReveal
-                .4s
-                ease
-                both;
-        }
-
-
-        .empty-symbol {
-
-            width: 50px;
-            height: 50px;
-
-            display:
-                grid;
-
-            place-items:
-                center;
-
-            margin:
-                0 auto 15px;
-
-            border:
-                1px solid
-                rgba(255,157,48,.18);
-
-            border-radius:
-                15px;
-
-            color:
-                var(--orange);
-
-            font-size:
-                18px;
-        }
-
-
-        .empty-state h3 {
-
-            font-family:
-                Manrope,
-                sans-serif;
-
-            font-size:
-                15px;
-        }
-
-
-        .empty-state p {
-
-            max-width:
-                400px;
-
-            margin:
-                7px auto 0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
-            line-height:
-                1.7;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        .footer {
-
-            padding:
-                35px 0 5px;
-
-            text-align:
-                center;
-
-            color:
-                #526075;
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                .14em;
-
-            text-transform:
-                uppercase;
-        }
-
-
-        .footer strong {
-
-            color:
-                rgba(255,187,86,.7);
-
-            font-weight:
-                700;
-        }
-
-
-        /* =====================================================
-           ANIMATION
-        ===================================================== */
-
-        @keyframes headerReveal {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(-16px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-
-        }
-
-
-        @keyframes panelReveal {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(18px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-
-        }
-
-
-        @keyframes resultReveal {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(12px)
-                    scale(.985);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-
-        }
-
-
-        @keyframes suggestionReveal {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(-5px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-
-        }
-
-
-        @keyframes headerGlow {
-
-            0%,
-            100% {
-
-                opacity:
-                    .55;
-
-                transform:
-                    translateX(-50%)
-                    scale(.92);
-            }
-
-            50% {
-
-                opacity:
-                    1;
-
-                transform:
-                    translateX(-50%)
-                    scale(1.08);
-            }
-
-        }
-
-
-        @keyframes titleGradient {
-
-            0% {
-                background-position:
-                    0% center;
-            }
-
-            50% {
-                background-position:
-                    100% center;
-            }
-
-            100% {
-                background-position:
-                    0% center;
-            }
-
-        }
-
-
-        @keyframes buttonGradient {
-
-            0% {
-                background-position:
-                    0% center;
-            }
-
-            50% {
-                background-position:
-                    100% center;
-            }
-
-            100% {
-                background-position:
-                    0% center;
-            }
-
-        }
-
-
-        @keyframes orbitSpin {
-
-            from {
-                transform:
-                    rotate(0deg);
-            }
-
-            to {
-                transform:
-                    rotate(360deg);
-            }
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 680px) {
-
-            .app {
-
-                width:
-                    calc(100% - 20px);
-
-                padding-top:
-                    14px;
-            }
-
-
-            .header {
-
-                padding:
-                    23px 5px 36px;
-            }
-
-
-            .header h1 {
-
-                font-size:
-                    31px;
-            }
-
-
-            .subtitle {
-
-                font-size:
-                    10px;
-
-                letter-spacing:
-                    .035em;
-            }
-
-
-            .search-panel {
-
-                padding:
-                    18px;
-
-                border-radius:
-                    21px;
-            }
-
-
-            .route-grid {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    10px;
-            }
-
-
-            .swap-wrap {
-
-                position:
-                    absolute;
-
-                top:
-                    85px;
-
-                right:
-                    26px;
-
-                z-index:
-                    10;
-            }
-
-
-            #swapBtn {
-
-                width:
-                    40px;
-
-                height:
-                    40px;
-
-                border-radius:
-                    12px;
-            }
-
-
-            .input-wrap input {
-
-                height:
-                    54px;
-            }
-
-
-            .result-card {
-
-                padding:
-                    18px;
-            }
-
-
-            .fare-item {
-
-                min-width:
-                    88px;
-            }
-
-
-            .mini-train {
-
-                transform:
-                    scale(.82);
-
-                transform-origin:
-                    left bottom;
-            }
-
-        }
-
-
-        /* =====================================================
-           REDUCE MOTION
-        ===================================================== */
-
-        @media (
-            prefers-reduced-motion: reduce
-        ) {
-
-            *,
-            *::before,
-            *::after {
-
-                animation-duration:
-                    .01ms !important;
-
-                animation-iteration-count:
-                    1 !important;
-
-                transition-duration:
-                    .01ms !important;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-    <div class="bg-orbit"></div>
-
-
-    <main class="app">
-
-
-        <!-- HEADER -->
-
-        <header class="header">
-
-            <div class="kai-label">
-                KAI 121
-            </div>
-
-
-            <h1>
-                TARSUS FINDER
-            </h1>
-
-
-            <p class="subtitle">
-                Tarif Khusus Perjalanan Kereta Api
-            </p>
-
-
-            <!-- =================================================
-                 MINI TRAIN
-                 CSS ONLY
-            ================================================== -->
-
-            <div class="train-track">
-
-                <div class="mini-train">
-
-
-                    <!-- ASAP -->
-
-                    <div class="train-smoke"></div>
-
-                    <div class="train-smoke-two"></div>
-
-
-                    <!-- GERBONG -->
-                    
-                    <div class="train-coach coach-one"></div>
-
-                    <div class="train-coach coach-two"></div>
-
-                    <div class="train-coach coach-three"></div>
-
-                    <div class="train-coach coach-four"></div>
-
-
-                    <!-- SAMBUNGAN -->
-
-                    <div class="train-coupler coupler-one"></div>
-
-                    <div class="train-coupler coupler-two"></div>
-
-                    <div class="train-coupler coupler-three"></div>
-
-                    <div class="train-coupler coupler-four"></div>
-
-
-                    <!-- LOKOMOTIF -->
-
-                    <div class="train-locomotive"></div>
-
-                    <div class="train-cabin"></div>
-
-                    <div class="train-roof"></div>
-
-                    <div class="train-window"></div>
-
-                    <div class="train-chimney"></div>
-
-                    <div class="train-light"></div>
-
-
-                    <!-- RODA GERBONG -->
-
-                    <div class="wheel wheel-coach-one"></div>
-
-                    <div class="wheel wheel-coach-two"></div>
-
-                    <div class="wheel wheel-coach-three"></div>
-
-                    <div class="wheel wheel-coach-four"></div>
-
-                    <div class="wheel wheel-coach-five"></div>
-
-                    <div class="wheel wheel-coach-six"></div>
-
-                    <div class="wheel wheel-coach-seven"></div>
-
-                    <div class="wheel wheel-coach-eight"></div>
-
-
-                    <!-- RODA LOKOMOTIF -->
-
-                    <div class="wheel wheel-loco-one"></div>
-
-                    <div class="wheel wheel-loco-two"></div>
-
-
-                    <!-- GLOW -->
-
-                    <div class="train-glow"></div>
-
-                </div>
-
-            </div>
-
-        </header>
-
-
-
-        <!-- SEARCH -->
-
-        <section class="search-panel">
-
-
-            <div class="route-grid">
-
-
-                <!-- ASAL -->
-
-                <div class="field">
-
-                    <div class="field-label">
-
-                        <span class="dot"></span>
-
-                        Stasiun Asal
-
-                    </div>
-
-
-                    <div class="input-wrap">
-
-                        <input
-                            id="asal"
-                            type="text"
-                            autocomplete="off"
-                            placeholder="Cari stasiun asal..."
-                        >
-
-
-                        <div
-                            id="asal-suggestions"
-                            class="suggestions"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- SWAP -->
-
-                <div class="swap-wrap">
-
-                    <button
-                        id="swapBtn"
-                        type="button"
-                        title="Tukar stasiun"
-                    >
-                        ⇄
-                    </button>
-
-                </div>
-
-
-
-                <!-- TUJUAN -->
-
-                <div class="field">
-
-                    <div class="field-label">
-
-                        <span class="dot"></span>
-
-                        Stasiun Tujuan
-
-                    </div>
-
-
-                    <div class="input-wrap">
-
-                        <input
-                            id="tujuan"
-                            type="text"
-                            autocomplete="off"
-                            placeholder="Cari stasiun tujuan..."
-                        >
-
-
-                        <div
-                            id="tujuan-suggestions"
-                            class="suggestions"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <button
-                id="searchBtn"
-                class="search-button"
-                type="button"
-            >
-                Temukan Tarif Khusus
-            </button>
-
-
-            <div id="status"></div>
-
-
-        </section>
-
-
-
-        <!-- RESULTS -->
-
-        <section id="results"></section>
-
-
-
-        <!-- FOOTER -->
-
-        <footer class="footer">
-
-            Created by
-            <strong>prima_adis</strong>
-
-        </footer>
-
-
-    </main>
-
-
-    <script src="data.js"></script>
-
-</body>
-
-</html>
-```
+    100% {
+        background-position:
+            0% center;
+    }
+}
