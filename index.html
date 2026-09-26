@@ -119,6 +119,10 @@
                 24px 16px 50px;
         }
 
+        /* =========================
+           HEADER
+        ========================= */
+
         .header {
             position: relative;
 
@@ -241,7 +245,12 @@
             text-transform:
                 uppercase;
         }
-          .search-panel {
+
+        /* =========================
+           SEARCH PANEL
+        ========================= */
+
+        .search-panel {
             padding: 17px;
 
             border:
@@ -351,6 +360,10 @@
                 rgba(255, 107, 26, .08);
         }
 
+        /* =========================
+           STATION SUGGESTIONS
+        ========================= */
+
         .suggestions {
             position: absolute;
 
@@ -378,6 +391,12 @@
         }
 
         .suggestion-item {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 3px;
+
             padding:
                 10px 12px;
 
@@ -390,6 +409,9 @@
             border-bottom:
                 1px solid
                 rgba(255, 255, 255, .05);
+
+            transition:
+                background .15s ease;
         }
 
         .suggestion-item:last-child {
@@ -403,7 +425,24 @@
 
             color: #ffffff;
         }
-          .swap-button {
+
+        .suggestion-name {
+            font-weight: 700;
+
+            color: #f0f4f8;
+        }
+
+        .suggestion-meta {
+            color: #728397;
+
+            font-size: 9px;
+        }
+
+        /* =========================
+           SWAP
+        ========================= */
+
+        .swap-button {
             width: 42px;
             height: 42px;
 
@@ -440,6 +479,10 @@
             transform:
                 scale(.94);
         }
+
+        /* =========================
+           SEARCH BUTTON
+        ========================= */
 
         .search-button {
             width: 100%;
@@ -526,6 +569,10 @@
             box-shadow: none;
         }
 
+        /* =========================
+           DATABASE STATUS
+        ========================= */
+
         .database-status {
             display: flex;
 
@@ -558,7 +605,12 @@
                 0 0 8px
                 rgba(57, 217, 138, .45);
         }
-          .result-header {
+
+        /* =========================
+           RESULTS
+        ========================= */
+
+        .result-header {
             display: flex;
 
             align-items: center;
@@ -656,6 +708,10 @@
             font-weight: 500;
         }
 
+        /* =========================
+           SPECIAL ROUTE
+        ========================= */
+
         .special-route {
             margin-top: 10px;
 
@@ -684,7 +740,12 @@
 
             font-weight: 600;
         }
-          .fare-list {
+
+        /* =========================
+           FARES
+        ========================= */
+
+        .fare-list {
             display: grid;
 
             grid-template-columns:
@@ -736,6 +797,10 @@
             font-weight: 800;
         }
 
+        /* =========================
+           LOADING
+        ========================= */
+
         .loading {
             display: none;
 
@@ -777,6 +842,10 @@
             }
         }
 
+        /* =========================
+           EMPTY
+        ========================= */
+
         .empty {
             display: none;
 
@@ -800,6 +869,10 @@
 
             text-align: center;
         }
+
+        /* =========================
+           ERROR
+        ========================= */
 
         .error-box {
             display: none;
@@ -825,6 +898,10 @@
             line-height: 1.5;
         }
 
+        /* =========================
+           FOOTER
+        ========================= */
+
         .footer {
             margin-top: 30px;
 
@@ -836,7 +913,12 @@
 
             text-align: center;
         }
-          @media (max-width: 560px) {
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 560px) {
 
             .app {
                 padding:
@@ -985,9 +1067,15 @@
     </style>
 
 </head>
+
+
 <body>
 
     <main class="app">
+
+        <!-- =========================
+             HEADER
+        ========================= -->
 
         <header class="header">
 
@@ -1010,12 +1098,18 @@
         </header>
 
 
+        <!-- =========================
+             SEARCH PANEL
+        ========================= -->
+
         <section class="search-panel">
 
             <div class="route-wrapper">
 
 
-                <!-- ASAL -->
+                <!-- =====================
+                     ASAL
+                ====================== -->
 
                 <div class="field">
 
@@ -1033,13 +1127,15 @@
                             id="asal"
                             class="station-input"
                             type="text"
-                            placeholder="Contoh: Purwokerto"
+                            placeholder="Contoh: Cimahi"
                             autocomplete="off"
-                            spellcheck="false">
+                            spellcheck="false"
+                            data-station-role="asal">
 
                         <div
                             id="suggestionsAsal"
-                            class="suggestions">
+                            class="suggestions"
+                            role="listbox">
                         </div>
 
                     </div>
@@ -1047,7 +1143,9 @@
                 </div>
 
 
-                <!-- TUKAR -->
+                <!-- =====================
+                     TUKAR
+                ====================== -->
 
                 <button
                     id="swapBtn"
@@ -1060,7 +1158,9 @@
                 </button>
 
 
-                <!-- TUJUAN -->
+                <!-- =====================
+                     TUJUAN
+                ====================== -->
 
                 <div class="field">
 
@@ -1078,13 +1178,15 @@
                             id="tujuan"
                             class="station-input"
                             type="text"
-                            placeholder="Contoh: Yogyakarta"
+                            placeholder="Contoh: Cirebon"
                             autocomplete="off"
-                            spellcheck="false">
+                            spellcheck="false"
+                            data-station-role="tujuan">
 
                         <div
                             id="suggestionsTujuan"
-                            class="suggestions">
+                            class="suggestions"
+                            role="listbox">
                         </div>
 
                     </div>
@@ -1092,6 +1194,12 @@
                 </div>
 
             </div>
+
+
+            <!-- =========================
+                 SEARCH BUTTON
+            ========================== -->
+
             <button
                 id="searchBtn"
                 class="search-button"
@@ -1101,6 +1209,10 @@
 
             </button>
 
+
+            <!-- =========================
+                 LOADING
+            ========================== -->
 
             <div
                 id="loading"
@@ -1115,10 +1227,15 @@
             </div>
 
 
+            <!-- =========================
+                 DATABASE STATUS
+            ========================== -->
+
             <div
                 class="database-status">
 
                 <span
+                    id="statusDot"
                     class="status-dot">
                 </span>
 
@@ -1129,6 +1246,10 @@
             </div>
 
 
+            <!-- =========================
+                 ERROR
+            ========================== -->
+
             <div
                 id="errorBox"
                 class="error-box">
@@ -1136,6 +1257,10 @@
 
         </section>
 
+
+        <!-- =========================
+             RESULT SECTION
+        ========================== -->
 
         <section>
 
@@ -1160,10 +1285,14 @@
             </div>
 
 
+            <!-- HASIL AKAN DIISI data.js -->
+
             <div
                 id="results">
             </div>
 
+
+            <!-- TIDAK ADA HASIL -->
 
             <div
                 id="empty"
@@ -1175,6 +1304,12 @@
             </div>
 
         </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================== -->
+
         <footer class="footer">
 
             TARSUS FINDER
@@ -1183,13 +1318,17 @@
 
             <br>
 
-            Data mengikuti informasi yang
-            tersedia pada database.
+            Data stasiun mengikuti daftar
+            layanan KA antarkota.
 
         </footer>
 
     </main>
 
+
+    <!-- =============================
+         DATABASE / JAVASCRIPT
+    ============================== -->
 
     <script
         src="data.js">
